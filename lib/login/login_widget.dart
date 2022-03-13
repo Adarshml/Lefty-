@@ -3,6 +3,7 @@ import '../create_account_user/create_account_user_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../main.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -258,8 +259,14 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 Align(
                                   alignment: AlignmentDirectional(0.05, -0.09),
                                   child: FFButtonWidget(
-                                    onPressed: () {
-                                      print('Button pressed ...');
+                                    onPressed: () async {
+                                      await Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              NavBarPage(initialPage: 'home'),
+                                        ),
+                                      );
                                     },
                                     text: 'Login',
                                     options: FFButtonOptions(

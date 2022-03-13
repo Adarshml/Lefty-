@@ -181,8 +181,13 @@ class _CreateAccountUserWidgetState extends State<CreateAccountUserWidget> {
                       Align(
                         alignment: AlignmentDirectional(-0.17, 0.73),
                         child: FFButtonWidget(
-                          onPressed: () {
-                            print('Button pressed ...');
+                          onPressed: () async {
+                            await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => LoginWidget(),
+                              ),
+                            );
                           },
                           text: 'Create Account',
                           options: FFButtonOptions(
