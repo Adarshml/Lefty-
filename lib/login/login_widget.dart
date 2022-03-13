@@ -1,9 +1,10 @@
 import '../create_account_organization/create_account_organization_widget.dart';
 import '../create_account_user/create_account_user_widget.dart';
+import '../donate/donate_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../main.dart';
+import '../profile/profile_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -263,8 +264,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                       await Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) =>
-                                              NavBarPage(initialPage: 'donate'),
+                                          builder: (context) => DonateWidget(),
                                         ),
                                       );
                                     },
@@ -539,8 +539,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                                           await Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                              builder: (context) => NavBarPage(
-                                                  initialPage: 'profile'),
+                                              builder: (context) =>
+                                                  ProfileWidget(),
                                             ),
                                           );
                                         },
