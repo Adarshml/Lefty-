@@ -65,7 +65,7 @@ class _DonateWidgetState extends State<DonateWidget> {
                 child: Stack(
                   children: [
                     Align(
-                      alignment: AlignmentDirectional(-0.84, -0.82),
+                      alignment: AlignmentDirectional(-0.86, -0.79),
                       child: Text(
                         'Food Type',
                         style: FlutterFlowTheme.of(context).bodyText1.override(
