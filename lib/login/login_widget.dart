@@ -535,8 +535,14 @@ class _LoginWidgetState extends State<LoginWidget> {
                                       alignment:
                                           AlignmentDirectional(0.05, -0.09),
                                       child: FFButtonWidget(
-                                        onPressed: () {
-                                          print('Button pressed ...');
+                                        onPressed: () async {
+                                          await Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => NavBarPage(
+                                                  initialPage: 'home'),
+                                            ),
+                                          );
                                         },
                                         text: 'Login',
                                         options: FFButtonOptions(
