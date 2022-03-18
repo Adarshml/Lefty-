@@ -1,3 +1,4 @@
+import '../auth/auth_util.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -14,23 +15,23 @@ class CreateAccountUserWidget extends StatefulWidget {
 }
 
 class _CreateAccountUserWidgetState extends State<CreateAccountUserWidget> {
-  TextEditingController emailAddressController1;
-  TextEditingController passwordController1;
-  bool passwordVisibility1;
-  TextEditingController emailAddressController2;
-  TextEditingController passwordController2;
-  bool passwordVisibility2;
+  TextEditingController confirmpasswordController;
+  bool confirmpasswordVisibility;
+  TextEditingController emailAddressController;
+  TextEditingController passwordController;
+  bool passwordVisibility;
+  TextEditingController nameController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    emailAddressController1 = TextEditingController();
-    passwordController1 = TextEditingController();
-    passwordVisibility1 = false;
-    emailAddressController2 = TextEditingController();
-    passwordController2 = TextEditingController();
-    passwordVisibility2 = false;
+    confirmpasswordController = TextEditingController();
+    confirmpasswordVisibility = false;
+    emailAddressController = TextEditingController();
+    passwordController = TextEditingController();
+    passwordVisibility = false;
+    nameController = TextEditingController();
   }
 
   @override
@@ -128,7 +129,7 @@ class _CreateAccountUserWidgetState extends State<CreateAccountUserWidget> {
                           padding:
                               EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
                           child: TextFormField(
-                            controller: emailAddressController1,
+                            controller: emailAddressController,
                             obscureText: false,
                             decoration: InputDecoration(
                               labelText: 'Email Address',
@@ -182,6 +183,27 @@ class _CreateAccountUserWidgetState extends State<CreateAccountUserWidget> {
                         alignment: AlignmentDirectional(-0.17, 0.73),
                         child: FFButtonWidget(
                           onPressed: () async {
+                            if (passwordController.text !=
+                                confirmpasswordController.text) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Passwords don\'t match!',
+                                  ),
+                                ),
+                              );
+                              return;
+                            }
+
+                            final user = await createAccountWithEmail(
+                              context,
+                              emailAddressController.text,
+                              passwordController.text,
+                            );
+                            if (user == null) {
+                              return;
+                            }
+
                             await Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -215,8 +237,8 @@ class _CreateAccountUserWidgetState extends State<CreateAccountUserWidget> {
                           padding:
                               EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
                           child: TextFormField(
-                            controller: passwordController1,
-                            obscureText: !passwordVisibility1,
+                            controller: passwordController,
+                            obscureText: !passwordVisibility,
                             decoration: InputDecoration(
                               labelText: 'Password',
                               labelStyle: FlutterFlowTheme.of(context)
@@ -255,11 +277,11 @@ class _CreateAccountUserWidgetState extends State<CreateAccountUserWidget> {
                                   .primaryBackground,
                               suffixIcon: InkWell(
                                 onTap: () => setState(
-                                  () => passwordVisibility1 =
-                                      !passwordVisibility1,
+                                  () =>
+                                      passwordVisibility = !passwordVisibility,
                                 ),
                                 child: Icon(
-                                  passwordVisibility1
+                                  passwordVisibility
                                       ? Icons.visibility_outlined
                                       : Icons.visibility_off_outlined,
                                   color: Color(0xFF757575),
@@ -297,7 +319,7 @@ class _CreateAccountUserWidgetState extends State<CreateAccountUserWidget> {
                           padding:
                               EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
                           child: TextFormField(
-                            controller: emailAddressController2,
+                            controller: nameController,
                             obscureText: false,
                             decoration: InputDecoration(
                               labelText: 'Full Name',
@@ -376,8 +398,8 @@ class _CreateAccountUserWidgetState extends State<CreateAccountUserWidget> {
                           padding:
                               EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
                           child: TextFormField(
-                            controller: passwordController2,
-                            obscureText: !passwordVisibility2,
+                            controller: confirmpasswordController,
+                            obscureText: !confirmpasswordVisibility,
                             decoration: InputDecoration(
                               labelText: 'Confirm Password',
                               labelStyle: FlutterFlowTheme.of(context)
@@ -416,11 +438,11 @@ class _CreateAccountUserWidgetState extends State<CreateAccountUserWidget> {
                                   .primaryBackground,
                               suffixIcon: InkWell(
                                 onTap: () => setState(
-                                  () => passwordVisibility2 =
-                                      !passwordVisibility2,
+                                  () => confirmpasswordVisibility =
+                                      !confirmpasswordVisibility,
                                 ),
                                 child: Icon(
-                                  passwordVisibility2
+                                  confirmpasswordVisibility
                                       ? Icons.visibility_outlined
                                       : Icons.visibility_off_outlined,
                                   color: Color(0xFF757575),

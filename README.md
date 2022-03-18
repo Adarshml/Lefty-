@@ -1,4 +1,4 @@
-# firsty
+# lefty
 
 A new Flutter project.
 
