@@ -20,13 +20,13 @@
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="firsty">
+  <meta name="apple-mobile-web-app-title" content="lefty">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png"/>
 
-  <title>firsty</title>
+  <title>lefty</title>
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
@@ -40,7 +40,25 @@
       });
     }
   </script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
   
+  
+  
+
+  <script>
+    const firebaseConfig = {
+    apiKey: "AIzaSyDNfoyhcd8fbufeeXAd5r0OAqUs-gjl16c",
+    authDomain: "lefty-bdb52.firebaseapp.com",
+    projectId: "lefty-bdb52",
+    storageBucket: "lefty-bdb52.appspot.com",
+    messagingSenderId: "180283241560",
+    appId: "1:180283241560:web:16c32f199e5779d48f862d",
+    measurementId: "G-4MDG5LTP61"
+  }
+    firebase.initializeApp(firebaseConfig);
+  </script>
   
   
   <script src="main.dart.js" type="application/javascript"></script>

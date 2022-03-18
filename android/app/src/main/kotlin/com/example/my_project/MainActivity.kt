@@ -1,4 +1,4 @@
-package com.flutterflow.firsty
+package com.flutterflow.lefty
 
 import io.flutter.embedding.android.FlutterActivity
 
