@@ -1,6 +1,7 @@
 import '../auth/auth_util.dart';
 import '../create_account_organization/create_account_organization_widget.dart';
 import '../create_account_user/create_account_user_widget.dart';
+import '../edit_profile/edit_profile_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -549,8 +550,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                                           await Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                              builder: (context) => NavBarPage(
-                                                  initialPage: 'profile'),
+                                              builder: (context) =>
+                                                  EditProfileWidget(),
                                             ),
                                           );
                                         },
