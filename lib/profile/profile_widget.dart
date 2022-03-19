@@ -91,8 +91,13 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       Align(
                         alignment: AlignmentDirectional(0, 0),
                         child: FFButtonWidget(
-                          onPressed: () {
-                            print('Button pressed ...');
+                          onPressed: () async {
+                            await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => LoginWidget(),
+                              ),
+                            );
                           },
                           text: 'logout',
                           options: FFButtonOptions(
