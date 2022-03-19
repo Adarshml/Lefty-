@@ -42,83 +42,82 @@ class _ProfileWidgetState extends State<ProfileWidget> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              InkWell(
-                onTap: () async {
-                  await signOut();
-                  await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => LoginWidget(),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * 1,
+                child: Stack(
+                  children: [
+                    Align(
+                      alignment: AlignmentDirectional(-0.09, -0.92),
+                      child: Container(
+                        width: 120,
+                        height: 120,
+                        clipBehavior: Clip.antiAlias,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                        ),
+                        child: Image.network(
+                          'https://picsum.photos/seed/990/600',
+                        ),
+                      ),
                     ),
-                  );
-                },
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * 1,
-                  child: Stack(
-                    children: [
-                      Align(
-                        alignment: AlignmentDirectional(-0.09, -0.92),
-                        child: Container(
-                          width: 120,
-                          height: 120,
-                          clipBehavior: Clip.antiAlias,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                          ),
-                          child: Image.network(
-                            'https://picsum.photos/seed/990/600',
-                          ),
+                    Align(
+                      alignment: AlignmentDirectional(-0.07, -0.57),
+                      child: AuthUserStreamWidget(
+                        child: Text(
+                          currentUserDocument?.name,
+                          style:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'Lexend Deca',
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                         ),
                       ),
-                      Align(
-                        alignment: AlignmentDirectional(-0.07, -0.57),
-                        child: AuthUserStreamWidget(
-                          child: Text(
-                            valueOrDefault<String>(
-                              currentUserDocument?.name,
-                              'username',
+                    ),
+                    Align(
+                      alignment: AlignmentDirectional(-0.05, -0.47),
+                      child: AuthUserStreamWidget(
+                        child: Text(
+                          currentUserDocument?.emailAddress,
+                          style:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'Poppins',
+                                    fontSize: 20,
+                                  ),
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: AlignmentDirectional(0, 0),
+                      child: FFButtonWidget(
+                        onPressed: () async {
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => LoginWidget(),
                             ),
-                            style:
-                                FlutterFlowTheme.of(context).bodyText1.override(
-                                      fontFamily: 'Lexend Deca',
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w500,
-                                    ),
+                          );
+                        },
+                        text: 'logout',
+                        options: FFButtonOptions(
+                          width: 130,
+                          height: 40,
+                          color: FlutterFlowTheme.of(context).primaryColor,
+                          textStyle:
+                              FlutterFlowTheme.of(context).subtitle2.override(
+                                    fontFamily: 'Poppins',
+                                    color: Colors.white,
+                                  ),
+                          borderSide: BorderSide(
+                            color: Colors.transparent,
+                            width: 1,
                           ),
+                          borderRadius: 12,
                         ),
                       ),
-                      Align(
-                        alignment: AlignmentDirectional(0, 0),
-                        child: FFButtonWidget(
-                          onPressed: () async {
-                            await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => LoginWidget(),
-                              ),
-                            );
-                          },
-                          text: 'logout',
-                          options: FFButtonOptions(
-                            width: 130,
-                            height: 40,
-                            color: FlutterFlowTheme.of(context).primaryColor,
-                            textStyle:
-                                FlutterFlowTheme.of(context).subtitle2.override(
-                                      fontFamily: 'Poppins',
-                                      color: Colors.white,
-                                    ),
-                            borderSide: BorderSide(
-                              color: Colors.transparent,
-                              width: 1,
-                            ),
-                            borderRadius: 12,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ],
