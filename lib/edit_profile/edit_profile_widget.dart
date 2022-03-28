@@ -1,6 +1,11 @@
+import '../auth/auth_util.dart';
+import '../backend/backend.dart';
+import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../main.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -14,6 +19,7 @@ class EditProfileWidget extends StatefulWidget {
 class _EditProfileWidgetState extends State<EditProfileWidget> {
   TextEditingController emailAddressController;
   TextEditingController fullNameController;
+  TextEditingController phoneController;
   TextEditingController myBioController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -22,6 +28,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
     super.initState();
     emailAddressController = TextEditingController();
     fullNameController = TextEditingController();
+    phoneController = TextEditingController();
     myBioController = TextEditingController();
   }
 
@@ -32,17 +39,33 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
       appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).primaryColor,
         automaticallyImplyLeading: false,
-        title: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(113, 0, 0, 0),
-          child: Text(
-            'Edit Profile',
-            style: FlutterFlowTheme.of(context).title2.override(
-                  fontFamily: 'Poppins',
-                  color: Colors.white,
-                  fontSize: 22,
-                  fontWeight: FontWeight.w500,
-                ),
+        leading: FlutterFlowIconButton(
+          borderColor: Colors.transparent,
+          borderRadius: 30,
+          borderWidth: 1,
+          buttonSize: 60,
+          icon: Icon(
+            Icons.arrow_back_sharp,
+            color: Colors.white,
+            size: 30,
           ),
+          onPressed: () async {
+            await Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => NavBarPage(initialPage: 'profile'),
+              ),
+            );
+          },
+        ),
+        title: Text(
+          'Edit Profile',
+          style: FlutterFlowTheme.of(context).title2.override(
+                fontFamily: 'Poppins',
+                color: Colors.white,
+                fontSize: 22,
+                fontWeight: FontWeight.w500,
+              ),
         ),
         actions: [],
         centerTitle: false,
@@ -70,7 +93,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                           shape: BoxShape.circle,
                         ),
                         child: Image.network(
-                          'https://picsum.photos/seed/876/600',
+                          '',
                         ),
                       ),
                     ),
@@ -82,15 +105,15 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                     Align(
                       alignment: AlignmentDirectional(0.05, -0.09),
                       child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(90, 20, 0, 0),
+                        padding: EdgeInsetsDirectional.fromSTEB(110, 20, 0, 0),
                         child: FFButtonWidget(
                           onPressed: () {
                             print('changePhoto pressed ...');
                           },
                           text: 'Change Photo',
                           options: FFButtonOptions(
-                            width: 200,
-                            height: 40,
+                            width: 150,
+                            height: 35,
                             color: FlutterFlowTheme.of(context).primaryColor,
                             textStyle:
                                 FlutterFlowTheme.of(context).subtitle2.override(
@@ -158,7 +181,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 20),
+                  padding: EdgeInsetsDirectional.fromSTEB(20, 10, 20, 20),
                   child: TextFormField(
                     controller: emailAddressController,
                     obscureText: false,
@@ -204,7 +227,54 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 20),
+                  padding: EdgeInsetsDirectional.fromSTEB(20, 10, 20, 20),
+                  child: TextFormField(
+                    controller: phoneController,
+                    obscureText: false,
+                    decoration: InputDecoration(
+                      labelText: 'Phone ',
+                      labelStyle:
+                          FlutterFlowTheme.of(context).bodyText1.override(
+                                fontFamily: 'Lexend Deca',
+                                color: Color(0xFF95A1AC),
+                                fontWeight: FontWeight.normal,
+                              ),
+                      hintText: 'Enter your phone number',
+                      hintStyle:
+                          FlutterFlowTheme.of(context).bodyText1.override(
+                                fontFamily: 'Lexend Deca',
+                                color: Color(0xFF95A1AC),
+                                fontWeight: FontWeight.normal,
+                              ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0xFFDBE2E7),
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0xFFDBE2E7),
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      filled: true,
+                      fillColor: Colors.white,
+                      contentPadding:
+                          EdgeInsetsDirectional.fromSTEB(20, 0, 24, 24),
+                    ),
+                    style: FlutterFlowTheme.of(context).bodyText1.override(
+                          fontFamily: 'Lexend Deca',
+                          color: Color(0xFF14181B),
+                          fontWeight: FontWeight.normal,
+                        ),
+                    keyboardType: TextInputType.phone,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
                   child: TextFormField(
                     controller: myBioController,
                     obscureText: false,
@@ -254,30 +324,63 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                 Align(
                   alignment: AlignmentDirectional(0.05, -0.09),
                   child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                    child: FFButtonWidget(
-                      onPressed: () {
-                        print('save pressed ...');
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
+                    child: StreamBuilder<UsersRecord>(
+                      stream: UsersRecord.getDocument(currentUserReference),
+                      builder: (context, snapshot) {
+                        // Customize what your widget looks like when it's loading.
+                        if (!snapshot.hasData) {
+                          return Center(
+                            child: SizedBox(
+                              width: 50,
+                              height: 50,
+                              child: CircularProgressIndicator(
+                                color:
+                                    FlutterFlowTheme.of(context).primaryColor,
+                              ),
+                            ),
+                          );
+                        }
+                        final saveUsersRecord = snapshot.data;
+                        return FFButtonWidget(
+                          onPressed: () async {
+                            final usersUpdateData = createUsersRecordData(
+                              name: fullNameController.text,
+                              emailAddress: emailAddressController.text,
+                              bio: myBioController.text,
+                              phoneNumber: phoneController.text,
+                            );
+                            await saveUsersRecord.reference
+                                .update(usersUpdateData);
+                            await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    NavBarPage(initialPage: 'profile'),
+                              ),
+                            );
+                          },
+                          text: 'Save Changes',
+                          options: FFButtonOptions(
+                            width: 250,
+                            height: 50,
+                            color: FlutterFlowTheme.of(context).primaryColor,
+                            textStyle:
+                                FlutterFlowTheme.of(context).subtitle2.override(
+                                      fontFamily: 'Lexend Deca',
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                            elevation: 3,
+                            borderSide: BorderSide(
+                              color: Colors.black,
+                              width: 1,
+                            ),
+                            borderRadius: 8,
+                          ),
+                        );
                       },
-                      text: 'Save Changes',
-                      options: FFButtonOptions(
-                        width: 250,
-                        height: 50,
-                        color: FlutterFlowTheme.of(context).primaryColor,
-                        textStyle:
-                            FlutterFlowTheme.of(context).subtitle2.override(
-                                  fontFamily: 'Lexend Deca',
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                        elevation: 3,
-                        borderSide: BorderSide(
-                          color: Colors.black,
-                          width: 1,
-                        ),
-                        borderRadius: 8,
-                      ),
                     ),
                   ),
                 ),

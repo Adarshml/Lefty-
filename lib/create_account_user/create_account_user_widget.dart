@@ -1,8 +1,10 @@
 import '../auth/auth_util.dart';
+import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../login/login_widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -181,54 +183,88 @@ class _CreateAccountUserWidgetState extends State<CreateAccountUserWidget> {
                       ),
                       Align(
                         alignment: AlignmentDirectional(-0.17, 0.73),
-                        child: FFButtonWidget(
-                          onPressed: () async {
-                            if (passwordController.text !=
-                                confirmpasswordController.text) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    'Passwords don\'t match!',
+                        child: StreamBuilder<UsersRecord>(
+                          stream: UsersRecord.getDocument(currentUserReference),
+                          builder: (context, snapshot) {
+                            // Customize what your widget looks like when it's loading.
+                            if (!snapshot.hasData) {
+                              return Center(
+                                child: SizedBox(
+                                  width: 50,
+                                  height: 50,
+                                  child: CircularProgressIndicator(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryColor,
                                   ),
                                 ),
                               );
-                              return;
                             }
+                            final buttonUsersRecord = snapshot.data;
+                            return FFButtonWidget(
+                              onPressed: () async {
+                                if (passwordController.text !=
+                                    confirmpasswordController.text) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        'Passwords don\'t match!',
+                                      ),
+                                    ),
+                                  );
+                                  return;
+                                }
 
-                            final user = await createAccountWithEmail(
-                              context,
-                              emailAddressController.text,
-                              passwordController.text,
-                            );
-                            if (user == null) {
-                              return;
-                            }
+                                final user = await createAccountWithEmail(
+                                  context,
+                                  emailAddressController.text,
+                                  passwordController.text,
+                                );
+                                if (user == null) {
+                                  return;
+                                }
 
-                            await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => LoginWidget(),
-                              ),
-                            );
-                          },
-                          text: 'Create Account',
-                          options: FFButtonOptions(
-                            width: 230,
-                            height: 50,
-                            color: Color(0xFF090F13),
-                            textStyle:
-                                FlutterFlowTheme.of(context).subtitle2.override(
+                                final usersCreateData = createUsersRecordData(
+                                  email: '',
+                                  name: '',
+                                );
+                                await UsersRecord.collection
+                                    .doc(user.uid)
+                                    .update(usersCreateData);
+
+                                final usersUpdateData = createUsersRecordData(
+                                  name: nameController.text,
+                                  emailAddress: emailAddressController.text,
+                                );
+                                await currentUserReference
+                                    .update(usersUpdateData);
+                                await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => LoginWidget(),
+                                  ),
+                                );
+                              },
+                              text: 'Create Account',
+                              options: FFButtonOptions(
+                                width: 230,
+                                height: 50,
+                                color: Color(0xFF090F13),
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .subtitle2
+                                    .override(
                                       fontFamily: 'Lexend Deca',
                                       color: Colors.white,
                                       fontWeight: FontWeight.w500,
                                     ),
-                            elevation: 3,
-                            borderSide: BorderSide(
-                              color: Colors.black,
-                              width: 1,
-                            ),
-                            borderRadius: 8,
-                          ),
+                                elevation: 3,
+                                borderSide: BorderSide(
+                                  color: Colors.black,
+                                  width: 1,
+                                ),
+                                borderRadius: 8,
+                              ),
+                            );
+                          },
                         ),
                       ),
                       Align(

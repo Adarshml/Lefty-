@@ -1,3 +1,5 @@
+import '../auth/auth_util.dart';
+import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -15,25 +17,25 @@ class CreateAccountOrganizationWidget extends StatefulWidget {
 
 class _CreateAccountOrganizationWidgetState
     extends State<CreateAccountOrganizationWidget> {
-  TextEditingController emailAddressController1;
-  TextEditingController emailAddressController2;
-  TextEditingController passwordController1;
-  bool passwordVisibility1;
-  TextEditingController passwordController2;
-  bool passwordVisibility2;
-  TextEditingController emailAddressController3;
+  TextEditingController confirmPasswordController;
+  bool confirmPasswordVisibility;
+  TextEditingController emailAddressController;
+  TextEditingController regidController;
+  TextEditingController passwordController;
+  bool passwordVisibility;
+  TextEditingController orgNameController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    emailAddressController1 = TextEditingController();
-    emailAddressController2 = TextEditingController();
-    passwordController1 = TextEditingController();
-    passwordVisibility1 = false;
-    passwordController2 = TextEditingController();
-    passwordVisibility2 = false;
-    emailAddressController3 = TextEditingController();
+    confirmPasswordController = TextEditingController();
+    confirmPasswordVisibility = false;
+    emailAddressController = TextEditingController();
+    regidController = TextEditingController();
+    passwordController = TextEditingController();
+    passwordVisibility = false;
+    orgNameController = TextEditingController();
   }
 
   @override
@@ -131,7 +133,7 @@ class _CreateAccountOrganizationWidgetState
                           padding:
                               EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
                           child: TextFormField(
-                            controller: emailAddressController1,
+                            controller: regidController,
                             obscureText: false,
                             decoration: InputDecoration(
                               labelText: 'Registration Number',
@@ -184,33 +186,53 @@ class _CreateAccountOrganizationWidgetState
                       ),
                       Align(
                         alignment: AlignmentDirectional(-0.16, 0.8),
-                        child: FFButtonWidget(
-                          onPressed: () async {
-                            await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => LoginWidget(),
-                              ),
-                            );
-                          },
-                          text: 'Create Account',
-                          options: FFButtonOptions(
-                            width: 230,
-                            height: 50,
-                            color: Color(0xFF090F13),
-                            textStyle:
-                                FlutterFlowTheme.of(context).subtitle2.override(
+                        child: StreamBuilder<UsersRecord>(
+                          stream: UsersRecord.getDocument(currentUserReference),
+                          builder: (context, snapshot) {
+                            // Customize what your widget looks like when it's loading.
+                            if (!snapshot.hasData) {
+                              return Center(
+                                child: SizedBox(
+                                  width: 50,
+                                  height: 50,
+                                  child: CircularProgressIndicator(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryColor,
+                                  ),
+                                ),
+                              );
+                            }
+                            final buttonUsersRecord = snapshot.data;
+                            return FFButtonWidget(
+                              onPressed: () async {
+                                await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => LoginWidget(),
+                                  ),
+                                );
+                              },
+                              text: 'Create Account',
+                              options: FFButtonOptions(
+                                width: 230,
+                                height: 50,
+                                color: Color(0xFF090F13),
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .subtitle2
+                                    .override(
                                       fontFamily: 'Lexend Deca',
                                       color: Colors.white,
                                       fontWeight: FontWeight.w500,
                                     ),
-                            elevation: 3,
-                            borderSide: BorderSide(
-                              color: Colors.black,
-                              width: 1,
-                            ),
-                            borderRadius: 8,
-                          ),
+                                elevation: 3,
+                                borderSide: BorderSide(
+                                  color: Colors.black,
+                                  width: 1,
+                                ),
+                                borderRadius: 8,
+                              ),
+                            );
+                          },
                         ),
                       ),
                       Align(
@@ -219,7 +241,7 @@ class _CreateAccountOrganizationWidgetState
                           padding:
                               EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
                           child: TextFormField(
-                            controller: emailAddressController2,
+                            controller: emailAddressController,
                             obscureText: false,
                             decoration: InputDecoration(
                               labelText: 'Email Address',
@@ -311,8 +333,8 @@ class _CreateAccountOrganizationWidgetState
                           padding:
                               EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
                           child: TextFormField(
-                            controller: passwordController1,
-                            obscureText: !passwordVisibility1,
+                            controller: confirmPasswordController,
+                            obscureText: !confirmPasswordVisibility,
                             decoration: InputDecoration(
                               labelText: 'Confirm Password',
                               labelStyle: FlutterFlowTheme.of(context)
@@ -351,11 +373,11 @@ class _CreateAccountOrganizationWidgetState
                                   .primaryBackground,
                               suffixIcon: InkWell(
                                 onTap: () => setState(
-                                  () => passwordVisibility1 =
-                                      !passwordVisibility1,
+                                  () => confirmPasswordVisibility =
+                                      !confirmPasswordVisibility,
                                 ),
                                 child: Icon(
-                                  passwordVisibility1
+                                  confirmPasswordVisibility
                                       ? Icons.visibility_outlined
                                       : Icons.visibility_off_outlined,
                                   color: Color(0xFF757575),
@@ -380,8 +402,8 @@ class _CreateAccountOrganizationWidgetState
                           padding:
                               EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
                           child: TextFormField(
-                            controller: passwordController2,
-                            obscureText: !passwordVisibility2,
+                            controller: passwordController,
+                            obscureText: !passwordVisibility,
                             decoration: InputDecoration(
                               labelText: 'Password',
                               labelStyle: FlutterFlowTheme.of(context)
@@ -420,11 +442,11 @@ class _CreateAccountOrganizationWidgetState
                                   .primaryBackground,
                               suffixIcon: InkWell(
                                 onTap: () => setState(
-                                  () => passwordVisibility2 =
-                                      !passwordVisibility2,
+                                  () =>
+                                      passwordVisibility = !passwordVisibility,
                                 ),
                                 child: Icon(
-                                  passwordVisibility2
+                                  passwordVisibility
                                       ? Icons.visibility_outlined
                                       : Icons.visibility_off_outlined,
                                   color: Color(0xFF757575),
@@ -449,7 +471,7 @@ class _CreateAccountOrganizationWidgetState
                           padding:
                               EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
                           child: TextFormField(
-                            controller: emailAddressController3,
+                            controller: orgNameController,
                             obscureText: false,
                             decoration: InputDecoration(
                               labelText: 'Organization Name',

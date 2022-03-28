@@ -1,7 +1,11 @@
+import '../auth/auth_util.dart';
+import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_drop_down.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../main.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -20,6 +24,7 @@ class _DonateWidgetState extends State<DonateWidget> {
   TextEditingController textController4;
   TextEditingController textController5;
   TextEditingController textController6;
+  TextEditingController textController7;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -31,6 +36,7 @@ class _DonateWidgetState extends State<DonateWidget> {
     textController4 = TextEditingController();
     textController5 = TextEditingController();
     textController6 = TextEditingController();
+    textController7 = TextEditingController();
   }
 
   @override
@@ -102,10 +108,29 @@ class _DonateWidgetState extends State<DonateWidget> {
                         ),
                       ),
                       Align(
-                        alignment: AlignmentDirectional(-0.18, 0.81),
+                        alignment: AlignmentDirectional(-0.02, 0.98),
                         child: FFButtonWidget(
-                          onPressed: () {
-                            print('Button pressed ...');
+                          onPressed: () async {
+                            final donateCreateData = createDonateRecordData(
+                              foodType: dropDownValue,
+                              foodName: textController2.text,
+                              preferedTime: textController4.text,
+                              expirationTime: textController3.text,
+                              pickupPlace: textController5.text,
+                              phoneNumber: textController6.text,
+                              quanity: textController1.text,
+                              username: textController7.text,
+                            );
+                            await DonateRecord.collection
+                                .doc()
+                                .set(donateCreateData);
+                            await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    NavBarPage(initialPage: 'donor_home'),
+                              ),
+                            );
                           },
                           text: 'Donate',
                           options: FFButtonOptions(
@@ -391,6 +416,46 @@ class _DonateWidgetState extends State<DonateWidget> {
                                       fontSize: 18,
                                     ),
                             keyboardType: TextInputType.phone,
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: AlignmentDirectional(2.22, 0.82),
+                        child: Padding(
+                          padding:
+                              EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
+                          child: TextFormField(
+                            controller: textController7,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              labelText: 'username',
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.black,
+                                  width: 1,
+                                ),
+                                borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(4.0),
+                                  topRight: Radius.circular(4.0),
+                                ),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.black,
+                                  width: 1,
+                                ),
+                                borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(4.0),
+                                  topRight: Radius.circular(4.0),
+                                ),
+                              ),
+                            ),
+                            style:
+                                FlutterFlowTheme.of(context).bodyText1.override(
+                                      fontFamily: 'Poppins',
+                                      color: Colors.black,
+                                      fontSize: 18,
+                                    ),
                           ),
                         ),
                       ),

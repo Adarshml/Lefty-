@@ -10,9 +10,10 @@ import 'flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/internationalization.dart';
 import 'package:lefty/login/login_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'home/home_widget.dart';
 import 'donate/donate_widget.dart';
+import 'donor_home/donor_home_widget.dart';
 import 'profile/profile_widget.dart';
+import 'test/test_widget.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -105,7 +106,7 @@ class NavBarPage extends StatefulWidget {
 
 /// This is the private State class that goes with NavBarPage.
 class _NavBarPageState extends State<NavBarPage> {
-  String _currentPage = 'home';
+  String _currentPage = 'donor_home';
 
   @override
   void initState() {
@@ -116,9 +117,10 @@ class _NavBarPageState extends State<NavBarPage> {
   @override
   Widget build(BuildContext context) {
     final tabs = {
-      'home': HomeWidget(),
       'donate': DonateWidget(),
+      'donor_home': DonorHomeWidget(),
       'profile': ProfileWidget(),
+      'test': TestWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPage);
     return Scaffold(
@@ -135,14 +137,6 @@ class _NavBarPageState extends State<NavBarPage> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.home_outlined,
-              size: 24,
-            ),
-            label: 'Home',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
               Icons.add_box,
               size: 24,
             ),
@@ -151,10 +145,26 @@ class _NavBarPageState extends State<NavBarPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
+              Icons.home_outlined,
+              size: 24,
+            ),
+            label: 'Home',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
               Icons.person,
               size: 24,
             ),
             label: 'profile',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.title_sharp,
+              size: 24,
+            ),
+            label: 'Home',
             tooltip: '',
           )
         ],
