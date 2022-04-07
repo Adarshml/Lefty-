@@ -20,14 +20,6 @@ abstract class OrganizationRecord
   String get orgEmail;
 
   @nullable
-  @BuiltValueField(wireName: 'org_password')
-  String get orgPassword;
-
-  @nullable
-  @BuiltValueField(wireName: 'org_confirm_password')
-  String get orgConfirmPassword;
-
-  @nullable
   @BuiltValueField(wireName: 'org_regid')
   int get orgRegid;
 
@@ -36,19 +28,19 @@ abstract class OrganizationRecord
   double get orgPhoneNumber;
 
   @nullable
-  @BuiltValueField(wireName: 'org_photo_url')
-  String get orgPhotoUrl;
-
-  @nullable
-  @BuiltValueField(wireName: 'org_created_time')
-  DateTime get orgCreatedTime;
-
-  @nullable
   @BuiltValueField(wireName: 'org_about')
   String get orgAbout;
 
   @nullable
-  DocumentReference get users;
+  @BuiltValueField(wireName: 'org_address')
+  String get orgAddress;
+
+  @nullable
+  @BuiltValueField(wireName: 'org_photo')
+  String get orgPhoto;
+
+  @nullable
+  DocumentReference get rf;
 
   @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
@@ -57,12 +49,11 @@ abstract class OrganizationRecord
   static void _initializeBuilder(OrganizationRecordBuilder builder) => builder
     ..orgName = ''
     ..orgEmail = ''
-    ..orgPassword = ''
-    ..orgConfirmPassword = ''
     ..orgRegid = 0
     ..orgPhoneNumber = 0.0
-    ..orgPhotoUrl = ''
-    ..orgAbout = '';
+    ..orgAbout = ''
+    ..orgAddress = ''
+    ..orgPhoto = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('organization');
@@ -89,25 +80,21 @@ abstract class OrganizationRecord
 Map<String, dynamic> createOrganizationRecordData({
   String orgName,
   String orgEmail,
-  String orgPassword,
-  String orgConfirmPassword,
   int orgRegid,
   double orgPhoneNumber,
-  String orgPhotoUrl,
-  DateTime orgCreatedTime,
   String orgAbout,
-  DocumentReference users,
+  String orgAddress,
+  String orgPhoto,
+  DocumentReference rf,
 }) =>
     serializers.toFirestore(
         OrganizationRecord.serializer,
         OrganizationRecord((o) => o
           ..orgName = orgName
           ..orgEmail = orgEmail
-          ..orgPassword = orgPassword
-          ..orgConfirmPassword = orgConfirmPassword
           ..orgRegid = orgRegid
           ..orgPhoneNumber = orgPhoneNumber
-          ..orgPhotoUrl = orgPhotoUrl
-          ..orgCreatedTime = orgCreatedTime
           ..orgAbout = orgAbout
-          ..users = users));
+          ..orgAddress = orgAddress
+          ..orgPhoto = orgPhoto
+          ..rf = rf));

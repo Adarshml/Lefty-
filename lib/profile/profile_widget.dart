@@ -1,3 +1,4 @@
+import '../add_org/add_org_widget.dart';
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../edit_profile/edit_profile_widget.dart';
@@ -5,7 +6,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../login/login_widget.dart';
-import '../org_home/org_home_widget.dart';
+import '../main.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -105,6 +106,39 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                     ),
                     Align(
                       alignment: AlignmentDirectional(-0.71, -0.6),
+                      child: StreamBuilder<UsersRecord>(
+                        stream: UsersRecord.getDocument(currentUserReference),
+                        builder: (context, snapshot) {
+                          // Customize what your widget looks like when it's loading.
+                          if (!snapshot.hasData) {
+                            return Center(
+                              child: SizedBox(
+                                width: 50,
+                                height: 50,
+                                child: CircularProgressIndicator(
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryColor,
+                                ),
+                              ),
+                            );
+                          }
+                          final textUsersRecord = snapshot.data;
+                          return Text(
+                            valueOrDefault<String>(
+                              textUsersRecord.name,
+                              'name',
+                            ),
+                            style: FlutterFlowTheme.of(context).title3.override(
+                                  fontFamily: 'Lexend Deca',
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                          );
+                        },
+                      ),
+                    ),
+                    Align(
+                      alignment: AlignmentDirectional(-0.84, -0.93),
                       child: AuthUserStreamWidget(
                         child: StreamBuilder<UsersRecord>(
                           stream: UsersRecord.getDocument(currentUserReference),
@@ -122,34 +156,22 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                 ),
                               );
                             }
-                            final textUsersRecord = snapshot.data;
-                            return Text(
-                              valueOrDefault<String>(
-                                currentUserDocument?.name,
-                                'name',
+                            final circleImageUsersRecord = snapshot.data;
+                            return Container(
+                              width: 120,
+                              height: 120,
+                              clipBehavior: Clip.antiAlias,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
                               ),
-                              style:
-                                  FlutterFlowTheme.of(context).title3.override(
-                                        fontFamily: 'Lexend Deca',
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w600,
-                                      ),
+                              child: Image.network(
+                                valueOrDefault<String>(
+                                  currentUserPhoto,
+                                  'https://picsum.photos/seed/990/600',
+                                ),
+                              ),
                             );
                           },
-                        ),
-                      ),
-                    ),
-                    Align(
-                      alignment: AlignmentDirectional(-0.84, -0.93),
-                      child: Container(
-                        width: 120,
-                        height: 120,
-                        clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                        ),
-                        child: Image.network(
-                          'https://picsum.photos/seed/990/600',
                         ),
                       ),
                     ),
@@ -179,40 +201,37 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                     ),
                     Align(
                       alignment: AlignmentDirectional(-0.63, -0.53),
-                      child: AuthUserStreamWidget(
-                        child: StreamBuilder<UsersRecord>(
-                          stream: UsersRecord.getDocument(currentUserReference),
-                          builder: (context, snapshot) {
-                            // Customize what your widget looks like when it's loading.
-                            if (!snapshot.hasData) {
-                              return Center(
-                                child: SizedBox(
-                                  width: 50,
-                                  height: 50,
-                                  child: CircularProgressIndicator(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryColor,
-                                  ),
+                      child: StreamBuilder<UsersRecord>(
+                        stream: UsersRecord.getDocument(currentUserReference),
+                        builder: (context, snapshot) {
+                          // Customize what your widget looks like when it's loading.
+                          if (!snapshot.hasData) {
+                            return Center(
+                              child: SizedBox(
+                                width: 50,
+                                height: 50,
+                                child: CircularProgressIndicator(
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryColor,
                                 ),
-                              );
-                            }
-                            final textUsersRecord = snapshot.data;
-                            return Text(
-                              valueOrDefault<String>(
-                                currentUserDocument?.emailAddress,
-                                'emailaddress',
                               ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: 'Poppins',
-                                    color: Colors.black,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500,
-                                  ),
                             );
-                          },
-                        ),
+                          }
+                          final textUsersRecord = snapshot.data;
+                          return Text(
+                            valueOrDefault<String>(
+                              textUsersRecord.emailAddress,
+                              'email',
+                            ),
+                            style:
+                                FlutterFlowTheme.of(context).bodyText1.override(
+                                      fontFamily: 'Poppins',
+                                      color: Colors.black,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                          );
+                        },
                       ),
                     ),
                     Align(
@@ -316,12 +335,23 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       alignment: AlignmentDirectional(0.69, -0.95),
                       child: FFButtonWidget(
                         onPressed: () async {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => OrgHomeWidget(),
-                            ),
-                          );
+                          if (currentUserDocument?.orgemail != null &&
+                              currentUserDocument?.orgemail != '') {
+                            await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    NavBarPage(initialPage: 'org_home'),
+                              ),
+                            );
+                          } else {
+                            await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => AddOrgWidget(),
+                              ),
+                            );
+                          }
                         },
                         text: 'Organization',
                         options: FFButtonOptions(

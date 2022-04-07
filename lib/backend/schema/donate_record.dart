@@ -52,6 +52,10 @@ abstract class DonateRecord
   String get username;
 
   @nullable
+  @BuiltValueField(wireName: 'donor_location')
+  LatLng get donorLocation;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -99,6 +103,7 @@ Map<String, dynamic> createDonateRecordData({
   DateTime donatedAt,
   String did,
   String username,
+  LatLng donorLocation,
 }) =>
     serializers.toFirestore(
         DonateRecord.serializer,
@@ -113,4 +118,5 @@ Map<String, dynamic> createDonateRecordData({
           ..donatedBy = donatedBy
           ..donatedAt = donatedAt
           ..did = did
-          ..username = username));
+          ..username = username
+          ..donorLocation = donorLocation));

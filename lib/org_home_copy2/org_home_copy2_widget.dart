@@ -1,18 +1,19 @@
 import '../backend/backend.dart';
+import '../donate_details/donate_details_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../request_details/request_details_widget.dart';
+import '../main.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class DonorHomeWidget extends StatefulWidget {
-  const DonorHomeWidget({Key key}) : super(key: key);
+class OrgHomeCopy2Widget extends StatefulWidget {
+  const OrgHomeCopy2Widget({Key key}) : super(key: key);
 
   @override
-  _DonorHomeWidgetState createState() => _DonorHomeWidgetState();
+  _OrgHomeCopy2WidgetState createState() => _OrgHomeCopy2WidgetState();
 }
 
-class _DonorHomeWidgetState extends State<DonorHomeWidget> {
+class _OrgHomeCopy2WidgetState extends State<OrgHomeCopy2Widget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -23,7 +24,7 @@ class _DonorHomeWidgetState extends State<DonorHomeWidget> {
         backgroundColor: FlutterFlowTheme.of(context).primaryColor,
         automaticallyImplyLeading: false,
         title: Text(
-          'LEFTY',
+          'Page Title',
           style: FlutterFlowTheme.of(context).title2.override(
                 fontFamily: 'Poppins',
                 color: Colors.white,
@@ -35,6 +36,152 @@ class _DonorHomeWidgetState extends State<DonorHomeWidget> {
         elevation: 2,
       ),
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          await Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => NavBarPage(initialPage: 'requestFood'),
+            ),
+          );
+        },
+        backgroundColor: FlutterFlowTheme.of(context).primaryColor,
+        elevation: 8,
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+          size: 28,
+        ),
+      ),
+      drawer: Drawer(
+        elevation: 16,
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Image.network(
+              'https://picsum.photos/seed/28/600',
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 0.25,
+              fit: BoxFit.cover,
+            ),
+            ListTile(
+              title: Text(
+                'Profile',
+                style: FlutterFlowTheme.of(context).title3.override(
+                      fontFamily: 'Lexend Deca',
+                      color: Colors.black,
+                    ),
+              ),
+              subtitle: Text(
+                'View and edit profile',
+                style: FlutterFlowTheme.of(context).subtitle2.override(
+                      fontFamily: 'Lexend Deca',
+                      fontWeight: FontWeight.w500,
+                    ),
+              ),
+              trailing: Icon(
+                Icons.arrow_forward_ios,
+                color: Color(0xFF303030),
+                size: 20,
+              ),
+              tileColor: Color(0xFFF5F5F5),
+              dense: false,
+            ),
+            ListTile(
+              title: Text(
+                'Requests',
+                style: FlutterFlowTheme.of(context).title3.override(
+                      fontFamily: 'Lexend Deca',
+                      color: Colors.black,
+                    ),
+              ),
+              subtitle: Text(
+                'Food requests',
+                style: FlutterFlowTheme.of(context).subtitle2.override(
+                      fontFamily: 'Lexend Deca',
+                      fontWeight: FontWeight.w500,
+                    ),
+              ),
+              trailing: Icon(
+                Icons.arrow_forward_ios,
+                color: Color(0xFF303030),
+                size: 20,
+              ),
+              tileColor: Color(0xFFF5F5F5),
+              dense: false,
+            ),
+            ListTile(
+              title: Text(
+                'Activity',
+                style: FlutterFlowTheme.of(context).title3.override(
+                      fontFamily: 'Lexend Deca',
+                      color: Colors.black,
+                    ),
+              ),
+              subtitle: Text(
+                'Orders ',
+                style: FlutterFlowTheme.of(context).subtitle2.override(
+                      fontFamily: 'Lexend Deca',
+                      fontWeight: FontWeight.w500,
+                    ),
+              ),
+              trailing: Icon(
+                Icons.arrow_forward_ios,
+                color: Color(0xFF303030),
+                size: 20,
+              ),
+              tileColor: Color(0xFFF5F5F5),
+              dense: false,
+            ),
+            ListTile(
+              title: Text(
+                'Settings',
+                style: FlutterFlowTheme.of(context).title3.override(
+                      fontFamily: 'Lexend Deca',
+                      color: Colors.black,
+                    ),
+              ),
+              subtitle: Text(
+                'Privacy and settings',
+                style: FlutterFlowTheme.of(context).subtitle2.override(
+                      fontFamily: 'Lexend Deca',
+                      fontWeight: FontWeight.w500,
+                    ),
+              ),
+              trailing: Icon(
+                Icons.arrow_forward_ios,
+                color: Color(0xFF303030),
+                size: 20,
+              ),
+              tileColor: Color(0xFFF5F5F5),
+              dense: false,
+            ),
+            ListTile(
+              title: Text(
+                'Help',
+                style: FlutterFlowTheme.of(context).title3.override(
+                      fontFamily: 'Lexend Deca',
+                      color: Colors.black,
+                    ),
+              ),
+              subtitle: Text(
+                'Help and support',
+                style: FlutterFlowTheme.of(context).subtitle2.override(
+                      fontFamily: 'Lexend Deca',
+                      fontWeight: FontWeight.w500,
+                    ),
+              ),
+              trailing: Icon(
+                Icons.arrow_forward_ios,
+                color: Color(0xFF303030),
+                size: 20,
+              ),
+              tileColor: Color(0xFFF5F5F5),
+              dense: false,
+            ),
+          ],
+        ),
+      ),
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
@@ -42,8 +189,8 @@ class _DonorHomeWidgetState extends State<DonorHomeWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Expanded(
-                child: StreamBuilder<List<RequestFoodRecord>>(
-                  stream: queryRequestFoodRecord(),
+                child: StreamBuilder<List<DonateRecord>>(
+                  stream: queryDonateRecord(),
                   builder: (context, snapshot) {
                     // Customize what your widget looks like when it's loading.
                     if (!snapshot.hasData) {
@@ -57,23 +204,20 @@ class _DonorHomeWidgetState extends State<DonorHomeWidget> {
                         ),
                       );
                     }
-                    List<RequestFoodRecord> columnRequestFoodRecordList =
-                        snapshot.data;
+                    List<DonateRecord> columnDonateRecordList = snapshot.data;
                     return Column(
                       mainAxisSize: MainAxisSize.max,
-                      children: List.generate(
-                          columnRequestFoodRecordList.length, (columnIndex) {
-                        final columnRequestFoodRecord =
-                            columnRequestFoodRecordList[columnIndex];
+                      children: List.generate(columnDonateRecordList.length,
+                          (columnIndex) {
+                        final columnDonateRecord =
+                            columnDonateRecordList[columnIndex];
                         return InkWell(
                           onTap: () async {
                             await Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => RequestDetailsWidget(
-                                  requestDetails:
-                                      columnRequestFoodRecord.reference,
-                                  orgnamep: columnRequestFoodRecord.orgnameref,
+                                builder: (context) => DonateDetailsWidget(
+                                  donateDetails: columnDonateRecord.reference,
                                 ),
                               ),
                             );
@@ -116,9 +260,8 @@ class _DonorHomeWidgetState extends State<DonorHomeWidget> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          StreamBuilder<
-                                              List<RequestFoodRecord>>(
-                                            stream: queryRequestFoodRecord(
+                                          StreamBuilder<List<DonateRecord>>(
+                                            stream: queryDonateRecord(
                                               singleRecord: true,
                                             ),
                                             builder: (context, snapshot) {
@@ -138,21 +281,24 @@ class _DonorHomeWidgetState extends State<DonorHomeWidget> {
                                                   ),
                                                 );
                                               }
-                                              List<RequestFoodRecord>
-                                                  textRequestFoodRecordList =
+                                              List<DonateRecord>
+                                                  textDonateRecordList =
                                                   snapshot.data;
                                               // Return an empty Container when the document does not exist.
                                               if (snapshot.data.isEmpty) {
                                                 return Container();
                                               }
-                                              final textRequestFoodRecord =
-                                                  textRequestFoodRecordList
+                                              final textDonateRecord =
+                                                  textDonateRecordList
                                                           .isNotEmpty
-                                                      ? textRequestFoodRecordList
+                                                      ? textDonateRecordList
                                                           .first
                                                       : null;
                                               return Text(
-                                                'Title Here',
+                                                valueOrDefault<String>(
+                                                  columnDonateRecord.foodName,
+                                                  'oi',
+                                                ),
                                                 style: FlutterFlowTheme.of(
                                                         context)
                                                     .subtitle1
@@ -171,8 +317,8 @@ class _DonorHomeWidgetState extends State<DonorHomeWidget> {
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     0, 4, 0, 0),
                                             child: StreamBuilder<
-                                                List<RequestFoodRecord>>(
-                                              stream: queryRequestFoodRecord(
+                                                List<DonateRecord>>(
+                                              stream: queryDonateRecord(
                                                 singleRecord: true,
                                               ),
                                               builder: (context, snapshot) {
@@ -192,80 +338,25 @@ class _DonorHomeWidgetState extends State<DonorHomeWidget> {
                                                     ),
                                                   );
                                                 }
-                                                List<RequestFoodRecord>
-                                                    textRequestFoodRecordList =
+                                                List<DonateRecord>
+                                                    textDonateRecordList =
                                                     snapshot.data;
                                                 // Return an empty Container when the document does not exist.
                                                 if (snapshot.data.isEmpty) {
                                                   return Container();
                                                 }
-                                                final textRequestFoodRecord =
-                                                    textRequestFoodRecordList
+                                                final textDonateRecord =
+                                                    textDonateRecordList
                                                             .isNotEmpty
-                                                        ? textRequestFoodRecordList
+                                                        ? textDonateRecordList
                                                             .first
                                                         : null;
                                                 return Text(
-                                                  columnRequestFoodRecord
-                                                      .rLocation,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily:
-                                                            'Lexend Deca',
-                                                        color:
-                                                            Color(0xFF57636C),
-                                                        fontSize: 12,
-                                                        fontWeight:
-                                                            FontWeight.normal,
-                                                      ),
-                                                );
-                                              },
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0, 4, 0, 0),
-                                            child: StreamBuilder<
-                                                List<RequestFoodRecord>>(
-                                              stream: queryRequestFoodRecord(
-                                                singleRecord: true,
-                                              ),
-                                              builder: (context, snapshot) {
-                                                // Customize what your widget looks like when it's loading.
-                                                if (!snapshot.hasData) {
-                                                  return Center(
-                                                    child: SizedBox(
-                                                      width: 50,
-                                                      height: 50,
-                                                      child:
-                                                          CircularProgressIndicator(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryColor,
-                                                      ),
-                                                    ),
-                                                  );
-                                                }
-                                                List<RequestFoodRecord>
-                                                    textRequestFoodRecordList =
-                                                    snapshot.data;
-                                                // Return an empty Container when the document does not exist.
-                                                if (snapshot.data.isEmpty) {
-                                                  return Container();
-                                                }
-                                                final textRequestFoodRecord =
-                                                    textRequestFoodRecordList
-                                                            .isNotEmpty
-                                                        ? textRequestFoodRecordList
-                                                            .first
-                                                        : null;
-                                                return Text(
-                                                  columnRequestFoodRecord.rDate
-                                                      .toString(),
+                                                  valueOrDefault<String>(
+                                                    columnDonateRecord
+                                                        .preferedTime,
+                                                    '12',
+                                                  ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyText1

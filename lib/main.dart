@@ -11,9 +11,13 @@ import 'flutter_flow/internationalization.dart';
 import 'package:lefty/login/login_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'donate/donate_widget.dart';
-import 'donor_home/donor_home_widget.dart';
 import 'profile/profile_widget.dart';
-import 'test/test_widget.dart';
+import 'org_home/org_home_widget.dart';
+import 'request_food/request_food_widget.dart';
+import 'donor_home/donor_home_widget.dart';
+import 'org_profile/org_profile_widget.dart';
+import 'map1/map1_widget.dart';
+import 'maptest/maptest_widget.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -118,9 +122,13 @@ class _NavBarPageState extends State<NavBarPage> {
   Widget build(BuildContext context) {
     final tabs = {
       'donate': DonateWidget(),
-      'donor_home': DonorHomeWidget(),
       'profile': ProfileWidget(),
-      'test': TestWidget(),
+      'org_home': OrgHomeWidget(),
+      'requestFood': RequestFoodWidget(),
+      'donor_home': DonorHomeWidget(),
+      'org_profile': OrgProfileWidget(),
+      'map1': Map1Widget(),
+      'maptest': MaptestWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPage);
     return Scaffold(
@@ -145,6 +153,30 @@ class _NavBarPageState extends State<NavBarPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
+              Icons.person,
+              size: 24,
+            ),
+            label: 'profile',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.account_balance_outlined,
+              size: 24,
+            ),
+            label: 'Home',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.title_sharp,
+              size: 24,
+            ),
+            label: 'Home',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
               Icons.home_outlined,
               size: 24,
             ),
@@ -161,7 +193,15 @@ class _NavBarPageState extends State<NavBarPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.title_sharp,
+              Icons.edit_location,
+              size: 24,
+            ),
+            label: 'Home',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.threesixty,
               size: 24,
             ),
             label: 'Home',
