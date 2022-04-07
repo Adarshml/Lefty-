@@ -3,14 +3,14 @@ import '../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class TestWidget extends StatefulWidget {
-  const TestWidget({Key key}) : super(key: key);
+class Donate1Widget extends StatefulWidget {
+  const Donate1Widget({Key key}) : super(key: key);
 
   @override
-  _TestWidgetState createState() => _TestWidgetState();
+  _Donate1WidgetState createState() => _Donate1WidgetState();
 }
 
-class _TestWidgetState extends State<TestWidget> {
+class _Donate1WidgetState extends State<Donate1Widget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -33,6 +33,15 @@ class _TestWidgetState extends State<TestWidget> {
         elevation: 2,
       ),
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+      body: SafeArea(
+        child: GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [],
+          ),
+        ),
+      ),
     );
   }
 }

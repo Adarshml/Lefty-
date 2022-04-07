@@ -224,7 +224,7 @@ class _CreateAccountUserWidgetState extends State<CreateAccountUserWidget> {
                                 }
 
                                 final usersCreateData = createUsersRecordData(
-                                  email: '',
+                                  emailAddress: '',
                                   name: '',
                                 );
                                 await UsersRecord.collection

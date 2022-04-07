@@ -1,9 +1,11 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../backend/firebase_storage/storage.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../flutter_flow/upload_media.dart';
 import '../main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -17,8 +19,9 @@ class EditProfileWidget extends StatefulWidget {
 }
 
 class _EditProfileWidgetState extends State<EditProfileWidget> {
-  TextEditingController emailAddressController;
+  String uploadedFileUrl = '';
   TextEditingController fullNameController;
+  TextEditingController emailAddressController;
   TextEditingController phoneController;
   TextEditingController myBioController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -83,53 +86,67 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                 Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(130, 30, 0, 0),
-                      child: Container(
-                        width: 120,
-                        height: 120,
-                        clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                        ),
-                        child: Image.network(
-                          '',
-                        ),
+                    Image.network(
+                      valueOrDefault<String>(
+                        uploadedFileUrl,
+                        'https://picsum.photos/seed/139/600',
                       ),
+                      width: 380,
+                      height: 180,
+                      fit: BoxFit.cover,
                     ),
                   ],
                 ),
                 Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Align(
-                      alignment: AlignmentDirectional(0.05, -0.09),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(110, 20, 0, 0),
-                        child: FFButtonWidget(
-                          onPressed: () {
-                            print('changePhoto pressed ...');
-                          },
-                          text: 'Change Photo',
-                          options: FFButtonOptions(
-                            width: 150,
-                            height: 35,
-                            color: FlutterFlowTheme.of(context).primaryColor,
-                            textStyle:
-                                FlutterFlowTheme.of(context).subtitle2.override(
-                                      fontFamily: 'Lexend Deca',
-                                      color: Colors.white,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                            elevation: 3,
-                            borderSide: BorderSide(
-                              color: Colors.black,
-                              width: 1,
-                            ),
-                            borderRadius: 8,
-                          ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(150, 0, 0, 0),
+                      child: FlutterFlowIconButton(
+                        borderColor: Colors.transparent,
+                        borderRadius: 30,
+                        borderWidth: 1,
+                        buttonSize: 60,
+                        icon: Icon(
+                          Icons.camera_alt,
+                          color: Colors.black,
+                          size: 30,
                         ),
+                        onPressed: () async {
+                          final selectedMedia =
+                              await selectMediaWithSourceBottomSheet(
+                            context: context,
+                            allowPhoto: true,
+                            backgroundColor: Colors.white,
+                            textColor: Colors.black,
+                            pickerFontFamily: 'Lexend Deca',
+                          );
+                          if (selectedMedia != null &&
+                              validateFileFormat(
+                                  selectedMedia.storagePath, context)) {
+                            showUploadMessage(
+                              context,
+                              'Uploading file...',
+                              showLoading: true,
+                            );
+                            final downloadUrl = await uploadData(
+                                selectedMedia.storagePath, selectedMedia.bytes);
+                            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                            if (downloadUrl != null) {
+                              setState(() => uploadedFileUrl = downloadUrl);
+                              showUploadMessage(
+                                context,
+                                'Success!',
+                              );
+                            } else {
+                              showUploadMessage(
+                                context,
+                                'Failed to upload media',
+                              );
+                              return;
+                            }
+                          }
+                        },
                       ),
                     ),
                   ],
@@ -349,6 +366,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                               emailAddress: emailAddressController.text,
                               bio: myBioController.text,
                               phoneNumber: phoneController.text,
+                              photoUrl: uploadedFileUrl,
                             );
                             await saveUsersRecord.reference
                                 .update(usersUpdateData);

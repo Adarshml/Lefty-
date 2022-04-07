@@ -7,6 +7,7 @@ import '../flutter_flow/flutter_flow_util.dart';
 import 'schema/users_record.dart';
 import 'schema/organization_record.dart';
 import 'schema/donate_record.dart';
+import 'schema/request_food_record.dart';
 import 'schema/serializers.dart';
 
 export 'package:cloud_firestore/cloud_firestore.dart';
@@ -16,6 +17,7 @@ export 'schema/serializers.dart';
 export 'schema/users_record.dart';
 export 'schema/organization_record.dart';
 export 'schema/donate_record.dart';
+export 'schema/request_food_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Stream<List<UsersRecord>> queryUsersRecord(
@@ -62,6 +64,22 @@ Future<List<DonateRecord>> queryDonateRecordOnce(
         int limit = -1,
         bool singleRecord = false}) =>
     queryCollectionOnce(DonateRecord.collection, DonateRecord.serializer,
+        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
+
+/// Functions to query RequestFoodRecords (as a Stream and as a Future).
+Stream<List<RequestFoodRecord>> queryRequestFoodRecord(
+        {Query Function(Query) queryBuilder,
+        int limit = -1,
+        bool singleRecord = false}) =>
+    queryCollection(RequestFoodRecord.collection, RequestFoodRecord.serializer,
+        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
+
+Future<List<RequestFoodRecord>> queryRequestFoodRecordOnce(
+        {Query Function(Query) queryBuilder,
+        int limit = -1,
+        bool singleRecord = false}) =>
+    queryCollectionOnce(
+        RequestFoodRecord.collection, RequestFoodRecord.serializer,
         queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
 
 Stream<List<T>> queryCollection<T>(
