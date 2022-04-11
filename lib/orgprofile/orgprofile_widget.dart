@@ -1,20 +1,26 @@
+import '../auth/auth_util.dart';
 import '../backend/backend.dart';
-import '../edit_profile/edit_profile_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../login/login_widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class OrgProfileWidget extends StatefulWidget {
-  const OrgProfileWidget({Key key}) : super(key: key);
+class OrgprofileWidget extends StatefulWidget {
+  const OrgprofileWidget({
+    Key key,
+    this.orgprofile,
+  }) : super(key: key);
+
+  final DocumentReference orgprofile;
 
   @override
-  _OrgProfileWidgetState createState() => _OrgProfileWidgetState();
+  _OrgprofileWidgetState createState() => _OrgprofileWidgetState();
 }
 
-class _OrgProfileWidgetState extends State<OrgProfileWidget> {
+class _OrgprofileWidgetState extends State<OrgprofileWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -128,10 +134,7 @@ class _OrgProfileWidgetState extends State<OrgProfileWidget> {
                                   ? textOrganizationRecordList.first
                                   : null;
                           return Text(
-                            valueOrDefault<String>(
-                              textOrganizationRecord.orgEmail,
-                              'emailaddress',
-                            ),
+                            textOrganizationRecord.orgEmail,
                             style:
                                 FlutterFlowTheme.of(context).bodyText1.override(
                                       fontFamily: 'Poppins',
@@ -190,46 +193,35 @@ class _OrgProfileWidgetState extends State<OrgProfileWidget> {
                     ),
                     Align(
                       alignment: AlignmentDirectional(-0.71, -0.6),
-                      child: StreamBuilder<List<OrganizationRecord>>(
-                        stream: queryOrganizationRecord(
-                          singleRecord: true,
-                        ),
-                        builder: (context, snapshot) {
-                          // Customize what your widget looks like when it's loading.
-                          if (!snapshot.hasData) {
-                            return Center(
-                              child: SizedBox(
-                                width: 50,
-                                height: 50,
-                                child: CircularProgressIndicator(
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryColor,
+                      child: AuthUserStreamWidget(
+                        child: StreamBuilder<UsersRecord>(
+                          stream: UsersRecord.getDocument(currentUserReference),
+                          builder: (context, snapshot) {
+                            // Customize what your widget looks like when it's loading.
+                            if (!snapshot.hasData) {
+                              return Center(
+                                child: SizedBox(
+                                  width: 50,
+                                  height: 50,
+                                  child: CircularProgressIndicator(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryColor,
+                                  ),
                                 ),
-                              ),
+                              );
+                            }
+                            final textUsersRecord = snapshot.data;
+                            return Text(
+                              currentUserDocument?.orgname,
+                              style:
+                                  FlutterFlowTheme.of(context).title3.override(
+                                        fontFamily: 'Lexend Deca',
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w600,
+                                      ),
                             );
-                          }
-                          List<OrganizationRecord> textOrganizationRecordList =
-                              snapshot.data;
-                          // Return an empty Container when the document does not exist.
-                          if (snapshot.data.isEmpty) {
-                            return Container();
-                          }
-                          final textOrganizationRecord =
-                              textOrganizationRecordList.isNotEmpty
-                                  ? textOrganizationRecordList.first
-                                  : null;
-                          return Text(
-                            valueOrDefault<String>(
-                              textOrganizationRecord.orgName,
-                              'name',
-                            ),
-                            style: FlutterFlowTheme.of(context).title3.override(
-                                  fontFamily: 'Lexend Deca',
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                          );
-                        },
+                          },
+                        ),
                       ),
                     ),
                     Align(
@@ -270,7 +262,7 @@ class _OrgProfileWidgetState extends State<OrgProfileWidget> {
                               shape: BoxShape.circle,
                             ),
                             child: Image.network(
-                              'https://picsum.photos/seed/990/600',
+                              circleImageOrganizationRecord.orgPhoto,
                             ),
                           );
                         },
@@ -332,13 +324,8 @@ class _OrgProfileWidgetState extends State<OrgProfileWidget> {
                     Align(
                       alignment: AlignmentDirectional(0.68, -0.47),
                       child: FFButtonWidget(
-                        onPressed: () async {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => EditProfileWidget(),
-                            ),
-                          );
+                        onPressed: () {
+                          print('Button pressed ...');
                         },
                         text: 'Edit Profile',
                         options: FFButtonOptions(
@@ -396,6 +383,7 @@ class _OrgProfileWidgetState extends State<OrgProfileWidget> {
                             style:
                                 FlutterFlowTheme.of(context).bodyText1.override(
                                       fontFamily: 'Lexend Deca',
+                                      color: Colors.black,
                                       fontWeight: FontWeight.w500,
                                     ),
                           );
@@ -404,48 +392,17 @@ class _OrgProfileWidgetState extends State<OrgProfileWidget> {
                     ),
                     Align(
                       alignment: AlignmentDirectional(-0.71, -0.53),
-                      child: StreamBuilder<List<OrganizationRecord>>(
-                        stream: queryOrganizationRecord(
-                          singleRecord: true,
+                      child: AuthUserStreamWidget(
+                        child: Text(
+                          currentUserDocument?.orgregid,
+                          style:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'Poppins',
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                         ),
-                        builder: (context, snapshot) {
-                          // Customize what your widget looks like when it's loading.
-                          if (!snapshot.hasData) {
-                            return Center(
-                              child: SizedBox(
-                                width: 50,
-                                height: 50,
-                                child: CircularProgressIndicator(
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryColor,
-                                ),
-                              ),
-                            );
-                          }
-                          List<OrganizationRecord> textOrganizationRecordList =
-                              snapshot.data;
-                          // Return an empty Container when the document does not exist.
-                          if (snapshot.data.isEmpty) {
-                            return Container();
-                          }
-                          final textOrganizationRecord =
-                              textOrganizationRecordList.isNotEmpty
-                                  ? textOrganizationRecordList.first
-                                  : null;
-                          return Text(
-                            valueOrDefault<String>(
-                              textOrganizationRecord.orgRegid.toString(),
-                              'emailaddress',
-                            ),
-                            style:
-                                FlutterFlowTheme.of(context).bodyText1.override(
-                                      fontFamily: 'Poppins',
-                                      color: Colors.black,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                          );
-                        },
                       ),
                     ),
                     Align(
@@ -486,6 +443,7 @@ class _OrgProfileWidgetState extends State<OrgProfileWidget> {
                             style:
                                 FlutterFlowTheme.of(context).bodyText1.override(
                                       fontFamily: 'Lexend Deca',
+                                      color: Colors.black,
                                       fontWeight: FontWeight.w500,
                                     ),
                           );

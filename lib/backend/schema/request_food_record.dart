@@ -20,10 +20,6 @@ abstract class RequestFoodRecord
   int get rQuantity;
 
   @nullable
-  @BuiltValueField(wireName: 'r-location')
-  String get rLocation;
-
-  @nullable
   @BuiltValueField(wireName: 'requested_by')
   DocumentReference get requestedBy;
 
@@ -31,12 +27,25 @@ abstract class RequestFoodRecord
   DocumentReference get orgnameref;
 
   @nullable
+  @BuiltValueField(wireName: 'request_description')
+  String get requestDescription;
+
+  @nullable
+  @BuiltValueField(wireName: 'request_location')
+  LatLng get requestLocation;
+
+  @nullable
+  @BuiltValueField(wireName: 'req_by')
+  String get reqBy;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
   static void _initializeBuilder(RequestFoodRecordBuilder builder) => builder
     ..rQuantity = 0
-    ..rLocation = '';
+    ..requestDescription = ''
+    ..reqBy = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('requestFood');
@@ -62,15 +71,19 @@ abstract class RequestFoodRecord
 Map<String, dynamic> createRequestFoodRecordData({
   DateTime rDate,
   int rQuantity,
-  String rLocation,
   DocumentReference requestedBy,
   DocumentReference orgnameref,
+  String requestDescription,
+  LatLng requestLocation,
+  String reqBy,
 }) =>
     serializers.toFirestore(
         RequestFoodRecord.serializer,
         RequestFoodRecord((r) => r
           ..rDate = rDate
           ..rQuantity = rQuantity
-          ..rLocation = rLocation
           ..requestedBy = requestedBy
-          ..orgnameref = orgnameref));
+          ..orgnameref = orgnameref
+          ..requestDescription = requestDescription
+          ..requestLocation = requestLocation
+          ..reqBy = reqBy));

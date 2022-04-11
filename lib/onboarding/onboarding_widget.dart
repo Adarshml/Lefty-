@@ -30,12 +30,11 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                 alignment: AlignmentDirectional(-0.05, 0.75),
                 child: FFButtonWidget(
                   onPressed: () async {
-                    await Navigator.pushAndRemoveUntil(
+                    await Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => LoginWidget(),
                       ),
-                      (r) => false,
                     );
                   },
                   text: 'Get Started',

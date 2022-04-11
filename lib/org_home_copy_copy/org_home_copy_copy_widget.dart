@@ -2,7 +2,7 @@ import '../backend/backend.dart';
 import '../donate_details/donate_details_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../main.dart';
+import '../orgprofile/orgprofile_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -52,8 +52,7 @@ class _OrgHomeCopyCopyWidgetState extends State<OrgHomeCopyCopyWidget> {
                 await Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>
-                        NavBarPage(initialPage: 'org_profile'),
+                    builder: (context) => OrgprofileWidget(),
                   ),
                 );
               },
@@ -289,9 +288,11 @@ class _OrgHomeCopyCopyWidgetState extends State<OrgHomeCopyCopyWidget> {
                                                         : null;
                                                 return Text(
                                                   valueOrDefault<String>(
-                                                    columnDonateRecord
-                                                        .preferedTime,
-                                                    '12',
+                                                    dateTimeFormat(
+                                                        'd/M h:mm a',
+                                                        columnDonateRecord
+                                                            .prTime),
+                                                    'Available',
                                                   ),
                                                   style: FlutterFlowTheme.of(
                                                           context)

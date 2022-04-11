@@ -3,8 +3,7 @@ import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../login/login_widget.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import '../login_old/login_old_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -102,7 +101,7 @@ class _CreateAccountOrganizationWidgetState
                                 await Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => LoginWidget(),
+                                    builder: (context) => LoginOldWidget(),
                                   ),
                                 );
                               },
@@ -206,45 +205,10 @@ class _CreateAccountOrganizationWidgetState
                             final buttonUsersRecord = snapshot.data;
                             return FFButtonWidget(
                               onPressed: () async {
-                                if (passwordController.text !=
-                                    confirmPasswordController.text) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        'Passwords don\'t match!',
-                                      ),
-                                    ),
-                                  );
-                                  return;
-                                }
-
-                                final user = await createAccountWithEmail(
-                                  context,
-                                  regidController.text,
-                                  passwordController.text,
-                                );
-                                if (user == null) {
-                                  return;
-                                }
-
-                                final usersCreateData = createUsersRecordData(
-                                  emailAddress: '',
-                                  name: '',
-                                );
-                                await UsersRecord.collection
-                                    .doc(user.uid)
-                                    .update(usersCreateData);
-
-                                final usersUpdateData = createUsersRecordData(
-                                  orgemail: '',
-                                  name: '',
-                                );
-                                await buttonUsersRecord.reference
-                                    .update(usersUpdateData);
                                 await Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => LoginWidget(),
+                                    builder: (context) => LoginOldWidget(),
                                   ),
                                 );
                               },

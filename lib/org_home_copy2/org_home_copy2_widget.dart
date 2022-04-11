@@ -2,7 +2,7 @@ import '../backend/backend.dart';
 import '../donate_details/donate_details_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../main.dart';
+import '../request_food/request_food_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -41,7 +41,7 @@ class _OrgHomeCopy2WidgetState extends State<OrgHomeCopy2Widget> {
           await Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => NavBarPage(initialPage: 'requestFood'),
+              builder: (context) => RequestFoodWidget(),
             ),
           );
         },
@@ -353,8 +353,10 @@ class _OrgHomeCopy2WidgetState extends State<OrgHomeCopy2Widget> {
                                                         : null;
                                                 return Text(
                                                   valueOrDefault<String>(
-                                                    columnDonateRecord
-                                                        .preferedTime,
+                                                    dateTimeFormat(
+                                                        'd/M h:mm a',
+                                                        columnDonateRecord
+                                                            .prTime),
                                                     '12',
                                                   ),
                                                   style: FlutterFlowTheme.of(

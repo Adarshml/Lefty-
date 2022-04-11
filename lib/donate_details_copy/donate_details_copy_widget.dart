@@ -221,11 +221,8 @@ class _DonateDetailsCopyWidgetState extends State<DonateDetailsCopyWidget> {
                                                 ? textDonateRecordList.first
                                                 : null;
                                         return Text(
-                                          valueOrDefault<String>(
-                                            donateDetailsCopyDonateRecord
-                                                .foodType,
-                                            'Veg',
-                                          ),
+                                          donateDetailsCopyDonateRecord
+                                              .description,
                                           style: FlutterFlowTheme.of(context)
                                               .subtitle1
                                               .override(
@@ -356,8 +353,10 @@ class _DonateDetailsCopyWidgetState extends State<DonateDetailsCopyWidget> {
                                                 ? textDonateRecordList.first
                                                 : null;
                                         return Text(
-                                          donateDetailsCopyDonateRecord
-                                              .preferedTime,
+                                          dateTimeFormat(
+                                              'd/M h:mm a',
+                                              donateDetailsCopyDonateRecord
+                                                  .prTime),
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
@@ -426,8 +425,10 @@ class _DonateDetailsCopyWidgetState extends State<DonateDetailsCopyWidget> {
                                                 ? textDonateRecordList.first
                                                 : null;
                                         return Text(
-                                          donateDetailsCopyDonateRecord
-                                              .expirationTime,
+                                          dateTimeFormat(
+                                              'd/M h:mm a',
+                                              donateDetailsCopyDonateRecord
+                                                  .exTime),
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
