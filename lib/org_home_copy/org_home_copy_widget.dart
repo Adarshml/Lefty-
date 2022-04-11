@@ -206,9 +206,11 @@ class _OrgHomeCopyWidgetState extends State<OrgHomeCopyWidget> {
                                                         : null;
                                                 return Text(
                                                   valueOrDefault<String>(
-                                                    columnDonateRecord
-                                                        .preferedTime,
-                                                    '12',
+                                                    dateTimeFormat(
+                                                        'd/M h:mm a',
+                                                        columnDonateRecord
+                                                            .prTime),
+                                                    'Available',
                                                   ),
                                                   style: FlutterFlowTheme.of(
                                                           context)

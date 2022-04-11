@@ -158,13 +158,12 @@ class _MaptestWidgetState extends State<MaptestWidget> {
                                   EdgeInsetsDirectional.fromSTEB(40, 0, 0, 0),
                               child: FFButtonWidget(
                                 onPressed: () async {
-                                  final donateCreateData =
+                                  final donateUpdateData =
                                       createDonateRecordData(
                                     donorLocation: googleMapsCenter,
                                   );
-                                  await DonateRecord.collection
-                                      .doc()
-                                      .set(donateCreateData);
+                                  await currentUserDocument?.fooddonate
+                                      .update(donateUpdateData);
                                   await Navigator.push(
                                     context,
                                     MaterialPageRoute(

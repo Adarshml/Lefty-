@@ -6,6 +6,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/upload_media.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -51,8 +52,8 @@ class _ImagetestWidgetState extends State<ImagetestWidget> {
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Image.network(
-                      valueOrDefault<String>(
+                    CachedNetworkImage(
+                      imageUrl: valueOrDefault<String>(
                         uploadedFileUrl,
                         'https://picsum.photos/seed/409/600',
                       ),
@@ -77,18 +78,20 @@ class _ImagetestWidgetState extends State<ImagetestWidget> {
                           allowPhoto: true,
                         );
                         if (selectedMedia != null &&
-                            validateFileFormat(
-                                selectedMedia.storagePath, context)) {
+                            selectedMedia.every((m) =>
+                                validateFileFormat(m.storagePath, context))) {
                           showUploadMessage(
                             context,
                             'Uploading file...',
                             showLoading: true,
                           );
-                          final downloadUrl = await uploadData(
-                              selectedMedia.storagePath, selectedMedia.bytes);
+                          final downloadUrls = await Future.wait(
+                              selectedMedia.map((m) async =>
+                                  await uploadData(m.storagePath, m.bytes)));
                           ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                          if (downloadUrl != null) {
-                            setState(() => uploadedFileUrl = downloadUrl);
+                          if (downloadUrls != null) {
+                            setState(
+                                () => uploadedFileUrl = downloadUrls.first);
                             showUploadMessage(
                               context,
                               'Success!',
@@ -107,12 +110,13 @@ class _ImagetestWidgetState extends State<ImagetestWidget> {
                       padding: EdgeInsetsDirectional.fromSTEB(0, 150, 0, 0),
                       child: FFButtonWidget(
                         onPressed: () async {
-                          final organizationUpdateData =
+                          final organizationCreateData =
                               createOrganizationRecordData(
                             orgPhoto: uploadedFileUrl,
                           );
-                          await currentUserDocument?.org
-                              .update(organizationUpdateData);
+                          await OrganizationRecord.collection
+                              .doc()
+                              .set(organizationCreateData);
                         },
                         text: 'change',
                         options: FFButtonOptions(

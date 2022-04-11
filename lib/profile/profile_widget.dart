@@ -1,4 +1,4 @@
-import '../add_org/add_org_widget.dart';
+import '../add_orgold/add_orgold_widget.dart';
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../edit_profile/edit_profile_widget.dart';
@@ -46,61 +46,49 @@ class _ProfileWidgetState extends State<ProfileWidget> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 1,
-                child: Stack(
+              Expanded(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
                   children: [
                     Align(
-                      alignment: AlignmentDirectional(-0.82, -0.34),
-                      child: Icon(
-                        Icons.adjust_rounded,
-                        color: Color(0xFF090F13),
-                        size: 24,
-                      ),
-                    ),
-                    Align(
-                      alignment: AlignmentDirectional(-0.82, -0.17),
-                      child: Icon(
-                        Icons.phone_sharp,
-                        color: Colors.black,
-                        size: 24,
-                      ),
-                    ),
-                    Align(
-                      alignment: AlignmentDirectional(-0.56, -0.31),
-                      child: AuthUserStreamWidget(
-                        child: StreamBuilder<UsersRecord>(
-                          stream: UsersRecord.getDocument(currentUserReference),
-                          builder: (context, snapshot) {
-                            // Customize what your widget looks like when it's loading.
-                            if (!snapshot.hasData) {
-                              return Center(
-                                child: SizedBox(
-                                  width: 50,
-                                  height: 50,
-                                  child: CircularProgressIndicator(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryColor,
+                      alignment: AlignmentDirectional(-0.84, -0.93),
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
+                        child: AuthUserStreamWidget(
+                          child: StreamBuilder<UsersRecord>(
+                            stream:
+                                UsersRecord.getDocument(currentUserReference),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                  child: SizedBox(
+                                    width: 50,
+                                    height: 50,
+                                    child: CircularProgressIndicator(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryColor,
+                                    ),
+                                  ),
+                                );
+                              }
+                              final circleImageUsersRecord = snapshot.data;
+                              return Container(
+                                width: 120,
+                                height: 120,
+                                clipBehavior: Clip.antiAlias,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Image.network(
+                                  valueOrDefault<String>(
+                                    currentUserPhoto,
+                                    'https://picsum.photos/seed/990/600',
                                   ),
                                 ),
                               );
-                            }
-                            final textUsersRecord = snapshot.data;
-                            return Text(
-                              valueOrDefault<String>(
-                                currentUserDocument?.bio,
-                                'Available',
-                              ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: 'Lexend Deca',
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                            );
-                          },
+                            },
+                          ),
                         ),
                       ),
                     ),
@@ -128,75 +116,12 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               textUsersRecord.name,
                               'name',
                             ),
-                            style: FlutterFlowTheme.of(context).title3.override(
+                            style: FlutterFlowTheme.of(context).title1.override(
                                   fontFamily: 'Lexend Deca',
                                   color: Colors.black,
-                                  fontWeight: FontWeight.w600,
                                 ),
                           );
                         },
-                      ),
-                    ),
-                    Align(
-                      alignment: AlignmentDirectional(-0.84, -0.93),
-                      child: AuthUserStreamWidget(
-                        child: StreamBuilder<UsersRecord>(
-                          stream: UsersRecord.getDocument(currentUserReference),
-                          builder: (context, snapshot) {
-                            // Customize what your widget looks like when it's loading.
-                            if (!snapshot.hasData) {
-                              return Center(
-                                child: SizedBox(
-                                  width: 50,
-                                  height: 50,
-                                  child: CircularProgressIndicator(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryColor,
-                                  ),
-                                ),
-                              );
-                            }
-                            final circleImageUsersRecord = snapshot.data;
-                            return Container(
-                              width: 120,
-                              height: 120,
-                              clipBehavior: Clip.antiAlias,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                              ),
-                              child: Image.network(
-                                valueOrDefault<String>(
-                                  currentUserPhoto,
-                                  'https://picsum.photos/seed/990/600',
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    ),
-                    Align(
-                      alignment: AlignmentDirectional(-0.56, -0.35),
-                      child: Text(
-                        'About',
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'Lexend Deca',
-                              color: Colors.black,
-                              fontSize: 12,
-                              fontWeight: FontWeight.normal,
-                            ),
-                      ),
-                    ),
-                    Align(
-                      alignment: AlignmentDirectional(-0.55, -0.2),
-                      child: Text(
-                        'Phone',
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'Lexend Deca',
-                              color: Colors.black,
-                              fontSize: 12,
-                              fontWeight: FontWeight.normal,
-                            ),
                       ),
                     ),
                     Align(
@@ -223,111 +148,183 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               textUsersRecord.emailAddress,
                               'email',
                             ),
-                            style:
-                                FlutterFlowTheme.of(context).bodyText1.override(
-                                      fontFamily: 'Poppins',
-                                      color: Colors.black,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w500,
-                                    ),
+                            style: FlutterFlowTheme.of(context).title3.override(
+                                  fontFamily: 'Lexend Deca',
+                                  color: Colors.black,
+                                  fontSize: 20,
+                                ),
                           );
                         },
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Align(
+                            alignment: AlignmentDirectional(-0.82, -0.34),
+                            child: Icon(
+                              Icons.adjust_rounded,
+                              color: Color(0xFF090F13),
+                              size: 24,
+                            ),
+                          ),
+                          Align(
+                            alignment: AlignmentDirectional(-0.56, -0.35),
+                            child: Text(
+                              'About',
+                              style: FlutterFlowTheme.of(context)
+                                  .subtitle1
+                                  .override(
+                                    fontFamily: 'Lexend Deca',
+                                    color: Colors.black,
+                                  ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Align(
+                      alignment: AlignmentDirectional(-0.56, -0.31),
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 130, 0),
+                        child: AuthUserStreamWidget(
+                          child: StreamBuilder<UsersRecord>(
+                            stream:
+                                UsersRecord.getDocument(currentUserReference),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                  child: SizedBox(
+                                    width: 50,
+                                    height: 50,
+                                    child: CircularProgressIndicator(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryColor,
+                                    ),
+                                  ),
+                                );
+                              }
+                              final textUsersRecord = snapshot.data;
+                              return Text(
+                                valueOrDefault<String>(
+                                  currentUserDocument?.bio,
+                                  'Available',
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .subtitle1
+                                    .override(
+                                      fontFamily: 'Lexend Deca',
+                                      color: Colors.black,
+                                    ),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Align(
+                            alignment: AlignmentDirectional(-0.82, -0.17),
+                            child: Icon(
+                              Icons.phone_sharp,
+                              color: Colors.black,
+                              size: 24,
+                            ),
+                          ),
+                          Align(
+                            alignment: AlignmentDirectional(-0.55, -0.2),
+                            child: Text(
+                              'Phone',
+                              style: FlutterFlowTheme.of(context)
+                                  .subtitle1
+                                  .override(
+                                    fontFamily: 'Lexend Deca',
+                                    color: Colors.black,
+                                  ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     Align(
                       alignment: AlignmentDirectional(-0.44, -0.16),
-                      child: AuthUserStreamWidget(
-                        child: StreamBuilder<UsersRecord>(
-                          stream: UsersRecord.getDocument(currentUserReference),
-                          builder: (context, snapshot) {
-                            // Customize what your widget looks like when it's loading.
-                            if (!snapshot.hasData) {
-                              return Center(
-                                child: SizedBox(
-                                  width: 50,
-                                  height: 50,
-                                  child: CircularProgressIndicator(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryColor,
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 70, 0),
+                        child: AuthUserStreamWidget(
+                          child: StreamBuilder<UsersRecord>(
+                            stream:
+                                UsersRecord.getDocument(currentUserReference),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                  child: SizedBox(
+                                    width: 50,
+                                    height: 50,
+                                    child: CircularProgressIndicator(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryColor,
+                                    ),
                                   ),
+                                );
+                              }
+                              final textUsersRecord = snapshot.data;
+                              return Text(
+                                valueOrDefault<String>(
+                                  currentPhoneNumber,
+                                  '+91',
                                 ),
+                                style: FlutterFlowTheme.of(context)
+                                    .subtitle1
+                                    .override(
+                                      fontFamily: 'Lexend Deca',
+                                      color: Colors.black,
+                                    ),
                               );
-                            }
-                            final textUsersRecord = snapshot.data;
-                            return Text(
-                              valueOrDefault<String>(
-                                currentPhoneNumber,
-                                '+91',
-                              ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: 'Lexend Deca',
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                            );
-                          },
-                        ),
-                      ),
-                    ),
-                    Align(
-                      alignment: AlignmentDirectional(-0.01, 0.46),
-                      child: FFButtonWidget(
-                        onPressed: () async {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => LoginWidget(),
-                            ),
-                          );
-                        },
-                        text: 'logout',
-                        options: FFButtonOptions(
-                          width: 130,
-                          height: 40,
-                          color: FlutterFlowTheme.of(context).primaryColor,
-                          textStyle:
-                              FlutterFlowTheme.of(context).subtitle2.override(
-                                    fontFamily: 'Poppins',
-                                    color: Colors.white,
-                                  ),
-                          borderSide: BorderSide(
-                            color: Colors.transparent,
-                            width: 1,
+                            },
                           ),
-                          borderRadius: 12,
                         ),
                       ),
                     ),
                     Align(
                       alignment: AlignmentDirectional(0.68, -0.47),
-                      child: FFButtonWidget(
-                        onPressed: () async {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => EditProfileWidget(),
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                        child: FFButtonWidget(
+                          onPressed: () async {
+                            await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => EditProfileWidget(),
+                              ),
+                            );
+                          },
+                          text: 'Edit Profile',
+                          options: FFButtonOptions(
+                            width: 100,
+                            height: 30,
+                            color: Colors.white,
+                            textStyle:
+                                FlutterFlowTheme.of(context).subtitle2.override(
+                                      fontFamily: 'Lexend Deca',
+                                      color: Colors.black,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                            elevation: 2,
+                            borderSide: BorderSide(
+                              color: Colors.transparent,
+                              width: 1,
                             ),
-                          );
-                        },
-                        text: 'Edit Profile',
-                        options: FFButtonOptions(
-                          width: 100,
-                          height: 30,
-                          color: Colors.white,
-                          textStyle:
-                              FlutterFlowTheme.of(context).subtitle2.override(
-                                    fontFamily: 'Lexend Deca',
-                                    color: Colors.black,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                          elevation: 2,
-                          borderSide: BorderSide(
-                            color: Colors.transparent,
-                            width: 1,
+                            borderRadius: 8,
                           ),
-                          borderRadius: 8,
                         ),
                       ),
                     ),
@@ -335,8 +332,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       alignment: AlignmentDirectional(0.69, -0.95),
                       child: FFButtonWidget(
                         onPressed: () async {
-                          if (currentUserDocument?.orgemail != null &&
-                              currentUserDocument?.orgemail != '') {
+                          if ((currentUserDocument?.orgemail != null) &&
+                              (currentUserDocument?.orgemail != '')) {
                             await Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -348,7 +345,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             await Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => AddOrgWidget(),
+                                builder: (context) => AddOrgoldWidget(),
                               ),
                             );
                           }
@@ -371,6 +368,38 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             width: 1,
                           ),
                           borderRadius: 8,
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: AlignmentDirectional(-0.29, -0.07),
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(40, 40, 0, 0),
+                        child: FFButtonWidget(
+                          onPressed: () async {
+                            await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => LoginWidget(),
+                              ),
+                            );
+                          },
+                          text: 'logout',
+                          options: FFButtonOptions(
+                            width: 130,
+                            height: 40,
+                            color: FlutterFlowTheme.of(context).primaryColor,
+                            textStyle:
+                                FlutterFlowTheme.of(context).subtitle2.override(
+                                      fontFamily: 'Poppins',
+                                      color: Colors.white,
+                                    ),
+                            borderSide: BorderSide(
+                              color: Colors.transparent,
+                              width: 1,
+                            ),
+                            borderRadius: 12,
+                          ),
                         ),
                       ),
                     ),

@@ -7,6 +7,7 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/upload_media.dart';
 import '../main.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -86,8 +87,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                 Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Image.network(
-                      valueOrDefault<String>(
+                    CachedNetworkImage(
+                      imageUrl: valueOrDefault<String>(
                         uploadedFileUrl,
                         'https://picsum.photos/seed/139/600',
                       ),
@@ -122,18 +123,20 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                             pickerFontFamily: 'Lexend Deca',
                           );
                           if (selectedMedia != null &&
-                              validateFileFormat(
-                                  selectedMedia.storagePath, context)) {
+                              selectedMedia.every((m) =>
+                                  validateFileFormat(m.storagePath, context))) {
                             showUploadMessage(
                               context,
                               'Uploading file...',
                               showLoading: true,
                             );
-                            final downloadUrl = await uploadData(
-                                selectedMedia.storagePath, selectedMedia.bytes);
+                            final downloadUrls = await Future.wait(
+                                selectedMedia.map((m) async =>
+                                    await uploadData(m.storagePath, m.bytes)));
                             ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                            if (downloadUrl != null) {
-                              setState(() => uploadedFileUrl = downloadUrl);
+                            if (downloadUrls != null) {
+                              setState(
+                                  () => uploadedFileUrl = downloadUrls.first);
                               showUploadMessage(
                                 context,
                                 'Success!',

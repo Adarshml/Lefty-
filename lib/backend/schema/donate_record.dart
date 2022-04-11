@@ -11,20 +11,8 @@ abstract class DonateRecord
   static Serializer<DonateRecord> get serializer => _$donateRecordSerializer;
 
   @nullable
-  @BuiltValueField(wireName: 'food_type')
-  String get foodType;
-
-  @nullable
   @BuiltValueField(wireName: 'food_name')
   String get foodName;
-
-  @nullable
-  @BuiltValueField(wireName: 'prefered_time')
-  String get preferedTime;
-
-  @nullable
-  @BuiltValueField(wireName: 'expiration_time')
-  String get expirationTime;
 
   @nullable
   @BuiltValueField(wireName: 'pickup_place')
@@ -46,9 +34,6 @@ abstract class DonateRecord
   DateTime get donatedAt;
 
   @nullable
-  String get did;
-
-  @nullable
   String get username;
 
   @nullable
@@ -56,19 +41,32 @@ abstract class DonateRecord
   LatLng get donorLocation;
 
   @nullable
+  @BuiltValueField(wireName: 'don_by')
+  String get donBy;
+
+  @nullable
+  @BuiltValueField(wireName: 'pr_time')
+  DateTime get prTime;
+
+  @nullable
+  @BuiltValueField(wireName: 'ex_time')
+  DateTime get exTime;
+
+  @nullable
+  String get description;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
   static void _initializeBuilder(DonateRecordBuilder builder) => builder
-    ..foodType = ''
     ..foodName = ''
-    ..preferedTime = ''
-    ..expirationTime = ''
     ..pickupPlace = ''
     ..phoneNumber = ''
     ..quanity = ''
-    ..did = ''
-    ..username = '';
+    ..username = ''
+    ..donBy = ''
+    ..description = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('donate');
@@ -92,31 +90,31 @@ abstract class DonateRecord
 }
 
 Map<String, dynamic> createDonateRecordData({
-  String foodType,
   String foodName,
-  String preferedTime,
-  String expirationTime,
   String pickupPlace,
   String phoneNumber,
   String quanity,
   DocumentReference donatedBy,
   DateTime donatedAt,
-  String did,
   String username,
   LatLng donorLocation,
+  String donBy,
+  DateTime prTime,
+  DateTime exTime,
+  String description,
 }) =>
     serializers.toFirestore(
         DonateRecord.serializer,
         DonateRecord((d) => d
-          ..foodType = foodType
           ..foodName = foodName
-          ..preferedTime = preferedTime
-          ..expirationTime = expirationTime
           ..pickupPlace = pickupPlace
           ..phoneNumber = phoneNumber
           ..quanity = quanity
           ..donatedBy = donatedBy
           ..donatedAt = donatedAt
-          ..did = did
           ..username = username
-          ..donorLocation = donorLocation));
+          ..donorLocation = donorLocation
+          ..donBy = donBy
+          ..prTime = prTime
+          ..exTime = exTime
+          ..description = description));

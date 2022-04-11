@@ -20,9 +20,9 @@ class _CreateAccountUserWidgetState extends State<CreateAccountUserWidget> {
   TextEditingController confirmpasswordController;
   bool confirmpasswordVisibility;
   TextEditingController emailAddressController;
+  TextEditingController nameController;
   TextEditingController passwordController;
   bool passwordVisibility;
-  TextEditingController nameController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -31,9 +31,9 @@ class _CreateAccountUserWidgetState extends State<CreateAccountUserWidget> {
     confirmpasswordController = TextEditingController();
     confirmpasswordVisibility = false;
     emailAddressController = TextEditingController();
+    nameController = TextEditingController();
     passwordController = TextEditingController();
     passwordVisibility = false;
-    nameController = TextEditingController();
   }
 
   @override
@@ -224,8 +224,8 @@ class _CreateAccountUserWidgetState extends State<CreateAccountUserWidget> {
                                 }
 
                                 final usersCreateData = createUsersRecordData(
-                                  emailAddress: '',
-                                  name: '',
+                                  emailAddress: buttonUsersRecord.emailAddress,
+                                  name: buttonUsersRecord.name,
                                 );
                                 await UsersRecord.collection
                                     .doc(user.uid)
@@ -265,75 +265,6 @@ class _CreateAccountUserWidgetState extends State<CreateAccountUserWidget> {
                               ),
                             );
                           },
-                        ),
-                      ),
-                      Align(
-                        alignment: AlignmentDirectional(-0.51, 0.06),
-                        child: Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
-                          child: TextFormField(
-                            controller: passwordController,
-                            obscureText: !passwordVisibility,
-                            decoration: InputDecoration(
-                              labelText: 'Password',
-                              labelStyle: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: 'Lexend Deca',
-                                    color: Color(0xFF2B343A),
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                              hintText: 'Enter your password here...',
-                              hintStyle: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: 'Lexend Deca',
-                                    color: Color(0xFF2B343A),
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0xFFDBE2E7),
-                                  width: 2,
-                                ),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0xFFDBE2E7),
-                                  width: 2,
-                                ),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              filled: true,
-                              fillColor: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
-                              suffixIcon: InkWell(
-                                onTap: () => setState(
-                                  () =>
-                                      passwordVisibility = !passwordVisibility,
-                                ),
-                                child: Icon(
-                                  passwordVisibility
-                                      ? Icons.visibility_outlined
-                                      : Icons.visibility_off_outlined,
-                                  color: Color(0xFF757575),
-                                  size: 22,
-                                ),
-                              ),
-                            ),
-                            style:
-                                FlutterFlowTheme.of(context).bodyText1.override(
-                                      fontFamily: 'Lexend Deca',
-                                      color: Color(0xFF2B343A),
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.normal,
-                                    ),
-                            textAlign: TextAlign.start,
-                          ),
                         ),
                       ),
                       Align(
@@ -479,6 +410,75 @@ class _CreateAccountUserWidgetState extends State<CreateAccountUserWidget> {
                                 ),
                                 child: Icon(
                                   confirmpasswordVisibility
+                                      ? Icons.visibility_outlined
+                                      : Icons.visibility_off_outlined,
+                                  color: Color(0xFF757575),
+                                  size: 22,
+                                ),
+                              ),
+                            ),
+                            style:
+                                FlutterFlowTheme.of(context).bodyText1.override(
+                                      fontFamily: 'Lexend Deca',
+                                      color: Color(0xFF2B343A),
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                            textAlign: TextAlign.start,
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: AlignmentDirectional(1.45, 0.03),
+                        child: Padding(
+                          padding:
+                              EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
+                          child: TextFormField(
+                            controller: passwordController,
+                            obscureText: !passwordVisibility,
+                            decoration: InputDecoration(
+                              labelText: 'Password',
+                              labelStyle: FlutterFlowTheme.of(context)
+                                  .bodyText1
+                                  .override(
+                                    fontFamily: 'Lexend Deca',
+                                    color: Color(0xFF2B343A),
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                              hintText: 'Enter your password here...',
+                              hintStyle: FlutterFlowTheme.of(context)
+                                  .bodyText1
+                                  .override(
+                                    fontFamily: 'Lexend Deca',
+                                    color: Color(0xFF2B343A),
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xFFDBE2E7),
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xFFDBE2E7),
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              filled: true,
+                              fillColor: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
+                              suffixIcon: InkWell(
+                                onTap: () => setState(
+                                  () =>
+                                      passwordVisibility = !passwordVisibility,
+                                ),
+                                child: Icon(
+                                  passwordVisibility
                                       ? Icons.visibility_outlined
                                       : Icons.visibility_off_outlined,
                                   color: Color(0xFF757575),
