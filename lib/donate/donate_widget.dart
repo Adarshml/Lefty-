@@ -271,7 +271,7 @@ class _DonateWidgetState extends State<DonateWidget> {
                                 padding:
                                     EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
                                 child: Text(
-                                  'Prefered Time',
+                                  'Preferred Time',
                                   style: FlutterFlowTheme.of(context)
                                       .subtitle2
                                       .override(
@@ -480,7 +480,7 @@ class _DonateWidgetState extends State<DonateWidget> {
                     Align(
                       alignment: AlignmentDirectional(-0.15, 0.42),
                       child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(19, 10, 0, 0),
+                        padding: EdgeInsetsDirectional.fromSTEB(19, 10, 0, 10),
                         child: FFButtonWidget(
                           onPressed: () async {
                             final donateCreateData = createDonateRecordData(

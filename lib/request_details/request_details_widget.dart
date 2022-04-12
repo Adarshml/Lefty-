@@ -3,6 +3,7 @@ import '../flutter_flow/flutter_flow_google_map.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/lat_lng.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -73,55 +74,61 @@ class _RequestDetailsWidgetState extends State<RequestDetailsWidget> {
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                    child: Image.network(
-                      'https://picsum.photos/seed/999/600',
-                      width: MediaQuery.of(context).size.width,
-                      height: 200,
-                      fit: BoxFit.cover,
-                    ),
+                  Image.asset(
+                    'assets/images/oldagehome.jpg',
+                    width: MediaQuery.of(context).size.width,
+                    height: 160,
+                    fit: BoxFit.cover,
                   ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 5, 250, 5),
-                    child: StreamBuilder<List<RequestFoodRecord>>(
-                      stream: queryRequestFoodRecord(
-                        singleRecord: true,
-                      ),
-                      builder: (context, snapshot) {
-                        // Customize what your widget looks like when it's loading.
-                        if (!snapshot.hasData) {
-                          return Center(
-                            child: SizedBox(
-                              width: 50,
-                              height: 50,
-                              child: CircularProgressIndicator(
-                                color:
-                                    FlutterFlowTheme.of(context).primaryColor,
-                              ),
+                    padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 5, 200, 5),
+                          child: StreamBuilder<List<RequestFoodRecord>>(
+                            stream: queryRequestFoodRecord(
+                              singleRecord: true,
                             ),
-                          );
-                        }
-                        List<RequestFoodRecord> textRequestFoodRecordList =
-                            snapshot.data;
-                        // Return an empty Container when the document does not exist.
-                        if (snapshot.data.isEmpty) {
-                          return Container();
-                        }
-                        final textRequestFoodRecord =
-                            textRequestFoodRecordList.isNotEmpty
-                                ? textRequestFoodRecordList.first
-                                : null;
-                        return Text(
-                          requestDetailsRequestFoodRecord.reqBy,
-                          style:
-                              FlutterFlowTheme.of(context).subtitle1.override(
-                                    fontFamily: 'Poppins',
-                                    color: Colors.black,
-                                    fontSize: 22,
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                  child: SizedBox(
+                                    width: 50,
+                                    height: 50,
+                                    child: CircularProgressIndicator(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryColor,
+                                    ),
                                   ),
-                        );
-                      },
+                                );
+                              }
+                              List<RequestFoodRecord>
+                                  textRequestFoodRecordList = snapshot.data;
+                              // Return an empty Container when the document does not exist.
+                              if (snapshot.data.isEmpty) {
+                                return Container();
+                              }
+                              final textRequestFoodRecord =
+                                  textRequestFoodRecordList.isNotEmpty
+                                      ? textRequestFoodRecordList.first
+                                      : null;
+                              return AutoSizeText(
+                                requestDetailsRequestFoodRecord.reqBy,
+                                style: FlutterFlowTheme.of(context)
+                                    .subtitle1
+                                    .override(
+                                      fontFamily: 'Poppins',
+                                      color: Colors.black,
+                                      fontSize: 22,
+                                    ),
+                              );
+                            },
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   Padding(
@@ -136,44 +143,54 @@ class _RequestDetailsWidgetState extends State<RequestDetailsWidget> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 150, 5),
-                    child: StreamBuilder<List<RequestFoodRecord>>(
-                      stream: queryRequestFoodRecord(
-                        singleRecord: true,
-                      ),
-                      builder: (context, snapshot) {
-                        // Customize what your widget looks like when it's loading.
-                        if (!snapshot.hasData) {
-                          return Center(
-                            child: SizedBox(
-                              width: 50,
-                              height: 50,
-                              child: CircularProgressIndicator(
-                                color:
-                                    FlutterFlowTheme.of(context).primaryColor,
-                              ),
+                    padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 150, 5),
+                          child: StreamBuilder<List<RequestFoodRecord>>(
+                            stream: queryRequestFoodRecord(
+                              singleRecord: true,
                             ),
-                          );
-                        }
-                        List<RequestFoodRecord> textRequestFoodRecordList =
-                            snapshot.data;
-                        // Return an empty Container when the document does not exist.
-                        if (snapshot.data.isEmpty) {
-                          return Container();
-                        }
-                        final textRequestFoodRecord =
-                            textRequestFoodRecordList.isNotEmpty
-                                ? textRequestFoodRecordList.first
-                                : null;
-                        return Text(
-                          requestDetailsRequestFoodRecord.requestDescription,
-                          style:
-                              FlutterFlowTheme.of(context).subtitle1.override(
-                                    fontFamily: 'Poppins',
-                                    color: Colors.black,
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                  child: SizedBox(
+                                    width: 50,
+                                    height: 50,
+                                    child: CircularProgressIndicator(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryColor,
+                                    ),
                                   ),
-                        );
-                      },
+                                );
+                              }
+                              List<RequestFoodRecord>
+                                  textRequestFoodRecordList = snapshot.data;
+                              // Return an empty Container when the document does not exist.
+                              if (snapshot.data.isEmpty) {
+                                return Container();
+                              }
+                              final textRequestFoodRecord =
+                                  textRequestFoodRecordList.isNotEmpty
+                                      ? textRequestFoodRecordList.first
+                                      : null;
+                              return AutoSizeText(
+                                requestDetailsRequestFoodRecord
+                                    .requestDescription,
+                                style: FlutterFlowTheme.of(context)
+                                    .subtitle1
+                                    .override(
+                                      fontFamily: 'Poppins',
+                                      color: Colors.black,
+                                    ),
+                              );
+                            },
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   Padding(
@@ -368,7 +385,7 @@ class _RequestDetailsWidgetState extends State<RequestDetailsWidget> {
                   ),
                   Expanded(
                     child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
+                      padding: EdgeInsetsDirectional.fromSTEB(10, 0, 10, 50),
                       child: StreamBuilder<List<RequestFoodRecord>>(
                         stream: queryRequestFoodRecord(
                           singleRecord: true,

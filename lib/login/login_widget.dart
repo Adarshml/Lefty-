@@ -247,13 +247,13 @@ class _LoginWidgetState extends State<LoginWidget> {
                     Align(
                       alignment: AlignmentDirectional(0, 0.1),
                       child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 200, 0, 0),
+                        padding: EdgeInsetsDirectional.fromSTEB(10, 50, 10, 0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Padding(
                               padding:
-                                  EdgeInsetsDirectional.fromSTEB(58, 0, 0, 0),
+                                  EdgeInsetsDirectional.fromSTEB(50, 0, 0, 0),
                               child: Text(
                                 'Dont have an account?',
                                 style: FlutterFlowTheme.of(context)
@@ -266,33 +266,37 @@ class _LoginWidgetState extends State<LoginWidget> {
                                     ),
                               ),
                             ),
-                            FFButtonWidget(
-                              onPressed: () async {
-                                await Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        CreateAccountUserWidget(),
-                                  ),
-                                );
-                              },
-                              text: 'Sign Up',
-                              options: FFButtonOptions(
-                                width: 80,
-                                height: 30,
-                                color: Color(0x00FFFFFF),
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .subtitle2
-                                    .override(
-                                      fontFamily: 'Lexend Deca',
-                                      color: Color(0xFFFFDE06),
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(2, 0, 0, 0),
+                              child: FFButtonWidget(
+                                onPressed: () async {
+                                  await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          CreateAccountUserWidget(),
                                     ),
-                                elevation: 0,
-                                borderSide: BorderSide(
-                                  color: Colors.transparent,
-                                  width: 1,
+                                  );
+                                },
+                                text: 'Sign Up',
+                                options: FFButtonOptions(
+                                  width: 90,
+                                  height: 30,
+                                  color: Color(0x00FFFFFF),
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .subtitle2
+                                      .override(
+                                        fontFamily: 'Lexend Deca',
+                                        color: Color(0xFFFFDE06),
+                                      ),
+                                  elevation: 0,
+                                  borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                    width: 1,
+                                  ),
+                                  borderRadius: 0,
                                 ),
-                                borderRadius: 0,
                               ),
                             ),
                           ],

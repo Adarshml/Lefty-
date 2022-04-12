@@ -421,7 +421,7 @@ class _OrgNewhomeWidgetState extends State<OrgNewhomeWidget> {
                                   final organizationCreateData =
                                       createOrganizationRecordData(
                                     orgEmail: emailAddressController.text,
-                                    orgRegid: int.parse(regNoController.text),
+                                    orgRegid: regNoController.text,
                                     orgPhoneNumber:
                                         double.parse(phoneController.text),
                                     orgAbout: descriptionController.text,
