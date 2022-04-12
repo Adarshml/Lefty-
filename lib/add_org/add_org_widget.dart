@@ -489,8 +489,7 @@ class _AddOrgWidgetState extends State<AddOrgWidget> {
                                                 createOrganizationRecordData(
                                               orgEmail:
                                                   emailAddressController.text,
-                                              orgRegid: int.parse(
-                                                  regNoController.text),
+                                              orgRegid: regNoController.text,
                                               orgPhoneNumber: double.parse(
                                                   phoneController.text),
                                               orgAbout:
@@ -510,7 +509,7 @@ class _AddOrgWidgetState extends State<AddOrgWidget> {
                                             );
                                             await currentUserReference
                                                 .update(usersUpdateData);
-                                            await Navigator.push(
+                                            await Navigator.pushAndRemoveUntil(
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
@@ -518,6 +517,7 @@ class _AddOrgWidgetState extends State<AddOrgWidget> {
                                                         initialPage:
                                                             'org_home'),
                                               ),
+                                              (r) => false,
                                             );
                                           },
                                           text: 'Add org',

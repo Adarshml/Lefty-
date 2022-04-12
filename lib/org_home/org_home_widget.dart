@@ -30,11 +30,12 @@ class _OrgHomeWidgetState extends State<OrgHomeWidget> {
         return;
       }
 
-      await Navigator.push(
+      await Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
           builder: (context) => AddOrgWidget(),
         ),
+        (r) => false,
       );
       return;
     });
