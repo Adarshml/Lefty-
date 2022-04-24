@@ -1,17 +1,18 @@
 import '../flutter_flow/flutter_flow_google_map.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Map1Widget extends StatefulWidget {
-  const Map1Widget({Key key}) : super(key: key);
+class MaptWidget extends StatefulWidget {
+  const MaptWidget({Key key}) : super(key: key);
 
   @override
-  _Map1WidgetState createState() => _Map1WidgetState();
+  _MaptWidgetState createState() => _MaptWidgetState();
 }
 
-class _Map1WidgetState extends State<Map1Widget> {
+class _MaptWidgetState extends State<MaptWidget> {
   LatLng currentUserLocationValue;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   LatLng googleMapsCenter;
@@ -67,7 +68,7 @@ class _Map1WidgetState extends State<Map1Widget> {
                   controller: googleMapsController,
                   onCameraIdle: (latLng) => googleMapsCenter = latLng,
                   initialLocation: googleMapsCenter ??=
-                      currentUserLocationValue,
+                      functions.getUsersLocation(currentUserLocationValue),
                   markerColor: GoogleMarkerColor.violet,
                   mapType: MapType.normal,
                   style: GoogleMapStyle.standard,
@@ -77,7 +78,7 @@ class _Map1WidgetState extends State<Map1Widget> {
                   showZoomControls: true,
                   showLocation: true,
                   showCompass: false,
-                  showMapToolbar: true,
+                  showMapToolbar: false,
                   showTraffic: false,
                   centerMapOnMarkerTap: true,
                 ),

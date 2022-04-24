@@ -23,9 +23,6 @@ abstract class DonateRecord
   String get phoneNumber;
 
   @nullable
-  String get quanity;
-
-  @nullable
   @BuiltValueField(wireName: 'donated_by')
   DocumentReference get donatedBy;
 
@@ -56,6 +53,29 @@ abstract class DonateRecord
   String get description;
 
   @nullable
+  String get status;
+
+  @nullable
+  DocumentReference get mylistingref;
+
+  @nullable
+  @BuiltValueField(wireName: 'don_email')
+  String get donEmail;
+
+  @nullable
+  int get quantity;
+
+  @nullable
+  @BuiltValueField(wireName: 'Foodimage_url')
+  String get foodimageUrl;
+
+  @nullable
+  String get claimedby;
+
+  @nullable
+  int get initialquantity;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -63,10 +83,15 @@ abstract class DonateRecord
     ..foodName = ''
     ..pickupPlace = ''
     ..phoneNumber = ''
-    ..quanity = ''
     ..username = ''
     ..donBy = ''
-    ..description = '';
+    ..description = ''
+    ..status = ''
+    ..donEmail = ''
+    ..quantity = 0
+    ..foodimageUrl = ''
+    ..claimedby = ''
+    ..initialquantity = 0;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('donate');
@@ -93,7 +118,6 @@ Map<String, dynamic> createDonateRecordData({
   String foodName,
   String pickupPlace,
   String phoneNumber,
-  String quanity,
   DocumentReference donatedBy,
   DateTime donatedAt,
   String username,
@@ -102,6 +126,13 @@ Map<String, dynamic> createDonateRecordData({
   DateTime prTime,
   DateTime exTime,
   String description,
+  String status,
+  DocumentReference mylistingref,
+  String donEmail,
+  int quantity,
+  String foodimageUrl,
+  String claimedby,
+  int initialquantity,
 }) =>
     serializers.toFirestore(
         DonateRecord.serializer,
@@ -109,7 +140,6 @@ Map<String, dynamic> createDonateRecordData({
           ..foodName = foodName
           ..pickupPlace = pickupPlace
           ..phoneNumber = phoneNumber
-          ..quanity = quanity
           ..donatedBy = donatedBy
           ..donatedAt = donatedAt
           ..username = username
@@ -117,4 +147,11 @@ Map<String, dynamic> createDonateRecordData({
           ..donBy = donBy
           ..prTime = prTime
           ..exTime = exTime
-          ..description = description));
+          ..description = description
+          ..status = status
+          ..mylistingref = mylistingref
+          ..donEmail = donEmail
+          ..quantity = quantity
+          ..foodimageUrl = foodimageUrl
+          ..claimedby = claimedby
+          ..initialquantity = initialquantity));

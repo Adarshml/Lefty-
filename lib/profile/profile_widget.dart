@@ -52,41 +52,38 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       alignment: AlignmentDirectional(-0.84, -0.93),
                       child: Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
-                        child: AuthUserStreamWidget(
-                          child: StreamBuilder<UsersRecord>(
-                            stream:
-                                UsersRecord.getDocument(currentUserReference),
-                            builder: (context, snapshot) {
-                              // Customize what your widget looks like when it's loading.
-                              if (!snapshot.hasData) {
-                                return Center(
-                                  child: SizedBox(
-                                    width: 50,
-                                    height: 50,
-                                    child: CircularProgressIndicator(
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryColor,
-                                    ),
-                                  ),
-                                );
-                              }
-                              final circleImageUsersRecord = snapshot.data;
-                              return Container(
-                                width: 120,
-                                height: 120,
-                                clipBehavior: Clip.antiAlias,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                ),
-                                child: Image.network(
-                                  valueOrDefault<String>(
-                                    currentUserPhoto,
-                                    'https://picsum.photos/seed/990/600',
+                        child: StreamBuilder<UsersRecord>(
+                          stream: UsersRecord.getDocument(currentUserReference),
+                          builder: (context, snapshot) {
+                            // Customize what your widget looks like when it's loading.
+                            if (!snapshot.hasData) {
+                              return Center(
+                                child: SizedBox(
+                                  width: 50,
+                                  height: 50,
+                                  child: CircularProgressIndicator(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryColor,
                                   ),
                                 ),
                               );
-                            },
-                          ),
+                            }
+                            final circleImageUsersRecord = snapshot.data;
+                            return Container(
+                              width: 120,
+                              height: 120,
+                              clipBehavior: Clip.antiAlias,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                              ),
+                              child: Image.network(
+                                valueOrDefault<String>(
+                                  circleImageUsersRecord.photoUrl,
+                                  'https://picsum.photos/seed/990/600',
+                                ),
+                              ),
+                            );
+                          },
                         ),
                       ),
                     ),

@@ -32,10 +32,6 @@ abstract class OrganizationRecord
   String get orgAddress;
 
   @nullable
-  @BuiltValueField(wireName: 'org_photo')
-  String get orgPhoto;
-
-  @nullable
   DocumentReference get rf;
 
   @nullable
@@ -47,6 +43,10 @@ abstract class OrganizationRecord
   String get orgRegid;
 
   @nullable
+  @BuiltValueField(wireName: 'org_photo')
+  String get orgPhoto;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -56,8 +56,8 @@ abstract class OrganizationRecord
     ..orgPhoneNumber = 0.0
     ..orgAbout = ''
     ..orgAddress = ''
-    ..orgPhoto = ''
-    ..orgRegid = '';
+    ..orgRegid = ''
+    ..orgPhoto = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('organization');
@@ -87,10 +87,10 @@ Map<String, dynamic> createOrganizationRecordData({
   double orgPhoneNumber,
   String orgAbout,
   String orgAddress,
-  String orgPhoto,
   DocumentReference rf,
   DocumentReference usersRef,
   String orgRegid,
+  String orgPhoto,
 }) =>
     serializers.toFirestore(
         OrganizationRecord.serializer,
@@ -100,7 +100,7 @@ Map<String, dynamic> createOrganizationRecordData({
           ..orgPhoneNumber = orgPhoneNumber
           ..orgAbout = orgAbout
           ..orgAddress = orgAddress
-          ..orgPhoto = orgPhoto
           ..rf = rf
           ..usersRef = usersRef
-          ..orgRegid = orgRegid));
+          ..orgRegid = orgRegid
+          ..orgPhoto = orgPhoto));

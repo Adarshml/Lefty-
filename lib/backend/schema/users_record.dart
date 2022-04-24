@@ -68,6 +68,16 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
   LatLng get location;
 
   @nullable
+  @BuiltValueField(wireName: 'mylistingdnr_ref')
+  DocumentReference get mylistingdnrRef;
+
+  @nullable
+  String get orgpicFromrUsers;
+
+  @nullable
+  String get orgCNfromusers;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -84,7 +94,9 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
     ..bio = ''
     ..orgname = ''
     ..orgregid = ''
-    ..orgemail = '';
+    ..orgemail = ''
+    ..orgpicFromrUsers = ''
+    ..orgCNfromusers = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('users');
@@ -126,6 +138,9 @@ Map<String, dynamic> createUsersRecordData({
   String orgemail,
   DocumentReference requestFood,
   LatLng location,
+  DocumentReference mylistingdnrRef,
+  String orgpicFromrUsers,
+  String orgCNfromusers,
 }) =>
     serializers.toFirestore(
         UsersRecord.serializer,
@@ -147,4 +162,7 @@ Map<String, dynamic> createUsersRecordData({
           ..orgregid = orgregid
           ..orgemail = orgemail
           ..requestFood = requestFood
-          ..location = location));
+          ..location = location
+          ..mylistingdnrRef = mylistingdnrRef
+          ..orgpicFromrUsers = orgpicFromrUsers
+          ..orgCNfromusers = orgCNfromusers));

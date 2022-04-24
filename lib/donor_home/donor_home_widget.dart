@@ -43,7 +43,10 @@ class _DonorHomeWidgetState extends State<DonorHomeWidget> {
             children: [
               Expanded(
                 child: StreamBuilder<List<RequestFoodRecord>>(
-                  stream: queryRequestFoodRecord(),
+                  stream: queryRequestFoodRecord(
+                    queryBuilder: (requestFoodRecord) => requestFoodRecord
+                        .where('requeststatus', isEqualTo: 'Active'),
+                  ),
                   builder: (context, snapshot) {
                     // Customize what your widget looks like when it's loading.
                     if (!snapshot.hasData) {
@@ -103,11 +106,49 @@ class _DonorHomeWidgetState extends State<DonorHomeWidget> {
                                   mainAxisSize: MainAxisSize.max,
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
-                                    Image.asset(
-                                      'assets/images/-undraw_conversation_re_c26v@2x.png',
-                                      width: 90,
-                                      height: 90,
-                                      fit: BoxFit.cover,
+                                    StreamBuilder<List<RequestFoodRecord>>(
+                                      stream: queryRequestFoodRecord(
+                                        singleRecord: true,
+                                      ),
+                                      builder: (context, snapshot) {
+                                        // Customize what your widget looks like when it's loading.
+                                        if (!snapshot.hasData) {
+                                          return Center(
+                                            child: SizedBox(
+                                              width: 50,
+                                              height: 50,
+                                              child: CircularProgressIndicator(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryColor,
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                        List<RequestFoodRecord>
+                                            imageRequestFoodRecordList =
+                                            snapshot.data;
+                                        // Return an empty Container when the document does not exist.
+                                        if (snapshot.data.isEmpty) {
+                                          return Container();
+                                        }
+                                        final imageRequestFoodRecord =
+                                            imageRequestFoodRecordList
+                                                    .isNotEmpty
+                                                ? imageRequestFoodRecordList
+                                                    .first
+                                                : null;
+                                        return Image.network(
+                                          valueOrDefault<String>(
+                                            columnRequestFoodRecord
+                                                .rqstdOrgcover,
+                                            'https://firebasestorage.googleapis.com/v0/b/lefty-bdb52.appspot.com/o/assets%2Fdownload%20(1).jpg?alt=media&token=34230413-fcfc-4df0-ad0e-bec16958721c',
+                                          ),
+                                          width: 90,
+                                          height: 90,
+                                          fit: BoxFit.cover,
+                                        );
+                                      },
                                     ),
                                     Expanded(
                                       child: Padding(
@@ -210,8 +251,10 @@ class _DonorHomeWidgetState extends State<DonorHomeWidget> {
                                                               .first
                                                           : null;
                                                   return Text(
-                                                    columnRequestFoodRecord
-                                                        .requestDescription,
+                                                    dateTimeFormat(
+                                                        'd/M h:mm a',
+                                                        columnRequestFoodRecord
+                                                            .rDate),
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyText1
@@ -266,21 +309,16 @@ class _DonorHomeWidgetState extends State<DonorHomeWidget> {
                                                               .first
                                                           : null;
                                                   return Text(
-                                                    dateTimeFormat(
-                                                        'd/M h:mm a',
-                                                        columnRequestFoodRecord
-                                                            .rDate),
+                                                    columnRequestFoodRecord
+                                                        .requeststatus,
                                                     style: FlutterFlowTheme.of(
                                                             context)
-                                                        .bodyText1
+                                                        .subtitle1
                                                         .override(
-                                                          fontFamily:
-                                                              'Lexend Deca',
-                                                          color:
-                                                              Color(0xFF57636C),
-                                                          fontSize: 12,
+                                                          fontFamily: 'Poppins',
+                                                          fontSize: 16,
                                                           fontWeight:
-                                                              FontWeight.normal,
+                                                              FontWeight.w500,
                                                         ),
                                                   );
                                                 },

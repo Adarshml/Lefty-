@@ -24,8 +24,9 @@ class _RequestFoodWidgetState extends State<RequestFoodWidget> {
   TextEditingController textController1;
   TextEditingController textController2;
   LatLng googleMapsCenter;
-  Completer<GoogleMapController> googleMapsController;
+  final googleMapsController = Completer<GoogleMapController>();
   LatLng currentUserLocationValue;
+  final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -87,300 +88,336 @@ class _RequestFoodWidgetState extends State<RequestFoodWidget> {
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Expanded(
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Align(
-                      alignment: AlignmentDirectional(-0.81, -0.87),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 50, 0, 0),
-                        child: Text(
-                          'Request Food',
-                          style:
-                              FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Lexend Deca',
-                                    color: Colors.black,
-                                    fontSize: 25,
-                                  ),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Align(
+                        alignment: AlignmentDirectional(-0.81, -0.87),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 50, 0, 0),
+                          child: Text(
+                            'Request Food',
+                            style:
+                                FlutterFlowTheme.of(context).bodyText1.override(
+                                      fontFamily: 'Lexend Deca',
+                                      color: Colors.black,
+                                      fontSize: 25,
+                                    ),
+                          ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
-                            child: Text(
-                              'Date of meal',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: 'Lexend Deca',
-                                    color: Colors.black,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                            ),
-                          ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(50, 0, 0, 0),
-                            child: FlutterFlowIconButton(
-                              borderColor: Colors.transparent,
-                              borderRadius: 30,
-                              borderWidth: 1,
-                              buttonSize: 60,
-                              icon: Icon(
-                                Icons.calendar_today_rounded,
-                                color: Colors.black,
-                                size: 30,
-                              ),
-                              onPressed: () async {
-                                await DatePicker.showDatePicker(
-                                  context,
-                                  showTitleActions: true,
-                                  onConfirm: (date) {
-                                    setState(() => datePicked = date);
-                                  },
-                                  currentTime: getCurrentTimestamp,
-                                  minTime: getCurrentTimestamp,
-                                );
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 200, 0),
-                      child: Text(
-                        valueOrDefault<String>(
-                          dateTimeFormat('d/M/y', datePicked),
-                          'DDMMYY',
-                        ),
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'Lexend Deca',
-                              color: Colors.black,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            ),
-                      ),
-                    ),
-                    Align(
-                      alignment: AlignmentDirectional(-4.44, -0.4),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(20, 10, 20, 0),
-                        child: TextFormField(
-                          controller: textController1,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            labelText: ' Required Quantity',
-                            hintText: 'Estimated number for the meals.',
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.black,
-                                width: 1,
-                              ),
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(4.0),
-                                topRight: Radius.circular(4.0),
-                              ),
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.black,
-                                width: 1,
-                              ),
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(4.0),
-                                topRight: Radius.circular(4.0),
-                              ),
-                            ),
-                          ),
-                          style:
-                              FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Lexend Deca',
-                                    color: Colors.black,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                        ),
-                      ),
-                    ),
-                    Align(
-                      alignment: AlignmentDirectional(-3.17, -0.12),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(20, 10, 20, 10),
-                        child: TextFormField(
-                          controller: textController2,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            labelText: ' Description',
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.black,
-                                width: 1,
-                              ),
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(4.0),
-                                topRight: Radius.circular(4.0),
-                              ),
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.black,
-                                width: 1,
-                              ),
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(4.0),
-                                topRight: Radius.circular(4.0),
-                              ),
-                            ),
-                          ),
-                          style:
-                              FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Lexend Deca',
-                                    color: Colors.black,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 140, 0),
-                            child: Text(
-                              'Your location(approx)',
-                              textAlign: TextAlign.center,
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: 'Lexend Deca',
-                                    color: Colors.black,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Padding(
+                      Form(
+                        key: formKey,
+                        autovalidateMode: AutovalidateMode.disabled,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Padding(
                               padding:
-                                  EdgeInsetsDirectional.fromSTEB(20, 10, 20, 5),
-                              child: StreamBuilder<List<RequestFoodRecord>>(
-                                stream: queryRequestFoodRecord(
-                                  singleRecord: true,
-                                ),
-                                builder: (context, snapshot) {
-                                  // Customize what your widget looks like when it's loading.
-                                  if (!snapshot.hasData) {
-                                    return Center(
-                                      child: SizedBox(
-                                        width: 50,
-                                        height: 50,
-                                        child: CircularProgressIndicator(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryColor,
-                                        ),
+                                  EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        10, 0, 0, 0),
+                                    child: Text(
+                                      'Date of meal',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1
+                                          .override(
+                                            fontFamily: 'Lexend Deca',
+                                            color: Colors.black,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        50, 0, 0, 0),
+                                    child: FlutterFlowIconButton(
+                                      borderColor: Colors.transparent,
+                                      borderRadius: 30,
+                                      borderWidth: 1,
+                                      buttonSize: 60,
+                                      icon: Icon(
+                                        Icons.calendar_today_rounded,
+                                        color: Colors.black,
+                                        size: 30,
                                       ),
-                                    );
-                                  }
-                                  List<RequestFoodRecord>
-                                      googleMapRequestFoodRecordList =
-                                      snapshot.data;
-                                  // Return an empty Container when the document does not exist.
-                                  if (snapshot.data.isEmpty) {
-                                    return Container();
-                                  }
-                                  final googleMapRequestFoodRecord =
-                                      googleMapRequestFoodRecordList.isNotEmpty
-                                          ? googleMapRequestFoodRecordList.first
-                                          : null;
-                                  return FlutterFlowGoogleMap(
-                                    controller: googleMapsController,
-                                    onCameraIdle: (latLng) =>
-                                        googleMapsCenter = latLng,
-                                    initialLocation: googleMapsCenter ??=
-                                        functions.getUsersLocation(
-                                            currentUserLocationValue),
-                                    markerColor: GoogleMarkerColor.red,
-                                    mapType: MapType.normal,
-                                    style: GoogleMapStyle.standard,
-                                    initialZoom: 14,
-                                    allowInteraction: true,
-                                    allowZoom: true,
-                                    showZoomControls: true,
-                                    showLocation: true,
-                                    showCompass: true,
-                                    showMapToolbar: true,
-                                    showTraffic: false,
-                                    centerMapOnMarkerTap: false,
-                                  );
-                                },
+                                      onPressed: () async {
+                                        await DatePicker.showDatePicker(
+                                          context,
+                                          showTitleActions: true,
+                                          onConfirm: (date) {
+                                            setState(() => datePicked = date);
+                                          },
+                                          currentTime: getCurrentTimestamp,
+                                          minTime: getCurrentTimestamp,
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 30, 10, 0),
-                      child: FFButtonWidget(
-                        onPressed: () async {
-                          final requestFoodCreateData =
-                              createRequestFoodRecordData(
-                            rQuantity: int.parse(textController1.text),
-                            rDate: datePicked,
-                            requestDescription: textController2.text,
-                            requestLocation: googleMapsCenter,
-                            reqBy: currentUserDocument?.orgname,
-                          );
-                          await RequestFoodRecord.collection
-                              .doc()
-                              .set(requestFoodCreateData);
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  NavBarPage(initialPage: 'org_home'),
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 0, 200, 0),
+                              child: Text(
+                                valueOrDefault<String>(
+                                  dateTimeFormat('d/M/y', datePicked),
+                                  'DDMMYY',
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'Lexend Deca',
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                              ),
                             ),
-                          );
-                        },
-                        text: 'Request',
-                        options: FFButtonOptions(
-                          width: 130,
-                          height: 40,
-                          color: FlutterFlowTheme.of(context).primaryColor,
-                          textStyle:
-                              FlutterFlowTheme.of(context).subtitle2.override(
-                                    fontFamily: 'Lexend Deca',
-                                    color: Colors.white,
-                                    fontSize: 18,
+                            Align(
+                              alignment: AlignmentDirectional(-4.44, -0.4),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    20, 10, 20, 0),
+                                child: TextFormField(
+                                  controller: textController1,
+                                  obscureText: false,
+                                  decoration: InputDecoration(
+                                    labelText: ' Required Quantity',
+                                    hintText: 'Estimated number for the meals.',
+                                    enabledBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Colors.black,
+                                        width: 1,
+                                      ),
+                                      borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(4.0),
+                                        topRight: Radius.circular(4.0),
+                                      ),
+                                    ),
+                                    focusedBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Colors.black,
+                                        width: 1,
+                                      ),
+                                      borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(4.0),
+                                        topRight: Radius.circular(4.0),
+                                      ),
+                                    ),
                                   ),
-                          borderSide: BorderSide(
-                            color: Colors.transparent,
-                            width: 1,
-                          ),
-                          borderRadius: 12,
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyText1
+                                      .override(
+                                        fontFamily: 'Lexend Deca',
+                                        color: Colors.black,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                  validator: (val) {
+                                    if (val.isEmpty) {
+                                      return 'Field is required';
+                                    }
+
+                                    return null;
+                                  },
+                                ),
+                              ),
+                            ),
+                            Align(
+                              alignment: AlignmentDirectional(-3.17, -0.12),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    20, 10, 20, 10),
+                                child: TextFormField(
+                                  controller: textController2,
+                                  obscureText: false,
+                                  decoration: InputDecoration(
+                                    labelText: ' Description',
+                                    enabledBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Colors.black,
+                                        width: 1,
+                                      ),
+                                      borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(4.0),
+                                        topRight: Radius.circular(4.0),
+                                      ),
+                                    ),
+                                    focusedBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Colors.black,
+                                        width: 1,
+                                      ),
+                                      borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(4.0),
+                                        topRight: Radius.circular(4.0),
+                                      ),
+                                    ),
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyText1
+                                      .override(
+                                        fontFamily: 'Lexend Deca',
+                                        color: Colors.black,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                  validator: (val) {
+                                    if (val.isEmpty) {
+                                      return 'Field is required';
+                                    }
+
+                                    return null;
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ),
-                  ],
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 140, 0),
+                        child: Text(
+                          'Your location(approx)',
+                          textAlign: TextAlign.center,
+                          style:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'Lexend Deca',
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                        ),
+                      ),
+                      Container(
+                        height: 200,
+                        decoration: BoxDecoration(),
+                        child: Padding(
+                          padding:
+                              EdgeInsetsDirectional.fromSTEB(20, 10, 20, 5),
+                          child: StreamBuilder<List<RequestFoodRecord>>(
+                            stream: queryRequestFoodRecord(
+                              singleRecord: true,
+                            ),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                  child: SizedBox(
+                                    width: 50,
+                                    height: 50,
+                                    child: CircularProgressIndicator(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryColor,
+                                    ),
+                                  ),
+                                );
+                              }
+                              List<RequestFoodRecord>
+                                  googleMapRequestFoodRecordList =
+                                  snapshot.data;
+                              // Return an empty Container when the document does not exist.
+                              if (snapshot.data.isEmpty) {
+                                return Container();
+                              }
+                              final googleMapRequestFoodRecord =
+                                  googleMapRequestFoodRecordList.isNotEmpty
+                                      ? googleMapRequestFoodRecordList.first
+                                      : null;
+                              return FlutterFlowGoogleMap(
+                                controller: googleMapsController,
+                                onCameraIdle: (latLng) =>
+                                    googleMapsCenter = latLng,
+                                initialLocation: googleMapsCenter ??= functions
+                                    .getUsersLocation(currentUserLocationValue),
+                                markerColor: GoogleMarkerColor.red,
+                                mapType: MapType.normal,
+                                style: GoogleMapStyle.standard,
+                                initialZoom: 14,
+                                allowInteraction: true,
+                                allowZoom: true,
+                                showZoomControls: true,
+                                showLocation: true,
+                                showCompass: true,
+                                showMapToolbar: true,
+                                showTraffic: false,
+                                centerMapOnMarkerTap: false,
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 30, 10, 0),
+                        child: FFButtonWidget(
+                          onPressed: () async {
+                            if (!formKey.currentState.validate()) {
+                              return;
+                            }
+
+                            if (datePicked == null) {
+                              return;
+                            }
+
+                            final requestFoodCreateData =
+                                createRequestFoodRecordData(
+                              rQuantity: int.parse(textController1.text),
+                              requestDescription: textController2.text,
+                              requestLocation: googleMapsCenter,
+                              reqBy: currentUserDocument?.orgname,
+                              rDate: datePicked,
+                              requeststatus: 'Active',
+                              rqstdOrgCN: currentUserDocument?.orgCNfromusers,
+                              rqstdOrgcover:
+                                  currentUserDocument?.orgpicFromrUsers,
+                            );
+                            await RequestFoodRecord.collection
+                                .doc()
+                                .set(requestFoodCreateData);
+                            await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    NavBarPage(initialPage: 'org_home'),
+                              ),
+                            );
+                          },
+                          text: 'Request',
+                          options: FFButtonOptions(
+                            width: 130,
+                            height: 40,
+                            color: FlutterFlowTheme.of(context).primaryColor,
+                            textStyle:
+                                FlutterFlowTheme.of(context).subtitle2.override(
+                                      fontFamily: 'Lexend Deca',
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                    ),
+                            borderSide: BorderSide(
+                              color: Colors.transparent,
+                              width: 1,
+                            ),
+                            borderRadius: 12,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

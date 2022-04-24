@@ -6,13 +6,12 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/lat_lng.dart';
 import '../main.dart';
-import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class DonateDetailsWidget extends StatefulWidget {
-  const DonateDetailsWidget({
+class DonateDetailsCopy3Widget extends StatefulWidget {
+  const DonateDetailsCopy3Widget({
     Key key,
     this.donateDetails,
     this.dmap,
@@ -22,19 +21,20 @@ class DonateDetailsWidget extends StatefulWidget {
   final LatLng dmap;
 
   @override
-  _DonateDetailsWidgetState createState() => _DonateDetailsWidgetState();
+  _DonateDetailsCopy3WidgetState createState() =>
+      _DonateDetailsCopy3WidgetState();
 }
 
-class _DonateDetailsWidgetState extends State<DonateDetailsWidget> {
+class _DonateDetailsCopy3WidgetState extends State<DonateDetailsCopy3Widget> {
   LatLng googleMapsCenter;
   final googleMapsController = Completer<GoogleMapController>();
-  TextEditingController rqrdQtyController;
+  TextEditingController fullNameController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    rqrdQtyController = TextEditingController();
+    fullNameController = TextEditingController();
   }
 
   @override
@@ -54,7 +54,7 @@ class _DonateDetailsWidgetState extends State<DonateDetailsWidget> {
             ),
           );
         }
-        final donateDetailsDonateRecord = snapshot.data;
+        final donateDetailsCopy3DonateRecord = snapshot.data;
         return Scaffold(
           key: scaffoldKey,
           resizeToAvoidBottomInset: false,
@@ -102,7 +102,7 @@ class _DonateDetailsWidgetState extends State<DonateDetailsWidget> {
                     ? textDonateRecordList.first
                     : null;
                 return Text(
-                  donateDetailsDonateRecord.donBy,
+                  donateDetailsCopy3DonateRecord.donBy,
                   style: FlutterFlowTheme.of(context).title2.override(
                         fontFamily: 'Poppins',
                         color: Colors.white,
@@ -127,44 +127,11 @@ class _DonateDetailsWidgetState extends State<DonateDetailsWidget> {
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          StreamBuilder<List<DonateRecord>>(
-                            stream: queryDonateRecord(
-                              singleRecord: true,
-                            ),
-                            builder: (context, snapshot) {
-                              // Customize what your widget looks like when it's loading.
-                              if (!snapshot.hasData) {
-                                return Center(
-                                  child: SizedBox(
-                                    width: 50,
-                                    height: 50,
-                                    child: CircularProgressIndicator(
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryColor,
-                                    ),
-                                  ),
-                                );
-                              }
-                              List<DonateRecord> imageDonateRecordList =
-                                  snapshot.data;
-                              // Return an empty Container when the document does not exist.
-                              if (snapshot.data.isEmpty) {
-                                return Container();
-                              }
-                              final imageDonateRecord =
-                                  imageDonateRecordList.isNotEmpty
-                                      ? imageDonateRecordList.first
-                                      : null;
-                              return Image.network(
-                                valueOrDefault<String>(
-                                  donateDetailsDonateRecord.foodimageUrl,
-                                  'https://firebasestorage.googleapis.com/v0/b/lefty-bdb52.appspot.com/o/food.jpg?alt=media&token=d739621c-1ef3-42fd-94b3-2e8670352672',
-                                ),
-                                width: 350,
-                                height: 200,
-                                fit: BoxFit.cover,
-                              );
-                            },
+                          Image.asset(
+                            'assets/images/food.jpg',
+                            width: 350,
+                            height: 200,
+                            fit: BoxFit.cover,
                           ),
                           Padding(
                             padding:
@@ -202,7 +169,7 @@ class _DonateDetailsWidgetState extends State<DonateDetailsWidget> {
                                             : null;
                                     return Text(
                                       valueOrDefault<String>(
-                                        donateDetailsDonateRecord.foodName,
+                                        donateDetailsCopy3DonateRecord.foodName,
                                         'Food Name',
                                       ),
                                       style: FlutterFlowTheme.of(context)
@@ -253,7 +220,8 @@ class _DonateDetailsWidgetState extends State<DonateDetailsWidget> {
                                             ? textDonateRecordList.first
                                             : null;
                                     return Text(
-                                      donateDetailsDonateRecord.description,
+                                      donateDetailsCopy3DonateRecord
+                                          .description,
                                       style: FlutterFlowTheme.of(context)
                                           .subtitle1
                                           .override(
@@ -299,7 +267,7 @@ class _DonateDetailsWidgetState extends State<DonateDetailsWidget> {
                                         : null;
                                 return Text(
                                   '${valueOrDefault<String>(
-                                    donateDetailsDonateRecord.quantity
+                                    donateDetailsCopy3DonateRecord.quantity
                                         .toString(),
                                     '0',
                                   )}pcs',
@@ -362,8 +330,10 @@ class _DonateDetailsWidgetState extends State<DonateDetailsWidget> {
                                               ? textDonateRecordList.first
                                               : null;
                                       return Text(
-                                        dateTimeFormat('d/M h:mm a',
-                                            donateDetailsDonateRecord.prTime),
+                                        dateTimeFormat(
+                                            'd/M h:mm a',
+                                            donateDetailsCopy3DonateRecord
+                                                .prTime),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
@@ -427,8 +397,10 @@ class _DonateDetailsWidgetState extends State<DonateDetailsWidget> {
                                               ? textDonateRecordList.first
                                               : null;
                                       return Text(
-                                        dateTimeFormat('d/M h:mm a',
-                                            donateDetailsDonateRecord.exTime),
+                                        dateTimeFormat(
+                                            'd/M h:mm a',
+                                            donateDetailsCopy3DonateRecord
+                                                .exTime),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
@@ -493,7 +465,8 @@ class _DonateDetailsWidgetState extends State<DonateDetailsWidget> {
                                               : null;
                                       return Text(
                                         valueOrDefault<String>(
-                                          donateDetailsDonateRecord.phoneNumber,
+                                          donateDetailsCopy3DonateRecord
+                                              .phoneNumber,
                                           '+91',
                                         ),
                                         style: FlutterFlowTheme.of(context)
@@ -549,13 +522,15 @@ class _DonateDetailsWidgetState extends State<DonateDetailsWidget> {
                                     onCameraIdle: (latLng) => setState(
                                         () => googleMapsCenter = latLng),
                                     initialLocation: googleMapsCenter ??=
-                                        donateDetailsDonateRecord.donorLocation,
+                                        donateDetailsCopy3DonateRecord
+                                            .donorLocation,
                                     markers: [
-                                      if (donateDetailsDonateRecord != null)
+                                      if (donateDetailsCopy3DonateRecord !=
+                                          null)
                                         FlutterFlowMarker(
-                                          donateDetailsDonateRecord
+                                          donateDetailsCopy3DonateRecord
                                               .reference.path,
-                                          donateDetailsDonateRecord
+                                          donateDetailsCopy3DonateRecord
                                               .donorLocation,
                                         ),
                                     ],
@@ -597,9 +572,9 @@ class _DonateDetailsWidgetState extends State<DonateDetailsWidget> {
                               Expanded(
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      20, 20, 20, 20),
+                                      20, 20, 100, 20),
                                   child: TextFormField(
-                                    controller: rqrdQtyController,
+                                    controller: fullNameController,
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: 'Qty',
@@ -635,45 +610,6 @@ class _DonateDetailsWidgetState extends State<DonateDetailsWidget> {
                                   ),
                                 ),
                               ),
-                              Align(
-                                alignment: AlignmentDirectional(0.68, -0.47),
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 20, 20, 20),
-                                  child: FFButtonWidget(
-                                    onPressed: () async {
-                                      final donateUpdateData =
-                                          createDonateRecordData(
-                                        quantity: functions.setquantity(
-                                            donateDetailsDonateRecord.quantity,
-                                            int.parse(rqrdQtyController.text)),
-                                      );
-                                      await donateDetailsDonateRecord.reference
-                                          .update(donateUpdateData);
-                                    },
-                                    text: 'Set',
-                                    options: FFButtonOptions(
-                                      width: 50,
-                                      height: 40,
-                                      color: Colors.white,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .subtitle2
-                                          .override(
-                                            fontFamily: 'Lexend Deca',
-                                            color: Colors.black,
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                      elevation: 2,
-                                      borderSide: BorderSide(
-                                        color: Colors.transparent,
-                                        width: 1,
-                                      ),
-                                      borderRadius: 8,
-                                    ),
-                                  ),
-                                ),
-                              ),
                             ],
                           ),
                           Padding(
@@ -681,60 +617,35 @@ class _DonateDetailsWidgetState extends State<DonateDetailsWidget> {
                                 EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
                             child: FFButtonWidget(
                               onPressed: () async {
-                                if ((donateDetailsDonateRecord.status) ==
-                                    'Active') {
-                                  final donateUpdateData =
-                                      createDonateRecordData(
-                                    status: functions.setstatus(
-                                        donateDetailsDonateRecord.quantity),
-                                    claimedby: currentUserDocument?.orgname,
-                                  );
-                                  await donateDetailsDonateRecord.reference
-                                      .update(donateUpdateData);
-                                  await showDialog(
-                                    context: context,
-                                    builder: (alertDialogContext) {
-                                      return AlertDialog(
-                                        title: Text('Success'),
-                                        content: Text(
-                                            'Your booking has been confirmed.'),
-                                        actions: [
-                                          TextButton(
-                                            onPressed: () => Navigator.pop(
-                                                alertDialogContext),
-                                            child: Text('Ok'),
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  );
-                                  await Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          NavBarPage(initialPage: 'org_home'),
-                                    ),
-                                  );
-                                  return;
-                                } else {
-                                  await showDialog(
-                                    context: context,
-                                    builder: (alertDialogContext) {
-                                      return AlertDialog(
-                                        title: Text('Sold out'),
-                                        content: Text('This ad was sold'),
-                                        actions: [
-                                          TextButton(
-                                            onPressed: () => Navigator.pop(
-                                                alertDialogContext),
-                                            child: Text('Ok'),
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  );
-                                  return;
-                                }
+                                final donateUpdateData = createDonateRecordData(
+                                  status: 'Sold',
+                                );
+                                await donateDetailsCopy3DonateRecord.reference
+                                    .update(donateUpdateData);
+                                await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: Text('Success'),
+                                      content: Text(
+                                          'Your booking has been confirmed.'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(alertDialogContext),
+                                          child: Text('Ok'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                                await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        NavBarPage(initialPage: 'org_home'),
+                                  ),
+                                );
                               },
                               text: 'Request this',
                               options: FFButtonOptions(
