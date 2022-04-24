@@ -16,3 +16,32 @@ LatLng getUsersLocation(LatLng userLocation) {
   }
   return userLocation;
 }
+
+int setquantity(
+  int quantity,
+  int requiredquantity,
+) {
+  // differance between two numbers
+  int diff = 0;
+  if (quantity > requiredquantity) {
+    diff = quantity - requiredquantity;
+  } else {
+    diff = 0;
+  }
+  return diff;
+}
+
+String setstatus(int quantity) {
+  // Add your function code here!
+  String status;
+  if (quantity <= 0) {
+    status = "Sold";
+  } else {
+    status = "Active";
+  }
+  return status;
+}
+
+int returnzero() {
+  return 0;
+}

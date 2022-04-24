@@ -44,21 +44,15 @@ class _LoginWidgetState extends State<LoginWidget> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
-                      child: Image.network(
-                        '',
-                        width: 100,
-                        height: 100,
-                        fit: BoxFit.cover,
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 120, 0, 0),
+                      child: Text(
+                        'WELCOME TO LEFTY',
+                        style: FlutterFlowTheme.of(context).title1.override(
+                              fontFamily: 'Lexend Deca',
+                              color: Colors.white,
+                              fontSize: 26,
+                            ),
                       ),
-                    ),
-                    Text(
-                      'WELCOME TO LEFTY',
-                      style: FlutterFlowTheme.of(context).title1.override(
-                            fontFamily: 'Lexend Deca',
-                            color: Colors.white,
-                            fontSize: 26,
-                          ),
                     ),
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(0, 80, 265, 0),
@@ -216,12 +210,13 @@ class _LoginWidgetState extends State<LoginWidget> {
                             return;
                           }
 
-                          await Navigator.push(
+                          await Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
                               builder: (context) =>
                                   NavBarPage(initialPage: 'donor_home'),
                             ),
+                            (r) => false,
                           );
                         },
                         text: 'Login',

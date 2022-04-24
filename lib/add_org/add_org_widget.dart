@@ -22,6 +22,7 @@ class _AddOrgWidgetState extends State<AddOrgWidget> {
   TextEditingController orgNameController;
   TextEditingController regNoController;
   TextEditingController phoneController;
+  final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -104,377 +105,508 @@ class _AddOrgWidgetState extends State<AddOrgWidget> {
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Align(
-                                      alignment:
-                                          AlignmentDirectional(-0.44, -0.45),
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            20, 20, 20, 20),
-                                        child: TextFormField(
-                                          controller: orgNameController,
-                                          obscureText: false,
-                                          decoration: InputDecoration(
-                                            labelText: 'Organization Name',
-                                            labelStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText1
-                                                    .override(
-                                                      fontFamily: 'Lexend Deca',
-                                                      color: Color(0xFF95A1AC),
-                                                      fontWeight:
-                                                          FontWeight.normal,
+                                    Form(
+                                      key: formKey,
+                                      autovalidateMode:
+                                          AutovalidateMode.disabled,
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Align(
+                                            alignment: AlignmentDirectional(
+                                                -0.44, -0.45),
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(20, 20, 20, 20),
+                                              child: TextFormField(
+                                                controller: orgNameController,
+                                                obscureText: false,
+                                                decoration: InputDecoration(
+                                                  labelText:
+                                                      'Organization Name',
+                                                  labelStyle: FlutterFlowTheme
+                                                          .of(context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            'Lexend Deca',
+                                                        color:
+                                                            Color(0xFF95A1AC),
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                      ),
+                                                  hintText:
+                                                      'Enter your name here...',
+                                                  hintStyle: FlutterFlowTheme
+                                                          .of(context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            'Lexend Deca',
+                                                        color:
+                                                            Color(0xFF95A1AC),
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                      ),
+                                                  enabledBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Colors.black,
+                                                      width: 2,
                                                     ),
-                                            hintText: 'Enter your name here...',
-                                            hintStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText1
-                                                    .override(
-                                                      fontFamily: 'Lexend Deca',
-                                                      color: Color(0xFF95A1AC),
-                                                      fontWeight:
-                                                          FontWeight.normal,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                  ),
+                                                  focusedBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Colors.black,
+                                                      width: 2,
                                                     ),
-                                            enabledBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: Colors.black,
-                                                width: 2,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                  ),
+                                                  filled: true,
+                                                  fillColor: Colors.black,
+                                                  contentPadding:
+                                                      EdgeInsetsDirectional
+                                                          .fromSTEB(
+                                                              20, 0, 24, 24),
+                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily:
+                                                              'Lexend Deca',
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                        ),
+                                                validator: (val) {
+                                                  if (val.isEmpty) {
+                                                    return 'Field is required';
+                                                  }
+
+                                                  return null;
+                                                },
                                               ),
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
                                             ),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: Colors.black,
-                                                width: 2,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                            ),
-                                            filled: true,
-                                            fillColor: Colors.black,
-                                            contentPadding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    20, 0, 24, 24),
                                           ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily: 'Lexend Deca',
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.normal,
-                                              ),
-                                        ),
-                                      ),
-                                    ),
-                                    Align(
-                                      alignment:
-                                          AlignmentDirectional(0.33, -0.23),
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            20, 10, 20, 20),
-                                        child: TextFormField(
-                                          controller: emailAddressController,
-                                          obscureText: false,
-                                          decoration: InputDecoration(
-                                            labelText: 'Email Address',
-                                            labelStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText1
-                                                    .override(
-                                                      fontFamily: 'Lexend Deca',
-                                                      color: Color(0xFF95A1AC),
-                                                      fontWeight:
-                                                          FontWeight.normal,
+                                          Align(
+                                            alignment: AlignmentDirectional(
+                                                0.33, -0.23),
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(20, 10, 20, 20),
+                                              child: TextFormField(
+                                                controller:
+                                                    emailAddressController,
+                                                obscureText: false,
+                                                decoration: InputDecoration(
+                                                  labelText: 'Email Address',
+                                                  labelStyle: FlutterFlowTheme
+                                                          .of(context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            'Lexend Deca',
+                                                        color:
+                                                            Color(0xFF95A1AC),
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                      ),
+                                                  hintText:
+                                                      'Enter your email here...',
+                                                  hintStyle: FlutterFlowTheme
+                                                          .of(context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            'Lexend Deca',
+                                                        color:
+                                                            Color(0xFF95A1AC),
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                      ),
+                                                  enabledBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Colors.black,
+                                                      width: 2,
                                                     ),
-                                            hintText:
-                                                'Enter your email here...',
-                                            hintStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText1
-                                                    .override(
-                                                      fontFamily: 'Lexend Deca',
-                                                      color: Color(0xFF95A1AC),
-                                                      fontWeight:
-                                                          FontWeight.normal,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                  ),
+                                                  focusedBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Colors.black,
+                                                      width: 2,
                                                     ),
-                                            enabledBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: Colors.black,
-                                                width: 2,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                  ),
+                                                  filled: true,
+                                                  fillColor: Colors.black,
+                                                  contentPadding:
+                                                      EdgeInsetsDirectional
+                                                          .fromSTEB(
+                                                              20, 0, 24, 24),
+                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily:
+                                                              'Lexend Deca',
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                        ),
+                                                validator: (val) {
+                                                  if (val.isEmpty) {
+                                                    return 'Field is required';
+                                                  }
+
+                                                  return null;
+                                                },
                                               ),
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
                                             ),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: Colors.black,
-                                                width: 2,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                            ),
-                                            filled: true,
-                                            fillColor: Colors.black,
-                                            contentPadding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    20, 0, 24, 24),
                                           ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily: 'Lexend Deca',
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.normal,
-                                              ),
-                                        ),
-                                      ),
-                                    ),
-                                    Align(
-                                      alignment:
-                                          AlignmentDirectional(-1.89, -0.03),
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            20, 10, 20, 20),
-                                        child: TextFormField(
-                                          controller: regNoController,
-                                          obscureText: false,
-                                          decoration: InputDecoration(
-                                            labelText: 'Registration Number',
-                                            labelStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText1
-                                                    .override(
-                                                      fontFamily: 'Lexend Deca',
-                                                      color: Color(0xFF95A1AC),
-                                                      fontWeight:
-                                                          FontWeight.normal,
+                                          Align(
+                                            alignment: AlignmentDirectional(
+                                                -1.89, -0.03),
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(20, 10, 20, 20),
+                                              child: TextFormField(
+                                                controller: regNoController,
+                                                obscureText: false,
+                                                decoration: InputDecoration(
+                                                  labelText:
+                                                      'Registration Number',
+                                                  labelStyle: FlutterFlowTheme
+                                                          .of(context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            'Lexend Deca',
+                                                        color:
+                                                            Color(0xFF95A1AC),
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                      ),
+                                                  hintStyle: FlutterFlowTheme
+                                                          .of(context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            'Lexend Deca',
+                                                        color:
+                                                            Color(0xFF95A1AC),
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                      ),
+                                                  enabledBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Colors.black,
+                                                      width: 2,
                                                     ),
-                                            hintStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText1
-                                                    .override(
-                                                      fontFamily: 'Lexend Deca',
-                                                      color: Color(0xFF95A1AC),
-                                                      fontWeight:
-                                                          FontWeight.normal,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                  ),
+                                                  focusedBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Colors.black,
+                                                      width: 2,
                                                     ),
-                                            enabledBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: Colors.black,
-                                                width: 2,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                  ),
+                                                  filled: true,
+                                                  fillColor: Colors.black,
+                                                  contentPadding:
+                                                      EdgeInsetsDirectional
+                                                          .fromSTEB(
+                                                              20, 0, 24, 24),
+                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily:
+                                                              'Lexend Deca',
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                        ),
+                                                validator: (val) {
+                                                  if (val.isEmpty) {
+                                                    return 'Field is required';
+                                                  }
+
+                                                  return null;
+                                                },
                                               ),
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
                                             ),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: Colors.black,
-                                                width: 2,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                            ),
-                                            filled: true,
-                                            fillColor: Colors.black,
-                                            contentPadding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    20, 0, 24, 24),
                                           ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily: 'Lexend Deca',
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.normal,
-                                              ),
-                                        ),
-                                      ),
-                                    ),
-                                    Align(
-                                      alignment:
-                                          AlignmentDirectional(-4.61, 0.18),
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            20, 10, 20, 20),
-                                        child: TextFormField(
-                                          controller: descriptionController,
-                                          obscureText: false,
-                                          decoration: InputDecoration(
-                                            labelText: 'Description',
-                                            labelStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText1
-                                                    .override(
-                                                      fontFamily: 'Lexend Deca',
-                                                      color: Color(0xFF95A1AC),
-                                                      fontWeight:
-                                                          FontWeight.normal,
+                                          Align(
+                                            alignment: AlignmentDirectional(
+                                                -4.61, 0.18),
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(20, 10, 20, 20),
+                                              child: TextFormField(
+                                                controller:
+                                                    descriptionController,
+                                                obscureText: false,
+                                                decoration: InputDecoration(
+                                                  labelText: 'Description',
+                                                  labelStyle: FlutterFlowTheme
+                                                          .of(context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            'Lexend Deca',
+                                                        color:
+                                                            Color(0xFF95A1AC),
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                      ),
+                                                  hintStyle: FlutterFlowTheme
+                                                          .of(context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            'Lexend Deca',
+                                                        color:
+                                                            Color(0xFF95A1AC),
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                      ),
+                                                  enabledBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Colors.black,
+                                                      width: 2,
                                                     ),
-                                            hintStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText1
-                                                    .override(
-                                                      fontFamily: 'Lexend Deca',
-                                                      color: Color(0xFF95A1AC),
-                                                      fontWeight:
-                                                          FontWeight.normal,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                  ),
+                                                  focusedBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Colors.black,
+                                                      width: 2,
                                                     ),
-                                            enabledBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: Colors.black,
-                                                width: 2,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                  ),
+                                                  filled: true,
+                                                  fillColor: Colors.black,
+                                                  contentPadding:
+                                                      EdgeInsetsDirectional
+                                                          .fromSTEB(
+                                                              20, 0, 24, 24),
+                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily:
+                                                              'Lexend Deca',
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                        ),
+                                                validator: (val) {
+                                                  if (val.isEmpty) {
+                                                    return 'Field is required';
+                                                  }
+
+                                                  return null;
+                                                },
                                               ),
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
                                             ),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: Colors.black,
-                                                width: 2,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                            ),
-                                            filled: true,
-                                            fillColor: Colors.black,
-                                            contentPadding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    20, 0, 24, 24),
                                           ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily: 'Lexend Deca',
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.normal,
-                                              ),
-                                        ),
-                                      ),
-                                    ),
-                                    Align(
-                                      alignment:
-                                          AlignmentDirectional(-3.22, 0.4),
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            20, 10, 20, 20),
-                                        child: TextFormField(
-                                          controller: phoneController,
-                                          obscureText: false,
-                                          decoration: InputDecoration(
-                                            labelText: 'Phone ',
-                                            labelStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText1
-                                                    .override(
-                                                      fontFamily: 'Lexend Deca',
-                                                      color: Color(0xFF95A1AC),
-                                                      fontWeight:
-                                                          FontWeight.normal,
+                                          Align(
+                                            alignment: AlignmentDirectional(
+                                                -3.22, 0.4),
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(20, 10, 20, 20),
+                                              child: TextFormField(
+                                                controller: phoneController,
+                                                obscureText: false,
+                                                decoration: InputDecoration(
+                                                  labelText: 'Phone ',
+                                                  labelStyle: FlutterFlowTheme
+                                                          .of(context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            'Lexend Deca',
+                                                        color:
+                                                            Color(0xFF95A1AC),
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                      ),
+                                                  hintText:
+                                                      'Enter your phone number',
+                                                  hintStyle: FlutterFlowTheme
+                                                          .of(context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            'Lexend Deca',
+                                                        color:
+                                                            Color(0xFF95A1AC),
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                      ),
+                                                  enabledBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Colors.black,
+                                                      width: 1,
                                                     ),
-                                            hintText: 'Enter your phone number',
-                                            hintStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText1
-                                                    .override(
-                                                      fontFamily: 'Lexend Deca',
-                                                      color: Color(0xFF95A1AC),
-                                                      fontWeight:
-                                                          FontWeight.normal,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                  ),
+                                                  focusedBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Colors.black,
+                                                      width: 1,
                                                     ),
-                                            enabledBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: Colors.black,
-                                                width: 1,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                  ),
+                                                  filled: true,
+                                                  fillColor: Colors.black,
+                                                  contentPadding:
+                                                      EdgeInsetsDirectional
+                                                          .fromSTEB(
+                                                              20, 0, 24, 24),
+                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily:
+                                                              'Lexend Deca',
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                        ),
+                                                keyboardType:
+                                                    TextInputType.phone,
+                                                validator: (val) {
+                                                  if (val.isEmpty) {
+                                                    return 'Field is required';
+                                                  }
+
+                                                  return null;
+                                                },
                                               ),
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
                                             ),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: Colors.black,
-                                                width: 1,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                            ),
-                                            filled: true,
-                                            fillColor: Colors.black,
-                                            contentPadding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    20, 0, 24, 24),
                                           ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily: 'Lexend Deca',
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.normal,
-                                              ),
-                                          keyboardType: TextInputType.phone,
-                                        ),
-                                      ),
-                                    ),
-                                    Align(
-                                      alignment:
-                                          AlignmentDirectional(-3.06, 0.63),
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            20, 10, 20, 0),
-                                        child: TextFormField(
-                                          controller: addressController,
-                                          obscureText: false,
-                                          decoration: InputDecoration(
-                                            labelText: 'Address',
-                                            labelStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText1
-                                                    .override(
-                                                      fontFamily: 'Lexend Deca',
-                                                      color: Color(0xFF95A1AC),
-                                                      fontWeight:
-                                                          FontWeight.normal,
+                                          Align(
+                                            alignment: AlignmentDirectional(
+                                                -3.06, 0.63),
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(20, 10, 20, 0),
+                                              child: TextFormField(
+                                                controller: addressController,
+                                                obscureText: false,
+                                                decoration: InputDecoration(
+                                                  labelText: 'Address',
+                                                  labelStyle: FlutterFlowTheme
+                                                          .of(context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            'Lexend Deca',
+                                                        color:
+                                                            Color(0xFF95A1AC),
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                      ),
+                                                  hintStyle: FlutterFlowTheme
+                                                          .of(context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            'Lexend Deca',
+                                                        color:
+                                                            Color(0xFF95A1AC),
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                      ),
+                                                  enabledBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Colors.black,
+                                                      width: 2,
                                                     ),
-                                            hintStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText1
-                                                    .override(
-                                                      fontFamily: 'Lexend Deca',
-                                                      color: Color(0xFF95A1AC),
-                                                      fontWeight:
-                                                          FontWeight.normal,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                  ),
+                                                  focusedBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Colors.black,
+                                                      width: 2,
                                                     ),
-                                            enabledBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: Colors.black,
-                                                width: 2,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                  ),
+                                                  filled: true,
+                                                  fillColor: Colors.black,
+                                                  contentPadding:
+                                                      EdgeInsetsDirectional
+                                                          .fromSTEB(
+                                                              20, 0, 24, 24),
+                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily:
+                                                              'Lexend Deca',
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                        ),
+                                                textAlign: TextAlign.start,
+                                                maxLines: 3,
+                                                validator: (val) {
+                                                  if (val.isEmpty) {
+                                                    return 'Field is required';
+                                                  }
+
+                                                  return null;
+                                                },
                                               ),
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
                                             ),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: Colors.black,
-                                                width: 2,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                            ),
-                                            filled: true,
-                                            fillColor: Colors.black,
-                                            contentPadding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    20, 0, 24, 24),
                                           ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily: 'Lexend Deca',
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.normal,
-                                              ),
-                                          textAlign: TextAlign.start,
-                                          maxLines: 3,
-                                        ),
+                                        ],
                                       ),
                                     ),
                                     Align(
@@ -485,6 +617,11 @@ class _AddOrgWidgetState extends State<AddOrgWidget> {
                                             0, 20, 0, 0),
                                         child: FFButtonWidget(
                                           onPressed: () async {
+                                            if (!formKey.currentState
+                                                .validate()) {
+                                              return;
+                                            }
+
                                             final organizationCreateData =
                                                 createOrganizationRecordData(
                                               orgEmail:
@@ -506,6 +643,8 @@ class _AddOrgWidgetState extends State<AddOrgWidget> {
                                                 createUsersRecordData(
                                               orgregid: regNoController.text,
                                               orgname: orgNameController.text,
+                                              orgCNfromusers:
+                                                  phoneController.text,
                                             );
                                             await currentUserReference
                                                 .update(usersUpdateData);

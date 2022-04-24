@@ -4,14 +4,22 @@ import '../backend/backend.dart';
 import '../donate_details/donate_details_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../myrequests_org/myrequests_org_widget.dart';
 import '../orgprofile/orgprofile_widget.dart';
 import '../request_food/request_food_widget.dart';
+import '../flutter_flow/custom_functions.dart' as functions;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class OrgHomeWidget extends StatefulWidget {
-  const OrgHomeWidget({Key key}) : super(key: key);
+  const OrgHomeWidget({
+    Key key,
+    this.orghome,
+  }) : super(key: key);
+
+  final DocumentReference orghome;
 
   @override
   _OrgHomeWidgetState createState() => _OrgHomeWidgetState();
@@ -83,11 +91,34 @@ class _OrgHomeWidgetState extends State<OrgHomeWidget> {
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
-            Image.network(
-              'https://picsum.photos/seed/28/600',
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.25,
-              fit: BoxFit.cover,
+            AuthUserStreamWidget(
+              child: StreamBuilder<UsersRecord>(
+                stream: UsersRecord.getDocument(currentUserReference),
+                builder: (context, snapshot) {
+                  // Customize what your widget looks like when it's loading.
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: SizedBox(
+                        width: 50,
+                        height: 50,
+                        child: CircularProgressIndicator(
+                          color: FlutterFlowTheme.of(context).primaryColor,
+                        ),
+                      ),
+                    );
+                  }
+                  final imageUsersRecord = snapshot.data;
+                  return Image.network(
+                    valueOrDefault<String>(
+                      currentUserDocument?.orgpicFromrUsers,
+                      'https://firebasestorage.googleapis.com/v0/b/lefty-bdb52.appspot.com/o/assets%2F42de7cbe3ff10d84b2a281d4172da65c.png?alt=media&token=a72e1ee6-6c86-4dd8-a2cc-1055c613ae32',
+                    ),
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height * 0.25,
+                    fit: BoxFit.cover,
+                  );
+                },
+              ),
             ),
             InkWell(
               onTap: () async {
@@ -124,28 +155,39 @@ class _OrgHomeWidgetState extends State<OrgHomeWidget> {
                 dense: false,
               ),
             ),
-            ListTile(
-              title: Text(
-                'Requests',
-                style: FlutterFlowTheme.of(context).title3.override(
-                      fontFamily: 'Lexend Deca',
-                      color: Colors.black,
-                    ),
+            InkWell(
+              onTap: () async {
+                await Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MyrequestsOrgWidget(),
+                  ),
+                  (r) => false,
+                );
+              },
+              child: ListTile(
+                title: Text(
+                  'Requests',
+                  style: FlutterFlowTheme.of(context).title3.override(
+                        fontFamily: 'Lexend Deca',
+                        color: Colors.black,
+                      ),
+                ),
+                subtitle: Text(
+                  'Food requests',
+                  style: FlutterFlowTheme.of(context).subtitle2.override(
+                        fontFamily: 'Lexend Deca',
+                        fontWeight: FontWeight.w500,
+                      ),
+                ),
+                trailing: Icon(
+                  Icons.arrow_forward_ios,
+                  color: Color(0xFF303030),
+                  size: 20,
+                ),
+                tileColor: Color(0xFFF5F5F5),
+                dense: false,
               ),
-              subtitle: Text(
-                'Food requests',
-                style: FlutterFlowTheme.of(context).subtitle2.override(
-                      fontFamily: 'Lexend Deca',
-                      fontWeight: FontWeight.w500,
-                    ),
-              ),
-              trailing: Icon(
-                Icons.arrow_forward_ios,
-                color: Color(0xFF303030),
-                size: 20,
-              ),
-              tileColor: Color(0xFFF5F5F5),
-              dense: false,
             ),
             ListTile(
               title: Text(
@@ -227,7 +269,10 @@ class _OrgHomeWidgetState extends State<OrgHomeWidget> {
             children: [
               Expanded(
                 child: StreamBuilder<List<DonateRecord>>(
-                  stream: queryDonateRecord(),
+                  stream: queryDonateRecord(
+                    queryBuilder: (donateRecord) => donateRecord
+                        .where('ex_time', isGreaterThan: getCurrentTimestamp),
+                  ),
                   builder: (context, snapshot) {
                     // Customize what your widget looks like when it's loading.
                     if (!snapshot.hasData) {
@@ -282,11 +327,46 @@ class _OrgHomeWidgetState extends State<OrgHomeWidget> {
                                   mainAxisSize: MainAxisSize.max,
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
-                                    Image.asset(
-                                      'assets/images/-undraw_conversation_re_c26v@2x.png',
-                                      width: 90,
-                                      height: 90,
-                                      fit: BoxFit.cover,
+                                    StreamBuilder<List<DonateRecord>>(
+                                      stream: queryDonateRecord(
+                                        singleRecord: true,
+                                      ),
+                                      builder: (context, snapshot) {
+                                        // Customize what your widget looks like when it's loading.
+                                        if (!snapshot.hasData) {
+                                          return Center(
+                                            child: SizedBox(
+                                              width: 50,
+                                              height: 50,
+                                              child: CircularProgressIndicator(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryColor,
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                        List<DonateRecord>
+                                            imageDonateRecordList =
+                                            snapshot.data;
+                                        // Return an empty Container when the document does not exist.
+                                        if (snapshot.data.isEmpty) {
+                                          return Container();
+                                        }
+                                        final imageDonateRecord =
+                                            imageDonateRecordList.isNotEmpty
+                                                ? imageDonateRecordList.first
+                                                : null;
+                                        return Image.network(
+                                          valueOrDefault<String>(
+                                            columnDonateRecord.foodimageUrl,
+                                            'https://firebasestorage.googleapis.com/v0/b/lefty-bdb52.appspot.com/o/food.jpg?alt=media&token=d739621c-1ef3-42fd-94b3-2e8670352672',
+                                          ),
+                                          width: 100,
+                                          height: 100,
+                                          fit: BoxFit.cover,
+                                        );
+                                      },
                                     ),
                                     Expanded(
                                       child: Padding(
@@ -334,10 +414,7 @@ class _OrgHomeWidgetState extends State<OrgHomeWidget> {
                                                             .first
                                                         : null;
                                                 return Text(
-                                                  valueOrDefault<String>(
-                                                    columnDonateRecord.foodName,
-                                                    'oi',
-                                                  ),
+                                                  columnDonateRecord.foodName,
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .subtitle1
@@ -413,6 +490,109 @@ class _OrgHomeWidgetState extends State<OrgHomeWidget> {
                                                   );
                                                 },
                                               ),
+                                            ),
+                                            StreamBuilder<List<DonateRecord>>(
+                                              stream: queryDonateRecord(
+                                                queryBuilder: (donateRecord) =>
+                                                    donateRecord.where(
+                                                        'quantity',
+                                                        isGreaterThan: functions
+                                                            .returnzero()),
+                                                singleRecord: true,
+                                              ),
+                                              builder: (context, snapshot) {
+                                                // Customize what your widget looks like when it's loading.
+                                                if (!snapshot.hasData) {
+                                                  return Center(
+                                                    child: SizedBox(
+                                                      width: 50,
+                                                      height: 50,
+                                                      child:
+                                                          CircularProgressIndicator(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryColor,
+                                                      ),
+                                                    ),
+                                                  );
+                                                }
+                                                List<DonateRecord>
+                                                    textDonateRecordList =
+                                                    snapshot.data;
+                                                // Return an empty Container when the document does not exist.
+                                                if (snapshot.data.isEmpty) {
+                                                  return Container();
+                                                }
+                                                final textDonateRecord =
+                                                    textDonateRecordList
+                                                            .isNotEmpty
+                                                        ? textDonateRecordList
+                                                            .first
+                                                        : null;
+                                                return Text(
+                                                  columnDonateRecord.quantity
+                                                      .toString(),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .title3
+                                                      .override(
+                                                        fontFamily:
+                                                            'Lexend Deca',
+                                                        color: Colors.black,
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
+                                                );
+                                              },
+                                            ),
+                                            StreamBuilder<List<DonateRecord>>(
+                                              stream: queryDonateRecord(
+                                                singleRecord: true,
+                                              ),
+                                              builder: (context, snapshot) {
+                                                // Customize what your widget looks like when it's loading.
+                                                if (!snapshot.hasData) {
+                                                  return Center(
+                                                    child: SizedBox(
+                                                      width: 50,
+                                                      height: 50,
+                                                      child:
+                                                          CircularProgressIndicator(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryColor,
+                                                      ),
+                                                    ),
+                                                  );
+                                                }
+                                                List<DonateRecord>
+                                                    textDonateRecordList =
+                                                    snapshot.data;
+                                                // Return an empty Container when the document does not exist.
+                                                if (snapshot.data.isEmpty) {
+                                                  return Container();
+                                                }
+                                                final textDonateRecord =
+                                                    textDonateRecordList
+                                                            .isNotEmpty
+                                                        ? textDonateRecordList
+                                                            .first
+                                                        : null;
+                                                return Text(
+                                                  columnDonateRecord.status,
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily: 'Poppins',
+                                                        color:
+                                                            Color(0xEB359339),
+                                                      ),
+                                                );
+                                              },
                                             ),
                                           ],
                                         ),

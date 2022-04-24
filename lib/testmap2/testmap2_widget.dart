@@ -14,7 +14,7 @@ class Testmap2Widget extends StatefulWidget {
 
 class _Testmap2WidgetState extends State<Testmap2Widget> {
   LatLng googleMapsCenter;
-  Completer<GoogleMapController> googleMapsController;
+  final googleMapsController = Completer<GoogleMapController>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override

@@ -3,14 +3,14 @@ import '../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Donate1Widget extends StatefulWidget {
-  const Donate1Widget({Key key}) : super(key: key);
+class CopydataWidget extends StatefulWidget {
+  const CopydataWidget({Key key}) : super(key: key);
 
   @override
-  _Donate1WidgetState createState() => _Donate1WidgetState();
+  _CopydataWidgetState createState() => _CopydataWidgetState();
 }
 
-class _Donate1WidgetState extends State<Donate1Widget> {
+class _CopydataWidgetState extends State<CopydataWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override

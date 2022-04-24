@@ -1,18 +1,16 @@
-import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_google_map.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/lat_lng.dart';
 import '../main.dart';
-import '../flutter_flow/custom_functions.dart' as functions;
+import '../orgprofileforusers/orgprofileforusers_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class DonateDetailsWidget extends StatefulWidget {
-  const DonateDetailsWidget({
+class MylistdetailsWidget extends StatefulWidget {
+  const MylistdetailsWidget({
     Key key,
     this.donateDetails,
     this.dmap,
@@ -22,20 +20,13 @@ class DonateDetailsWidget extends StatefulWidget {
   final LatLng dmap;
 
   @override
-  _DonateDetailsWidgetState createState() => _DonateDetailsWidgetState();
+  _MylistdetailsWidgetState createState() => _MylistdetailsWidgetState();
 }
 
-class _DonateDetailsWidgetState extends State<DonateDetailsWidget> {
+class _MylistdetailsWidgetState extends State<MylistdetailsWidget> {
   LatLng googleMapsCenter;
   final googleMapsController = Completer<GoogleMapController>();
-  TextEditingController rqrdQtyController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
-  @override
-  void initState() {
-    super.initState();
-    rqrdQtyController = TextEditingController();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +45,7 @@ class _DonateDetailsWidgetState extends State<DonateDetailsWidget> {
             ),
           );
         }
-        final donateDetailsDonateRecord = snapshot.data;
+        final mylistdetailsDonateRecord = snapshot.data;
         return Scaffold(
           key: scaffoldKey,
           resizeToAvoidBottomInset: false,
@@ -66,7 +57,7 @@ class _DonateDetailsWidgetState extends State<DonateDetailsWidget> {
                 await Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => NavBarPage(initialPage: 'org_home'),
+                    builder: (context) => NavBarPage(initialPage: 'mylist'),
                   ),
                 );
               },
@@ -75,41 +66,6 @@ class _DonateDetailsWidgetState extends State<DonateDetailsWidget> {
                 color: Colors.white,
                 size: 24,
               ),
-            ),
-            title: StreamBuilder<List<DonateRecord>>(
-              stream: queryDonateRecord(
-                singleRecord: true,
-              ),
-              builder: (context, snapshot) {
-                // Customize what your widget looks like when it's loading.
-                if (!snapshot.hasData) {
-                  return Center(
-                    child: SizedBox(
-                      width: 50,
-                      height: 50,
-                      child: CircularProgressIndicator(
-                        color: FlutterFlowTheme.of(context).primaryColor,
-                      ),
-                    ),
-                  );
-                }
-                List<DonateRecord> textDonateRecordList = snapshot.data;
-                // Return an empty Container when the document does not exist.
-                if (snapshot.data.isEmpty) {
-                  return Container();
-                }
-                final textDonateRecord = textDonateRecordList.isNotEmpty
-                    ? textDonateRecordList.first
-                    : null;
-                return Text(
-                  donateDetailsDonateRecord.donBy,
-                  style: FlutterFlowTheme.of(context).title2.override(
-                        fontFamily: 'Poppins',
-                        color: Colors.white,
-                        fontSize: 22,
-                      ),
-                );
-              },
             ),
             actions: [],
             centerTitle: false,
@@ -157,7 +113,7 @@ class _DonateDetailsWidgetState extends State<DonateDetailsWidget> {
                                       : null;
                               return Image.network(
                                 valueOrDefault<String>(
-                                  donateDetailsDonateRecord.foodimageUrl,
+                                  mylistdetailsDonateRecord.foodimageUrl,
                                   'https://firebasestorage.googleapis.com/v0/b/lefty-bdb52.appspot.com/o/food.jpg?alt=media&token=d739621c-1ef3-42fd-94b3-2e8670352672',
                                 ),
                                 width: 350,
@@ -202,7 +158,59 @@ class _DonateDetailsWidgetState extends State<DonateDetailsWidget> {
                                             : null;
                                     return Text(
                                       valueOrDefault<String>(
-                                        donateDetailsDonateRecord.foodName,
+                                        mylistdetailsDonateRecord.status,
+                                        'Active',
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .title3
+                                          .override(
+                                            fontFamily: 'Poppins',
+                                            color: Color(0xFF105C09),
+                                            fontSize: 18,
+                                          ),
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                StreamBuilder<List<DonateRecord>>(
+                                  stream: queryDonateRecord(
+                                    singleRecord: true,
+                                  ),
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50,
+                                          height: 50,
+                                          child: CircularProgressIndicator(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryColor,
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                    List<DonateRecord> textDonateRecordList =
+                                        snapshot.data;
+                                    // Return an empty Container when the document does not exist.
+                                    if (snapshot.data.isEmpty) {
+                                      return Container();
+                                    }
+                                    final textDonateRecord =
+                                        textDonateRecordList.isNotEmpty
+                                            ? textDonateRecordList.first
+                                            : null;
+                                    return Text(
+                                      valueOrDefault<String>(
+                                        mylistdetailsDonateRecord.foodName,
                                         'Food Name',
                                       ),
                                       style: FlutterFlowTheme.of(context)
@@ -253,7 +261,7 @@ class _DonateDetailsWidgetState extends State<DonateDetailsWidget> {
                                             ? textDonateRecordList.first
                                             : null;
                                     return Text(
-                                      donateDetailsDonateRecord.description,
+                                      mylistdetailsDonateRecord.description,
                                       style: FlutterFlowTheme.of(context)
                                           .subtitle1
                                           .override(
@@ -298,11 +306,7 @@ class _DonateDetailsWidgetState extends State<DonateDetailsWidget> {
                                         ? textDonateRecordList.first
                                         : null;
                                 return Text(
-                                  '${valueOrDefault<String>(
-                                    donateDetailsDonateRecord.quantity
-                                        .toString(),
-                                    '0',
-                                  )}pcs',
+                                  '${mylistdetailsDonateRecord.initialquantity.toString()}pcs',
                                   style: FlutterFlowTheme.of(context)
                                       .subtitle1
                                       .override(
@@ -363,7 +367,7 @@ class _DonateDetailsWidgetState extends State<DonateDetailsWidget> {
                                               : null;
                                       return Text(
                                         dateTimeFormat('d/M h:mm a',
-                                            donateDetailsDonateRecord.prTime),
+                                            mylistdetailsDonateRecord.prTime),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
@@ -428,7 +432,7 @@ class _DonateDetailsWidgetState extends State<DonateDetailsWidget> {
                                               : null;
                                       return Text(
                                         dateTimeFormat('d/M h:mm a',
-                                            donateDetailsDonateRecord.exTime),
+                                            mylistdetailsDonateRecord.exTime),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
@@ -493,7 +497,7 @@ class _DonateDetailsWidgetState extends State<DonateDetailsWidget> {
                                               : null;
                                       return Text(
                                         valueOrDefault<String>(
-                                          donateDetailsDonateRecord.phoneNumber,
+                                          mylistdetailsDonateRecord.phoneNumber,
                                           '+91',
                                         ),
                                         style: FlutterFlowTheme.of(context)
@@ -512,7 +516,27 @@ class _DonateDetailsWidgetState extends State<DonateDetailsWidget> {
                           ),
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
+                                EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Text(
+                                  'Posted at',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyText1
+                                      .override(
+                                        fontFamily: 'Lexend Deca',
+                                        color: Colors.black,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(20, 0, 20, 10),
                             child: Container(
                               height: 200,
                               decoration: BoxDecoration(),
@@ -549,13 +573,13 @@ class _DonateDetailsWidgetState extends State<DonateDetailsWidget> {
                                     onCameraIdle: (latLng) => setState(
                                         () => googleMapsCenter = latLng),
                                     initialLocation: googleMapsCenter ??=
-                                        donateDetailsDonateRecord.donorLocation,
+                                        mylistdetailsDonateRecord.donorLocation,
                                     markers: [
-                                      if (donateDetailsDonateRecord != null)
+                                      if (mylistdetailsDonateRecord != null)
                                         FlutterFlowMarker(
-                                          donateDetailsDonateRecord
+                                          mylistdetailsDonateRecord
                                               .reference.path,
-                                          donateDetailsDonateRecord
+                                          mylistdetailsDonateRecord
                                               .donorLocation,
                                         ),
                                     ],
@@ -576,184 +600,82 @@ class _DonateDetailsWidgetState extends State<DonateDetailsWidget> {
                               ),
                             ),
                           ),
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
-                                child: Text(
-                                  'Required quantity',
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Text(
+                                  'Food claimed by ',
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText1
                                       .override(
                                         fontFamily: 'Lexend Deca',
                                         color: Colors.black,
-                                        fontSize: 18,
+                                        fontSize: 16,
                                         fontWeight: FontWeight.w500,
                                       ),
                                 ),
-                              ),
-                              Expanded(
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      20, 20, 20, 20),
-                                  child: TextFormField(
-                                    controller: rqrdQtyController,
-                                    obscureText: false,
-                                    decoration: InputDecoration(
-                                      labelText: 'Qty',
-                                      hintText: '0',
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0xFFDBE2E7),
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0xFFDBE2E7),
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                      contentPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              20, 0, 24, 24),
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily: 'Lexend Deca',
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                    keyboardType: TextInputType.number,
+                                StreamBuilder<List<DonateRecord>>(
+                                  stream: queryDonateRecord(
+                                    singleRecord: true,
                                   ),
-                                ),
-                              ),
-                              Align(
-                                alignment: AlignmentDirectional(0.68, -0.47),
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 20, 20, 20),
-                                  child: FFButtonWidget(
-                                    onPressed: () async {
-                                      final donateUpdateData =
-                                          createDonateRecordData(
-                                        quantity: functions.setquantity(
-                                            donateDetailsDonateRecord.quantity,
-                                            int.parse(rqrdQtyController.text)),
-                                      );
-                                      await donateDetailsDonateRecord.reference
-                                          .update(donateUpdateData);
-                                    },
-                                    text: 'Set',
-                                    options: FFButtonOptions(
-                                      width: 50,
-                                      height: 40,
-                                      color: Colors.white,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .subtitle2
-                                          .override(
-                                            fontFamily: 'Lexend Deca',
-                                            color: Colors.black,
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w600,
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50,
+                                          height: 50,
+                                          child: CircularProgressIndicator(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryColor,
                                           ),
-                                      elevation: 2,
-                                      borderSide: BorderSide(
-                                        color: Colors.transparent,
-                                        width: 1,
+                                        ),
+                                      );
+                                    }
+                                    List<DonateRecord> textDonateRecordList =
+                                        snapshot.data;
+                                    // Return an empty Container when the document does not exist.
+                                    if (snapshot.data.isEmpty) {
+                                      return Container();
+                                    }
+                                    final textDonateRecord =
+                                        textDonateRecordList.isNotEmpty
+                                            ? textDonateRecordList.first
+                                            : null;
+                                    return InkWell(
+                                      onTap: () async {
+                                        await Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                OrgprofileforusersWidget(
+                                              orgprouser:
+                                                  mylistdetailsDonateRecord
+                                                      .reference,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      child: Text(
+                                        mylistdetailsDonateRecord.claimedby,
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Poppins',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500,
+                                            ),
                                       ),
-                                      borderRadius: 8,
-                                    ),
-                                  ),
+                                    );
+                                  },
                                 ),
-                              ),
-                            ],
-                          ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
-                            child: FFButtonWidget(
-                              onPressed: () async {
-                                if ((donateDetailsDonateRecord.status) ==
-                                    'Active') {
-                                  final donateUpdateData =
-                                      createDonateRecordData(
-                                    status: functions.setstatus(
-                                        donateDetailsDonateRecord.quantity),
-                                    claimedby: currentUserDocument?.orgname,
-                                  );
-                                  await donateDetailsDonateRecord.reference
-                                      .update(donateUpdateData);
-                                  await showDialog(
-                                    context: context,
-                                    builder: (alertDialogContext) {
-                                      return AlertDialog(
-                                        title: Text('Success'),
-                                        content: Text(
-                                            'Your booking has been confirmed.'),
-                                        actions: [
-                                          TextButton(
-                                            onPressed: () => Navigator.pop(
-                                                alertDialogContext),
-                                            child: Text('Ok'),
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  );
-                                  await Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          NavBarPage(initialPage: 'org_home'),
-                                    ),
-                                  );
-                                  return;
-                                } else {
-                                  await showDialog(
-                                    context: context,
-                                    builder: (alertDialogContext) {
-                                      return AlertDialog(
-                                        title: Text('Sold out'),
-                                        content: Text('This ad was sold'),
-                                        actions: [
-                                          TextButton(
-                                            onPressed: () => Navigator.pop(
-                                                alertDialogContext),
-                                            child: Text('Ok'),
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  );
-                                  return;
-                                }
-                              },
-                              text: 'Request this',
-                              options: FFButtonOptions(
-                                width: 130,
-                                height: 40,
-                                color:
-                                    FlutterFlowTheme.of(context).primaryColor,
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .subtitle2
-                                    .override(
-                                      fontFamily: 'Lexend Deca',
-                                      color: Colors.white,
-                                    ),
-                                borderSide: BorderSide(
-                                  color: Colors.transparent,
-                                  width: 1,
-                                ),
-                                borderRadius: 12,
-                              ),
+                              ],
                             ),
                           ),
                         ],

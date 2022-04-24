@@ -1,27 +1,27 @@
-import '../auth/auth_util.dart';
 import '../backend/backend.dart';
-import '../edit_profileorg/edit_profileorg_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../flutter_flow/flutter_flow_widgets.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class OrgprofileWidget extends StatefulWidget {
-  const OrgprofileWidget({
+class OrgprofileforusersWidget extends StatefulWidget {
+  const OrgprofileforusersWidget({
     Key key,
     this.orgprofile,
+    this.orgprouser,
   }) : super(key: key);
 
   final DocumentReference orgprofile;
+  final DocumentReference orgprouser;
 
   @override
-  _OrgprofileWidgetState createState() => _OrgprofileWidgetState();
+  _OrgprofileforusersWidgetState createState() =>
+      _OrgprofileforusersWidgetState();
 }
 
-class _OrgprofileWidgetState extends State<OrgprofileWidget> {
+class _OrgprofileforusersWidgetState extends State<OrgprofileforusersWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -41,8 +41,10 @@ class _OrgprofileWidgetState extends State<OrgprofileWidget> {
             size: 24,
           ),
         ),
-        title: StreamBuilder<UsersRecord>(
-          stream: UsersRecord.getDocument(currentUserReference),
+        title: StreamBuilder<List<DonateRecord>>(
+          stream: queryDonateRecord(
+            singleRecord: true,
+          ),
           builder: (context, snapshot) {
             // Customize what your widget looks like when it's loading.
             if (!snapshot.hasData) {
@@ -56,9 +58,16 @@ class _OrgprofileWidgetState extends State<OrgprofileWidget> {
                 ),
               );
             }
-            final textUsersRecord = snapshot.data;
+            List<DonateRecord> textDonateRecordList = snapshot.data;
+            // Return an empty Container when the document does not exist.
+            if (snapshot.data.isEmpty) {
+              return Container();
+            }
+            final textDonateRecord = textDonateRecordList.isNotEmpty
+                ? textDonateRecordList.first
+                : null;
             return Text(
-              textUsersRecord.orgname,
+              'Profile',
               style: FlutterFlowTheme.of(context).title2.override(
                     fontFamily: 'Poppins',
                     color: Colors.white,
@@ -121,43 +130,8 @@ class _OrgprofileWidgetState extends State<OrgprofileWidget> {
                         );
                       },
                     ),
-                    Align(
-                      alignment: AlignmentDirectional(0.68, -0.47),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(100, 10, 0, 0),
-                        child: FFButtonWidget(
-                          onPressed: () async {
-                            await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => EditProfileorgWidget(),
-                              ),
-                            );
-                          },
-                          text: 'Edit Profile',
-                          options: FFButtonOptions(
-                            width: 100,
-                            height: 30,
-                            color: Colors.white,
-                            textStyle:
-                                FlutterFlowTheme.of(context).subtitle2.override(
-                                      fontFamily: 'Lexend Deca',
-                                      color: Colors.black,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                            elevation: 2,
-                            borderSide: BorderSide(
-                              color: Colors.transparent,
-                              width: 1,
-                            ),
-                            borderRadius: 8,
-                          ),
-                        ),
-                      ),
-                    ),
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(15, 10, 20, 0),
+                      padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -166,38 +140,46 @@ class _OrgprofileWidgetState extends State<OrgprofileWidget> {
                             child: Padding(
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
-                              child: AuthUserStreamWidget(
-                                child: StreamBuilder<UsersRecord>(
-                                  stream: UsersRecord.getDocument(
-                                      currentUserReference),
-                                  builder: (context, snapshot) {
-                                    // Customize what your widget looks like when it's loading.
-                                    if (!snapshot.hasData) {
-                                      return Center(
-                                        child: SizedBox(
-                                          width: 50,
-                                          height: 50,
-                                          child: CircularProgressIndicator(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryColor,
-                                          ),
-                                        ),
-                                      );
-                                    }
-                                    final textUsersRecord = snapshot.data;
-                                    return Text(
-                                      currentUserDocument?.orgname,
-                                      style: FlutterFlowTheme.of(context)
-                                          .title3
-                                          .override(
-                                            fontFamily: 'Lexend Deca',
-                                            color: Colors.black,
-                                            fontSize: 24,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                    );
-                                  },
+                              child: StreamBuilder<List<OrganizationRecord>>(
+                                stream: queryOrganizationRecord(
+                                  singleRecord: true,
                                 ),
+                                builder: (context, snapshot) {
+                                  // Customize what your widget looks like when it's loading.
+                                  if (!snapshot.hasData) {
+                                    return Center(
+                                      child: SizedBox(
+                                        width: 50,
+                                        height: 50,
+                                        child: CircularProgressIndicator(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                  List<OrganizationRecord>
+                                      textOrganizationRecordList =
+                                      snapshot.data;
+                                  // Return an empty Container when the document does not exist.
+                                  if (snapshot.data.isEmpty) {
+                                    return Container();
+                                  }
+                                  final textOrganizationRecord =
+                                      textOrganizationRecordList.isNotEmpty
+                                          ? textOrganizationRecordList.first
+                                          : null;
+                                  return Text(
+                                    textOrganizationRecord.orgName,
+                                    style: FlutterFlowTheme.of(context)
+                                        .title3
+                                        .override(
+                                          fontFamily: 'Lexend Deca',
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                  );
+                                },
                               ),
                             ),
                           ),
@@ -205,23 +187,56 @@ class _OrgprofileWidgetState extends State<OrgprofileWidget> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(20, 5, 20, 0),
+                      padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Align(
                             alignment: AlignmentDirectional(-0.71, -0.53),
-                            child: AuthUserStreamWidget(
-                              child: Text(
-                                currentUserDocument?.orgregid,
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyText1
-                                    .override(
-                                      fontFamily: 'Lexend Deca',
-                                      color: Colors.black,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w500,
-                                    ),
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
+                              child: StreamBuilder<List<OrganizationRecord>>(
+                                stream: queryOrganizationRecord(
+                                  singleRecord: true,
+                                ),
+                                builder: (context, snapshot) {
+                                  // Customize what your widget looks like when it's loading.
+                                  if (!snapshot.hasData) {
+                                    return Center(
+                                      child: SizedBox(
+                                        width: 50,
+                                        height: 50,
+                                        child: CircularProgressIndicator(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                  List<OrganizationRecord>
+                                      textOrganizationRecordList =
+                                      snapshot.data;
+                                  // Return an empty Container when the document does not exist.
+                                  if (snapshot.data.isEmpty) {
+                                    return Container();
+                                  }
+                                  final textOrganizationRecord =
+                                      textOrganizationRecordList.isNotEmpty
+                                          ? textOrganizationRecordList.first
+                                          : null;
+                                  return Text(
+                                    textOrganizationRecord.orgRegid,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'Poppins',
+                                          color: Colors.black,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                  );
+                                },
                               ),
                             ),
                           ),
@@ -229,59 +244,64 @@ class _OrgprofileWidgetState extends State<OrgprofileWidget> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(20, 5, 20, 0),
+                      padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Align(
                             alignment: AlignmentDirectional(-0.71, -0.46),
-                            child: StreamBuilder<List<OrganizationRecord>>(
-                              stream: queryOrganizationRecord(
-                                singleRecord: true,
-                              ),
-                              builder: (context, snapshot) {
-                                // Customize what your widget looks like when it's loading.
-                                if (!snapshot.hasData) {
-                                  return Center(
-                                    child: SizedBox(
-                                      width: 50,
-                                      height: 50,
-                                      child: CircularProgressIndicator(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryColor,
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
+                              child: StreamBuilder<List<OrganizationRecord>>(
+                                stream: queryOrganizationRecord(
+                                  singleRecord: true,
+                                ),
+                                builder: (context, snapshot) {
+                                  // Customize what your widget looks like when it's loading.
+                                  if (!snapshot.hasData) {
+                                    return Center(
+                                      child: SizedBox(
+                                        width: 50,
+                                        height: 50,
+                                        child: CircularProgressIndicator(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                        ),
                                       ),
-                                    ),
+                                    );
+                                  }
+                                  List<OrganizationRecord>
+                                      textOrganizationRecordList =
+                                      snapshot.data;
+                                  // Return an empty Container when the document does not exist.
+                                  if (snapshot.data.isEmpty) {
+                                    return Container();
+                                  }
+                                  final textOrganizationRecord =
+                                      textOrganizationRecordList.isNotEmpty
+                                          ? textOrganizationRecordList.first
+                                          : null;
+                                  return Text(
+                                    textOrganizationRecord.orgEmail,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'Poppins',
+                                          color: Colors.black,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w500,
+                                        ),
                                   );
-                                }
-                                List<OrganizationRecord>
-                                    textOrganizationRecordList = snapshot.data;
-                                // Return an empty Container when the document does not exist.
-                                if (snapshot.data.isEmpty) {
-                                  return Container();
-                                }
-                                final textOrganizationRecord =
-                                    textOrganizationRecordList.isNotEmpty
-                                        ? textOrganizationRecordList.first
-                                        : null;
-                                return Text(
-                                  textOrganizationRecord.orgEmail,
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: 'Lexend Deca',
-                                        color: Colors.black,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                );
-                              },
+                                },
+                              ),
                             ),
                           ),
                         ],
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(20, 10, 20, 0),
+                      padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -302,7 +322,6 @@ class _OrgprofileWidgetState extends State<OrgprofileWidget> {
                                   .override(
                                     fontFamily: 'Lexend Deca',
                                     color: Colors.black,
-                                    fontWeight: FontWeight.w500,
                                   ),
                             ),
                           ),
@@ -310,7 +329,7 @@ class _OrgprofileWidgetState extends State<OrgprofileWidget> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(25, 5, 20, 0),
+                      padding: EdgeInsetsDirectional.fromSTEB(25, 0, 20, 0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -354,7 +373,6 @@ class _OrgprofileWidgetState extends State<OrgprofileWidget> {
                                       .override(
                                         fontFamily: 'Lexend Deca',
                                         color: Colors.black,
-                                        fontSize: 18,
                                         fontWeight: FontWeight.w500,
                                       ),
                                 );
@@ -365,7 +383,7 @@ class _OrgprofileWidgetState extends State<OrgprofileWidget> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(20, 10, 20, 0),
+                      padding: EdgeInsetsDirectional.fromSTEB(20, 5, 20, 0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -386,7 +404,6 @@ class _OrgprofileWidgetState extends State<OrgprofileWidget> {
                                   .override(
                                     fontFamily: 'Lexend Deca',
                                     color: Colors.black,
-                                    fontWeight: FontWeight.w500,
                                   ),
                             ),
                           ),
@@ -394,7 +411,7 @@ class _OrgprofileWidgetState extends State<OrgprofileWidget> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(25, 5, 20, 0),
+                      padding: EdgeInsetsDirectional.fromSTEB(25, 0, 20, 0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -439,7 +456,6 @@ class _OrgprofileWidgetState extends State<OrgprofileWidget> {
                                       .override(
                                         fontFamily: 'Lexend Deca',
                                         color: Colors.black,
-                                        fontSize: 18,
                                         fontWeight: FontWeight.w500,
                                       ),
                                 );
@@ -450,7 +466,7 @@ class _OrgprofileWidgetState extends State<OrgprofileWidget> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(20, 10, 20, 0),
+                      padding: EdgeInsetsDirectional.fromSTEB(20, 5, 20, 0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -471,7 +487,6 @@ class _OrgprofileWidgetState extends State<OrgprofileWidget> {
                                   .override(
                                     fontFamily: 'Lexend Deca',
                                     color: Colors.black,
-                                    fontWeight: FontWeight.w500,
                                   ),
                             ),
                           ),
@@ -479,7 +494,7 @@ class _OrgprofileWidgetState extends State<OrgprofileWidget> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(20, 5, 20, 0),
+                      padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -520,7 +535,6 @@ class _OrgprofileWidgetState extends State<OrgprofileWidget> {
                                       .override(
                                         fontFamily: 'Lexend Deca',
                                         color: Colors.black,
-                                        fontSize: 18,
                                         fontWeight: FontWeight.w500,
                                       ),
                                 );

@@ -39,13 +39,31 @@ abstract class RequestFoodRecord
   String get reqBy;
 
   @nullable
+  String get requeststatus;
+
+  @nullable
+  String get acceptedby;
+
+  @nullable
+  @BuiltValueField(wireName: 'rqstd_orgcover')
+  String get rqstdOrgcover;
+
+  @nullable
+  @BuiltValueField(wireName: 'rqstd_orgCN')
+  String get rqstdOrgCN;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
   static void _initializeBuilder(RequestFoodRecordBuilder builder) => builder
     ..rQuantity = 0
     ..requestDescription = ''
-    ..reqBy = '';
+    ..reqBy = ''
+    ..requeststatus = ''
+    ..acceptedby = ''
+    ..rqstdOrgcover = ''
+    ..rqstdOrgCN = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('requestFood');
@@ -76,6 +94,10 @@ Map<String, dynamic> createRequestFoodRecordData({
   String requestDescription,
   LatLng requestLocation,
   String reqBy,
+  String requeststatus,
+  String acceptedby,
+  String rqstdOrgcover,
+  String rqstdOrgCN,
 }) =>
     serializers.toFirestore(
         RequestFoodRecord.serializer,
@@ -86,4 +108,8 @@ Map<String, dynamic> createRequestFoodRecordData({
           ..orgnameref = orgnameref
           ..requestDescription = requestDescription
           ..requestLocation = requestLocation
-          ..reqBy = reqBy));
+          ..reqBy = reqBy
+          ..requeststatus = requeststatus
+          ..acceptedby = acceptedby
+          ..rqstdOrgcover = rqstdOrgcover
+          ..rqstdOrgCN = rqstdOrgCN));

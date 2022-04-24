@@ -4,7 +4,7 @@ import '../flutter_flow/flutter_flow_google_map.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../main.dart';
+import '../olddonate/olddonate_widget.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +21,7 @@ class _MaptestWidgetState extends State<MaptestWidget> {
   LatLng currentUserLocationValue;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   LatLng googleMapsCenter;
-  Completer<GoogleMapController> googleMapsController;
+  final googleMapsController = Completer<GoogleMapController>();
 
   @override
   void initState() {
@@ -167,8 +167,7 @@ class _MaptestWidgetState extends State<MaptestWidget> {
                                   await Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) =>
-                                          NavBarPage(initialPage: 'donate'),
+                                      builder: (context) => OlddonateWidget(),
                                     ),
                                   );
                                 },

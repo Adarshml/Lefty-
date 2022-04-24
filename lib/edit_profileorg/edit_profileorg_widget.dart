@@ -12,14 +12,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class EditProfileWidget extends StatefulWidget {
-  const EditProfileWidget({Key key}) : super(key: key);
+class EditProfileorgWidget extends StatefulWidget {
+  const EditProfileorgWidget({Key key}) : super(key: key);
 
   @override
-  _EditProfileWidgetState createState() => _EditProfileWidgetState();
+  _EditProfileorgWidgetState createState() => _EditProfileorgWidgetState();
 }
 
-class _EditProfileWidgetState extends State<EditProfileWidget> {
+class _EditProfileorgWidgetState extends State<EditProfileorgWidget> {
   String uploadedFileUrl = '';
   TextEditingController emailAddressController;
   TextEditingController fullNameController;
@@ -31,9 +31,6 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
   @override
   void initState() {
     super.initState();
-    emailAddressController =
-        TextEditingController(text: currentUserDocument?.emailAddress);
-    fullNameController = TextEditingController(text: currentUserDocument?.name);
     myBioController = TextEditingController();
   }
 
@@ -55,12 +52,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
             size: 30,
           ),
           onPressed: () async {
-            await Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => NavBarPage(initialPage: 'profile'),
-              ),
-            );
+            Navigator.pop(context);
           },
         ),
         title: Text(
@@ -128,14 +120,16 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                           'https://firebasestorage.googleapis.com/v0/b/lefty-bdb52.appspot.com/o/assets%2Fistockphoto-1248723171-612x612.jpg?alt=media&token=8fb9e9cb-c8cf-4e48-bbae-34531d5ea6d2',
                         ),
                         width: 380,
-                        height: 230,
+                        height: 180,
                         fit: BoxFit.cover,
                       ),
                     ],
                   ),
                 ),
-                StreamBuilder<UsersRecord>(
-                  stream: UsersRecord.getDocument(currentUserReference),
+                StreamBuilder<List<OrganizationRecord>>(
+                  stream: queryOrganizationRecord(
+                    singleRecord: true,
+                  ),
                   builder: (context, snapshot) {
                     // Customize what your widget looks like when it's loading.
                     if (!snapshot.hasData) {
@@ -149,7 +143,16 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                         ),
                       );
                     }
-                    final formUsersRecord = snapshot.data;
+                    List<OrganizationRecord> formOrganizationRecordList =
+                        snapshot.data;
+                    // Return an empty Container when the document does not exist.
+                    if (snapshot.data.isEmpty) {
+                      return Container();
+                    }
+                    final formOrganizationRecord =
+                        formOrganizationRecordList.isNotEmpty
+                            ? formOrganizationRecordList.first
+                            : null;
                     return Form(
                       key: formKey,
                       autovalidateMode: AutovalidateMode.always,
@@ -159,143 +162,109 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                           Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
-                            child: AuthUserStreamWidget(
-                              child: StreamBuilder<UsersRecord>(
-                                stream: UsersRecord.getDocument(
-                                    currentUserReference),
-                                builder: (context, snapshot) {
-                                  // Customize what your widget looks like when it's loading.
-                                  if (!snapshot.hasData) {
-                                    return Center(
-                                      child: SizedBox(
-                                        width: 50,
-                                        height: 50,
-                                        child: CircularProgressIndicator(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryColor,
-                                        ),
-                                      ),
-                                    );
-                                  }
-                                  final fullNameUsersRecord = snapshot.data;
-                                  return TextFormField(
-                                    controller: fullNameController,
-                                    obscureText: false,
-                                    decoration: InputDecoration(
-                                      labelText: 'Full Name',
-                                      labelStyle: FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily: 'Lexend Deca',
-                                            color: Color(0xFF95A1AC),
-                                            fontWeight: FontWeight.normal,
-                                          ),
-                                      hintText: 'Enter your name here...',
-                                      hintStyle: FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily: 'Lexend Deca',
-                                            color: Color(0xFF95A1AC),
-                                            fontWeight: FontWeight.normal,
-                                          ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0xFFDBE2E7),
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0xFFDBE2E7),
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                      contentPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              20, 0, 24, 24),
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily: 'Lexend Deca',
-                                          color: Color(0xFF14181B),
-                                          fontWeight: FontWeight.normal,
-                                        ),
-                                    validator: (val) {
-                                      if (val.isEmpty) {
-                                        return 'Field is required';
-                                      }
-
-                                      return null;
-                                    },
-                                  );
-                                },
+                            child: TextFormField(
+                              controller: fullNameController ??=
+                                  TextEditingController(
+                                text: formOrganizationRecord.orgName,
                               ),
+                              obscureText: false,
+                              decoration: InputDecoration(
+                                labelText: 'Full Name',
+                                labelStyle: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'Lexend Deca',
+                                      color: Color(0xFF95A1AC),
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                hintText: 'Enter your name here...',
+                                hintStyle: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'Lexend Deca',
+                                      color: Color(0xFF95A1AC),
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0xFFDBE2E7),
+                                    width: 2,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0xFFDBE2E7),
+                                    width: 2,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                filled: true,
+                                fillColor: Colors.white,
+                                contentPadding: EdgeInsetsDirectional.fromSTEB(
+                                    20, 0, 24, 24),
+                              ),
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyText1
+                                  .override(
+                                    fontFamily: 'Lexend Deca',
+                                    color: Color(0xFF14181B),
+                                    fontWeight: FontWeight.normal,
+                                  ),
                             ),
                           ),
                           Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(20, 10, 20, 20),
-                            child: AuthUserStreamWidget(
-                              child: TextFormField(
-                                controller: emailAddressController,
-                                obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'Email Address',
-                                  labelStyle: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: 'Lexend Deca',
-                                        color: Color(0xFF95A1AC),
-                                        fontWeight: FontWeight.normal,
-                                      ),
-                                  hintText: 'Enter your email here...',
-                                  hintStyle: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: 'Lexend Deca',
-                                        color: Color(0xFF95A1AC),
-                                        fontWeight: FontWeight.normal,
-                                      ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFDBE2E7),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFDBE2E7),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  contentPadding:
-                                      EdgeInsetsDirectional.fromSTEB(
-                                          20, 0, 24, 24),
-                                ),
-                                style: FlutterFlowTheme.of(context)
+                            child: TextFormField(
+                              controller: emailAddressController ??=
+                                  TextEditingController(
+                                text: formOrganizationRecord.orgEmail,
+                              ),
+                              obscureText: false,
+                              decoration: InputDecoration(
+                                labelText: 'Email Address',
+                                labelStyle: FlutterFlowTheme.of(context)
                                     .bodyText1
                                     .override(
                                       fontFamily: 'Lexend Deca',
-                                      color: Color(0xFF14181B),
+                                      color: Color(0xFF95A1AC),
                                       fontWeight: FontWeight.normal,
                                     ),
-                                validator: (val) {
-                                  if (val.isEmpty) {
-                                    return 'Field is required';
-                                  }
-
-                                  return null;
-                                },
+                                hintText: 'Enter your email here...',
+                                hintStyle: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'Lexend Deca',
+                                      color: Color(0xFF95A1AC),
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0xFFDBE2E7),
+                                    width: 2,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0xFFDBE2E7),
+                                    width: 2,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                filled: true,
+                                fillColor: Colors.white,
+                                contentPadding: EdgeInsetsDirectional.fromSTEB(
+                                    20, 0, 24, 24),
                               ),
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyText1
+                                  .override(
+                                    fontFamily: 'Lexend Deca',
+                                    color: Color(0xFF14181B),
+                                    fontWeight: FontWeight.normal,
+                                  ),
                             ),
                           ),
                           Padding(
@@ -304,7 +273,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                             child: TextFormField(
                               controller: phoneController ??=
                                   TextEditingController(
-                                text: formUsersRecord.phoneNumber,
+                                text: formOrganizationRecord.orgPhoneNumber
+                                    .toString(),
                               ),
                               obscureText: false,
                               decoration: InputDecoration(
@@ -351,13 +321,6 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                     fontWeight: FontWeight.normal,
                                   ),
                               keyboardType: TextInputType.phone,
-                              validator: (val) {
-                                if (val.isEmpty) {
-                                  return 'Field is required';
-                                }
-
-                                return null;
-                              },
                             ),
                           ),
                           Padding(
@@ -367,7 +330,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                               controller: myBioController,
                               obscureText: false,
                               decoration: InputDecoration(
-                                labelText: formUsersRecord.bio,
+                                labelText: 'Bio',
                                 labelStyle: FlutterFlowTheme.of(context)
                                     .bodyText1
                                     .override(
@@ -375,7 +338,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                       color: Color(0xFF95A1AC),
                                       fontWeight: FontWeight.normal,
                                     ),
-                                hintText: '[bio]',
+                                hintText: formOrganizationRecord.orgAbout,
                                 hintStyle: FlutterFlowTheme.of(context)
                                     .bodyText1
                                     .override(
@@ -411,13 +374,6 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                   ),
                               textAlign: TextAlign.start,
                               maxLines: 3,
-                              validator: (val) {
-                                if (val.isEmpty) {
-                                  return 'Field is required';
-                                }
-
-                                return null;
-                              },
                             ),
                           ),
                         ],
@@ -429,8 +385,10 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                   alignment: AlignmentDirectional(0.05, -0.09),
                   child: Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
-                    child: StreamBuilder<UsersRecord>(
-                      stream: UsersRecord.getDocument(currentUserReference),
+                    child: StreamBuilder<List<OrganizationRecord>>(
+                      stream: queryOrganizationRecord(
+                        singleRecord: true,
+                      ),
                       builder: (context, snapshot) {
                         // Customize what your widget looks like when it's loading.
                         if (!snapshot.hasData) {
@@ -445,22 +403,38 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                             ),
                           );
                         }
-                        final saveUsersRecord = snapshot.data;
+                        List<OrganizationRecord> saveOrganizationRecordList =
+                            snapshot.data;
+                        // Return an empty Container when the document does not exist.
+                        if (snapshot.data.isEmpty) {
+                          return Container();
+                        }
+                        final saveOrganizationRecord =
+                            saveOrganizationRecordList.isNotEmpty
+                                ? saveOrganizationRecordList.first
+                                : null;
                         return FFButtonWidget(
                           onPressed: () async {
                             if (!formKey.currentState.validate()) {
                               return;
                             }
 
-                            final usersUpdateData = createUsersRecordData(
-                              name: fullNameController.text,
-                              emailAddress: emailAddressController.text,
-                              bio: myBioController.text,
-                              phoneNumber: phoneController?.text ?? '',
-                              photoUrl: uploadedFileUrl,
+                            final organizationUpdateData =
+                                createOrganizationRecordData(
+                              orgName: fullNameController?.text ?? '',
+                              orgEmail: emailAddressController?.text ?? '',
+                              orgPhoneNumber:
+                                  double.parse(phoneController?.text ?? ''),
+                              orgAbout: myBioController.text,
+                              orgPhoto: uploadedFileUrl,
                             );
-                            await saveUsersRecord.reference
-                                .update(usersUpdateData);
+                            await saveOrganizationRecord.reference
+                                .update(organizationUpdateData);
+
+                            final usersUpdateData = createUsersRecordData(
+                              orgpicFromrUsers: uploadedFileUrl,
+                            );
+                            await currentUserReference.update(usersUpdateData);
                             await Navigator.push(
                               context,
                               MaterialPageRoute(
