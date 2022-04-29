@@ -67,6 +67,41 @@ class _MylistdetailsWidgetState extends State<MylistdetailsWidget> {
                 size: 24,
               ),
             ),
+            title: StreamBuilder<List<DonateRecord>>(
+              stream: queryDonateRecord(
+                singleRecord: true,
+              ),
+              builder: (context, snapshot) {
+                // Customize what your widget looks like when it's loading.
+                if (!snapshot.hasData) {
+                  return Center(
+                    child: SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: CircularProgressIndicator(
+                        color: FlutterFlowTheme.of(context).primaryColor,
+                      ),
+                    ),
+                  );
+                }
+                List<DonateRecord> textDonateRecordList = snapshot.data;
+                // Return an empty Container when the document does not exist.
+                if (snapshot.data.isEmpty) {
+                  return Container();
+                }
+                final textDonateRecord = textDonateRecordList.isNotEmpty
+                    ? textDonateRecordList.first
+                    : null;
+                return Text(
+                  mylistdetailsDonateRecord.foodName,
+                  style: FlutterFlowTheme.of(context).title2.override(
+                        fontFamily: 'Lexend Deca',
+                        color: Colors.white,
+                        fontSize: 20,
+                      ),
+                );
+              },
+            ),
             actions: [],
             centerTitle: false,
             elevation: 2,
@@ -652,7 +687,7 @@ class _MylistdetailsWidgetState extends State<MylistdetailsWidget> {
                                           MaterialPageRoute(
                                             builder: (context) =>
                                                 OrgprofileforusersWidget(
-                                              orgprouser:
+                                              orgprofileforusers:
                                                   mylistdetailsDonateRecord
                                                       .reference,
                                             ),

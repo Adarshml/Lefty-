@@ -76,6 +76,10 @@ abstract class DonateRecord
   int get initialquantity;
 
   @nullable
+  @BuiltValueField(wireName: 'clymd_by')
+  DocumentReference get clymdBy;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -133,6 +137,7 @@ Map<String, dynamic> createDonateRecordData({
   String foodimageUrl,
   String claimedby,
   int initialquantity,
+  DocumentReference clymdBy,
 }) =>
     serializers.toFirestore(
         DonateRecord.serializer,
@@ -154,4 +159,5 @@ Map<String, dynamic> createDonateRecordData({
           ..quantity = quantity
           ..foodimageUrl = foodimageUrl
           ..claimedby = claimedby
-          ..initialquantity = initialquantity));
+          ..initialquantity = initialquantity
+          ..clymdBy = clymdBy));

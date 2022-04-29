@@ -99,8 +99,6 @@ class _MyrequestsOrgWidgetState extends State<MyrequestsOrgWidget> {
                                         MyrequestdetailsOrgWidget(
                                       requestDetails:
                                           columnRequestFoodRecord.reference,
-                                      orgnamep:
-                                          columnRequestFoodRecord.orgnameref,
                                       rmap: columnRequestFoodRecord
                                           .requestLocation,
                                     ),

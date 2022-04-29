@@ -63,12 +63,7 @@ class _DonateDetailsWidgetState extends State<DonateDetailsWidget> {
             automaticallyImplyLeading: false,
             leading: InkWell(
               onTap: () async {
-                await Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => NavBarPage(initialPage: 'org_home'),
-                  ),
-                );
+                Navigator.pop(context);
               },
               child: Icon(
                 Icons.arrow_back_rounded,
@@ -104,7 +99,7 @@ class _DonateDetailsWidgetState extends State<DonateDetailsWidget> {
                 return Text(
                   donateDetailsDonateRecord.donBy,
                   style: FlutterFlowTheme.of(context).title2.override(
-                        fontFamily: 'Poppins',
+                        fontFamily: 'Lexend Deca',
                         color: Colors.white,
                         fontSize: 22,
                       ),
@@ -688,6 +683,7 @@ class _DonateDetailsWidgetState extends State<DonateDetailsWidget> {
                                     status: functions.setstatus(
                                         donateDetailsDonateRecord.quantity),
                                     claimedby: currentUserDocument?.orgname,
+                                    clymdBy: currentUserDocument?.org,
                                   );
                                   await donateDetailsDonateRecord.reference
                                       .update(donateUpdateData);

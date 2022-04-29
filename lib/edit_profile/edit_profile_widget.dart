@@ -55,12 +55,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
             size: 30,
           ),
           onPressed: () async {
-            await Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => NavBarPage(initialPage: 'profile'),
-              ),
-            );
+            Navigator.pop(context);
           },
         ),
         title: Text(

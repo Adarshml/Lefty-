@@ -47,6 +47,9 @@ abstract class OrganizationRecord
   String get orgPhoto;
 
   @nullable
+  DocumentReference get donateref;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -91,6 +94,7 @@ Map<String, dynamic> createOrganizationRecordData({
   DocumentReference usersRef,
   String orgRegid,
   String orgPhoto,
+  DocumentReference donateref,
 }) =>
     serializers.toFirestore(
         OrganizationRecord.serializer,
@@ -103,4 +107,5 @@ Map<String, dynamic> createOrganizationRecordData({
           ..rf = rf
           ..usersRef = usersRef
           ..orgRegid = orgRegid
-          ..orgPhoto = orgPhoto));
+          ..orgPhoto = orgPhoto
+          ..donateref = donateref));
