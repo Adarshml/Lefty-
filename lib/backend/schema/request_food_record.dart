@@ -53,6 +53,14 @@ abstract class RequestFoodRecord
   String get rqstdOrgCN;
 
   @nullable
+  @BuiltValueField(wireName: 'acpt_usr_phno')
+  String get acptUsrPhno;
+
+  @nullable
+  @BuiltValueField(wireName: 'acptd_user_email')
+  String get acptdUserEmail;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -63,7 +71,9 @@ abstract class RequestFoodRecord
     ..requeststatus = ''
     ..acceptedby = ''
     ..rqstdOrgcover = ''
-    ..rqstdOrgCN = '';
+    ..rqstdOrgCN = ''
+    ..acptUsrPhno = ''
+    ..acptdUserEmail = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('requestFood');
@@ -98,6 +108,8 @@ Map<String, dynamic> createRequestFoodRecordData({
   String acceptedby,
   String rqstdOrgcover,
   String rqstdOrgCN,
+  String acptUsrPhno,
+  String acptdUserEmail,
 }) =>
     serializers.toFirestore(
         RequestFoodRecord.serializer,
@@ -112,4 +124,6 @@ Map<String, dynamic> createRequestFoodRecordData({
           ..requeststatus = requeststatus
           ..acceptedby = acceptedby
           ..rqstdOrgcover = rqstdOrgcover
-          ..rqstdOrgCN = rqstdOrgCN));
+          ..rqstdOrgCN = rqstdOrgCN
+          ..acptUsrPhno = acptUsrPhno
+          ..acptdUserEmail = acptdUserEmail));

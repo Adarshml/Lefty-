@@ -380,8 +380,12 @@ class _RequestFoodWidgetState extends State<RequestFoodWidget> {
                               rDate: datePicked,
                               requeststatus: 'Active',
                               rqstdOrgCN: currentUserDocument?.orgCNfromusers,
-                              rqstdOrgcover:
-                                  currentUserDocument?.orgpicFromrUsers,
+                              rqstdOrgcover: valueOrDefault<String>(
+                                currentUserDocument?.orgpicFromrUsers,
+                                'https://firebasestorage.googleapis.com/v0/b/lefty-bdb52.appspot.com/o/assets%2F42de7cbe3ff10d84b2a281d4172da65c.png?alt=media&token=a72e1ee6-6c86-4dd8-a2cc-1055c613ae32',
+                              ),
+                              acptUsrPhno: '9526358965',
+                              acptdUserEmail: 'sai@gmail.com',
                             );
                             await RequestFoodRecord.collection
                                 .doc()

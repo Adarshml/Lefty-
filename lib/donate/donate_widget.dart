@@ -292,9 +292,7 @@ class _DonateWidgetState extends State<DonateWidget> {
                                             if (val.isEmpty) {
                                               return 'Field is required';
                                             }
-                                            if (val.length < 10) {
-                                              return 'Requires at least 10 characters.';
-                                            }
+
                                             return null;
                                           },
                                         ),

@@ -15,12 +15,10 @@ class RequestDetailsWidget extends StatefulWidget {
   const RequestDetailsWidget({
     Key key,
     this.requestDetails,
-    this.orgnamep,
     this.rmap,
   }) : super(key: key);
 
   final DocumentReference requestDetails;
-  final DocumentReference orgnamep;
   final LatLng rmap;
 
   @override
@@ -82,8 +80,8 @@ class _RequestDetailsWidgetState extends State<RequestDetailsWidget> {
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          StreamBuilder<List<OrganizationRecord>>(
-                            stream: queryOrganizationRecord(
+                          StreamBuilder<List<RequestFoodRecord>>(
+                            stream: queryRequestFoodRecord(
                               singleRecord: true,
                             ),
                             builder: (context, snapshot) {
@@ -100,15 +98,15 @@ class _RequestDetailsWidgetState extends State<RequestDetailsWidget> {
                                   ),
                                 );
                               }
-                              List<OrganizationRecord>
-                                  imageOrganizationRecordList = snapshot.data;
+                              List<RequestFoodRecord>
+                                  imageRequestFoodRecordList = snapshot.data;
                               // Return an empty Container when the document does not exist.
                               if (snapshot.data.isEmpty) {
                                 return Container();
                               }
-                              final imageOrganizationRecord =
-                                  imageOrganizationRecordList.isNotEmpty
-                                      ? imageOrganizationRecordList.first
+                              final imageRequestFoodRecord =
+                                  imageRequestFoodRecordList.isNotEmpty
+                                      ? imageRequestFoodRecordList.first
                                       : null;
                               return Image.network(
                                 valueOrDefault<String>(
@@ -535,6 +533,8 @@ class _RequestDetailsWidgetState extends State<RequestDetailsWidget> {
                                 createRequestFoodRecordData(
                               requeststatus: 'Accepted',
                               acceptedby: currentUserDocument?.name,
+                              acptUsrPhno: currentPhoneNumber,
+                              acptdUserEmail: currentUserDocument?.emailAddress,
                             );
                             await requestDetailsRequestFoodRecord.reference
                                 .update(requestFoodUpdateData);

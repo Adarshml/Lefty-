@@ -2,7 +2,7 @@ import '../backend/backend.dart';
 import '../donate_details/donate_details_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../orgprofile/orgprofile_widget.dart';
+import '../main.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -52,7 +52,7 @@ class _OrgHomeCopyCopyWidgetState extends State<OrgHomeCopyCopyWidget> {
                 await Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => OrgprofileWidget(),
+                    builder: (context) => NavBarPage(initialPage: 'orgprofile'),
                   ),
                 );
               },

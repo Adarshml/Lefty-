@@ -5,24 +5,18 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'auth/firebase_user_provider.dart';
 import 'auth/auth_util.dart';
 
-import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
+import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
-import 'package:lefty/login/login_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'profile/profile_widget.dart';
-import 'org_home/org_home_widget.dart';
-import 'donor_home/donor_home_widget.dart';
-import 'maptest/maptest_widget.dart';
-import 'mylist/mylist_widget.dart';
-import 'donate/donate_widget.dart';
-import 'mapt/mapt_widget.dart';
+import 'index.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
   await FlutterFlowTheme.initialize();
+
+  FFAppState(); // Initialize FFAppState
 
   runApp(MyApp());
 }
@@ -30,7 +24,7 @@ void main() async {
 class MyApp extends StatefulWidget {
   // This widget is the root of your application.
   @override
-  _MyAppState createState() => _MyAppState();
+  State<MyApp> createState() => _MyAppState();
 
   static _MyAppState of(BuildContext context) =>
       context.findAncestorStateOfType<_MyAppState>();
@@ -39,16 +33,12 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   Locale _locale;
   ThemeMode _themeMode = FlutterFlowTheme.themeMode;
+
   Stream<LeftyFirebaseUser> userStream;
   LeftyFirebaseUser initialUser;
   bool displaySplashImage = true;
-  final authUserSub = authenticatedUserStream.listen((_) {});
 
-  void setLocale(Locale value) => setState(() => _locale = value);
-  void setThemeMode(ThemeMode mode) => setState(() {
-        _themeMode = mode;
-        FlutterFlowTheme.saveThemeMode(mode);
-      });
+  final authUserSub = authenticatedUserStream.listen((_) {});
 
   @override
   void initState() {
@@ -56,7 +46,9 @@ class _MyAppState extends State<MyApp> {
     userStream = leftyFirebaseUserStream()
       ..listen((user) => initialUser ?? setState(() => initialUser = user));
     Future.delayed(
-        Duration(seconds: 1), () => setState(() => displaySplashImage = false));
+      Duration(seconds: 1),
+      () => setState(() => displaySplashImage = false),
+    );
   }
 
   @override
@@ -65,6 +57,12 @@ class _MyAppState extends State<MyApp> {
 
     super.dispose();
   }
+
+  void setLocale(Locale value) => setState(() => _locale = value);
+  void setThemeMode(ThemeMode mode) => setState(() {
+        _themeMode = mode;
+        FlutterFlowTheme.saveThemeMode(mode);
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -127,6 +125,7 @@ class _NavBarPageState extends State<NavBarPage> {
       'mylist': MylistWidget(),
       'donate': DonateWidget(),
       'mapt': MaptWidget(),
+      'orgprofile': OrgprofileWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPage);
     return Scaffold(
@@ -195,6 +194,14 @@ class _NavBarPageState extends State<NavBarPage> {
               size: 24,
             ),
             label: 'Home',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.person,
+              size: 24,
+            ),
+            label: 'profile',
             tooltip: '',
           )
         ],

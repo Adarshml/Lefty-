@@ -4,8 +4,8 @@ import '../backend/backend.dart';
 import '../donate_details/donate_details_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../main.dart';
 import '../myrequests_org/myrequests_org_widget.dart';
-import '../orgprofile/orgprofile_widget.dart';
 import '../request_food/request_food_widget.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -125,9 +125,7 @@ class _OrgHomeWidgetState extends State<OrgHomeWidget> {
                 await Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => OrgprofileWidget(
-                      orgprofile: currentUserDocument?.org,
-                    ),
+                    builder: (context) => NavBarPage(initialPage: 'orgprofile'),
                   ),
                 );
               },

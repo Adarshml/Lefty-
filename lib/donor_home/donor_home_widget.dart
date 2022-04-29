@@ -77,8 +77,6 @@ class _DonorHomeWidgetState extends State<DonorHomeWidget> {
                                   builder: (context) => RequestDetailsWidget(
                                     requestDetails:
                                         columnRequestFoodRecord.reference,
-                                    orgnamep:
-                                        columnRequestFoodRecord.orgnameref,
                                     rmap:
                                         columnRequestFoodRecord.requestLocation,
                                   ),

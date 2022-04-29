@@ -87,69 +87,91 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                         ),
                       ),
                     ),
-                    Align(
-                      alignment: AlignmentDirectional(-0.71, -0.6),
-                      child: StreamBuilder<UsersRecord>(
-                        stream: UsersRecord.getDocument(currentUserReference),
-                        builder: (context, snapshot) {
-                          // Customize what your widget looks like when it's loading.
-                          if (!snapshot.hasData) {
-                            return Center(
-                              child: SizedBox(
-                                width: 50,
-                                height: 50,
-                                child: CircularProgressIndicator(
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryColor,
-                                ),
-                              ),
-                            );
-                          }
-                          final textUsersRecord = snapshot.data;
-                          return Text(
-                            valueOrDefault<String>(
-                              textUsersRecord.name,
-                              'name',
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(20, 5, 20, 0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Align(
+                            alignment: AlignmentDirectional(-0.71, -0.6),
+                            child: StreamBuilder<UsersRecord>(
+                              stream:
+                                  UsersRecord.getDocument(currentUserReference),
+                              builder: (context, snapshot) {
+                                // Customize what your widget looks like when it's loading.
+                                if (!snapshot.hasData) {
+                                  return Center(
+                                    child: SizedBox(
+                                      width: 50,
+                                      height: 50,
+                                      child: CircularProgressIndicator(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                      ),
+                                    ),
+                                  );
+                                }
+                                final textUsersRecord = snapshot.data;
+                                return Text(
+                                  valueOrDefault<String>(
+                                    textUsersRecord.name,
+                                    'name',
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .title1
+                                      .override(
+                                        fontFamily: 'Lexend Deca',
+                                        color: Colors.black,
+                                      ),
+                                );
+                              },
                             ),
-                            style: FlutterFlowTheme.of(context).title1.override(
-                                  fontFamily: 'Lexend Deca',
-                                  color: Colors.black,
-                                ),
-                          );
-                        },
+                          ),
+                        ],
                       ),
                     ),
-                    Align(
-                      alignment: AlignmentDirectional(-0.63, -0.53),
-                      child: StreamBuilder<UsersRecord>(
-                        stream: UsersRecord.getDocument(currentUserReference),
-                        builder: (context, snapshot) {
-                          // Customize what your widget looks like when it's loading.
-                          if (!snapshot.hasData) {
-                            return Center(
-                              child: SizedBox(
-                                width: 50,
-                                height: 50,
-                                child: CircularProgressIndicator(
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryColor,
-                                ),
-                              ),
-                            );
-                          }
-                          final textUsersRecord = snapshot.data;
-                          return Text(
-                            valueOrDefault<String>(
-                              textUsersRecord.emailAddress,
-                              'email',
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(20, 5, 20, 0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Align(
+                            alignment: AlignmentDirectional(-0.63, -0.53),
+                            child: StreamBuilder<UsersRecord>(
+                              stream:
+                                  UsersRecord.getDocument(currentUserReference),
+                              builder: (context, snapshot) {
+                                // Customize what your widget looks like when it's loading.
+                                if (!snapshot.hasData) {
+                                  return Center(
+                                    child: SizedBox(
+                                      width: 50,
+                                      height: 50,
+                                      child: CircularProgressIndicator(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                      ),
+                                    ),
+                                  );
+                                }
+                                final textUsersRecord = snapshot.data;
+                                return Text(
+                                  valueOrDefault<String>(
+                                    textUsersRecord.emailAddress,
+                                    'email',
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .title3
+                                      .override(
+                                        fontFamily: 'Lexend Deca',
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                      ),
+                                );
+                              },
                             ),
-                            style: FlutterFlowTheme.of(context).title3.override(
-                                  fontFamily: 'Lexend Deca',
-                                  color: Colors.black,
-                                  fontSize: 20,
-                                ),
-                          );
-                        },
+                          ),
+                        ],
                       ),
                     ),
                     Padding(
