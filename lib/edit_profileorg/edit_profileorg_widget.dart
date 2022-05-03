@@ -10,6 +10,7 @@ import '../main.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class EditProfileorgWidget extends StatefulWidget {
@@ -27,12 +28,6 @@ class _EditProfileorgWidgetState extends State<EditProfileorgWidget> {
   TextEditingController myBioController;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
-  @override
-  void initState() {
-    super.initState();
-    myBioController = TextEditingController();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -137,8 +132,9 @@ class _EditProfileorgWidgetState extends State<EditProfileorgWidget> {
                         child: SizedBox(
                           width: 50,
                           height: 50,
-                          child: CircularProgressIndicator(
+                          child: SpinKitChasingDots(
                             color: FlutterFlowTheme.of(context).primaryColor,
+                            size: 50,
                           ),
                         ),
                       );
@@ -173,9 +169,10 @@ class _EditProfileorgWidgetState extends State<EditProfileorgWidget> {
                                     child: SizedBox(
                                       width: 50,
                                       height: 50,
-                                      child: CircularProgressIndicator(
+                                      child: SpinKitChasingDots(
                                         color: FlutterFlowTheme.of(context)
                                             .primaryColor,
+                                        size: 50,
                                       ),
                                     ),
                                   );
@@ -237,9 +234,11 @@ class _EditProfileorgWidgetState extends State<EditProfileorgWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText1
                                       .override(
-                                        fontFamily: 'Lexend Deca',
+                                        fontFamily: 'Product Sans',
                                         color: Color(0xFF14181B),
-                                        fontWeight: FontWeight.normal,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
+                                        useGoogleFonts: false,
                                       ),
                                 );
                               },
@@ -293,9 +292,11 @@ class _EditProfileorgWidgetState extends State<EditProfileorgWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .bodyText1
                                   .override(
-                                    fontFamily: 'Lexend Deca',
+                                    fontFamily: 'Product Sans',
                                     color: Color(0xFF14181B),
-                                    fontWeight: FontWeight.normal,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                    useGoogleFonts: false,
                                   ),
                             ),
                           ),
@@ -348,9 +349,11 @@ class _EditProfileorgWidgetState extends State<EditProfileorgWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .bodyText1
                                   .override(
-                                    fontFamily: 'Lexend Deca',
+                                    fontFamily: 'Product Sans',
                                     color: Color(0xFF14181B),
+                                    fontSize: 16,
                                     fontWeight: FontWeight.normal,
+                                    useGoogleFonts: false,
                                   ),
                               keyboardType: TextInputType.phone,
                             ),
@@ -359,7 +362,10 @@ class _EditProfileorgWidgetState extends State<EditProfileorgWidget> {
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
                             child: TextFormField(
-                              controller: myBioController,
+                              controller: myBioController ??=
+                                  TextEditingController(
+                                text: formOrganizationRecord.orgAbout,
+                              ),
                               obscureText: false,
                               decoration: InputDecoration(
                                 labelText: 'Bio',
@@ -370,7 +376,7 @@ class _EditProfileorgWidgetState extends State<EditProfileorgWidget> {
                                       color: Color(0xFF95A1AC),
                                       fontWeight: FontWeight.normal,
                                     ),
-                                hintText: formOrganizationRecord.orgAbout,
+                                hintText: '[bio]',
                                 hintStyle: FlutterFlowTheme.of(context)
                                     .bodyText1
                                     .override(
@@ -400,9 +406,11 @@ class _EditProfileorgWidgetState extends State<EditProfileorgWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .bodyText1
                                   .override(
-                                    fontFamily: 'Lexend Deca',
+                                    fontFamily: 'Product Sans',
                                     color: Color(0xFF14181B),
-                                    fontWeight: FontWeight.normal,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                    useGoogleFonts: false,
                                   ),
                               textAlign: TextAlign.start,
                               maxLines: 3,
@@ -428,9 +436,10 @@ class _EditProfileorgWidgetState extends State<EditProfileorgWidget> {
                             child: SizedBox(
                               width: 50,
                               height: 50,
-                              child: CircularProgressIndicator(
+                              child: SpinKitChasingDots(
                                 color:
                                     FlutterFlowTheme.of(context).primaryColor,
+                                size: 50,
                               ),
                             ),
                           );
@@ -457,7 +466,7 @@ class _EditProfileorgWidgetState extends State<EditProfileorgWidget> {
                               orgEmail: emailAddressController?.text ?? '',
                               orgPhoneNumber:
                                   double.parse(phoneController?.text ?? ''),
-                              orgAbout: myBioController.text,
+                              orgAbout: myBioController?.text ?? '',
                               orgPhoto: uploadedFileUrl,
                             );
                             await saveOrganizationRecord.reference
@@ -482,10 +491,11 @@ class _EditProfileorgWidgetState extends State<EditProfileorgWidget> {
                             color: FlutterFlowTheme.of(context).primaryColor,
                             textStyle:
                                 FlutterFlowTheme.of(context).subtitle2.override(
-                                      fontFamily: 'Lexend Deca',
+                                      fontFamily: 'Product Sans',
                                       color: Colors.white,
-                                      fontSize: 16,
+                                      fontSize: 18,
                                       fontWeight: FontWeight.w600,
+                                      useGoogleFonts: false,
                                     ),
                             elevation: 3,
                             borderSide: BorderSide(

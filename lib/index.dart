@@ -11,23 +11,16 @@ export 'profile/profile_widget.dart' show ProfileWidget;
 export 'org_home/org_home_widget.dart' show OrgHomeWidget;
 export 'donate_details/donate_details_widget.dart' show DonateDetailsWidget;
 export 'request_food/request_food_widget.dart' show RequestFoodWidget;
-export 'org_home_copy/org_home_copy_widget.dart' show OrgHomeCopyWidget;
-export 'org_home_copy_copy/org_home_copy_copy_widget.dart'
-    show OrgHomeCopyCopyWidget;
-export 'org_home_copy2/org_home_copy2_widget.dart' show OrgHomeCopy2Widget;
 export 'donor_home/donor_home_widget.dart' show DonorHomeWidget;
 export 'request_details/request_details_widget.dart' show RequestDetailsWidget;
 export 'add_orgold/add_orgold_widget.dart' show AddOrgoldWidget;
-export 'map1/map1_widget.dart' show Map1Widget;
-export 'maptest/maptest_widget.dart' show MaptestWidget;
-export 'testmap2/testmap2_widget.dart' show Testmap2Widget;
+export 'map_org/map_org_widget.dart' show MapOrgWidget;
 export 'org_newhome/org_newhome_widget.dart' show OrgNewhomeWidget;
 export 'login/login_widget.dart' show LoginWidget;
 export 'add_org/add_org_widget.dart' show AddOrgWidget;
 export 'donate_details_copy2/donate_details_copy2_widget.dart'
     show DonateDetailsCopy2Widget;
 export 'donate_copy/donate_copy_widget.dart' show DonateCopyWidget;
-export 'copydata/copydata_widget.dart' show CopydataWidget;
 export 'mylist/mylist_widget.dart' show MylistWidget;
 export 'donate_details_copy3/donate_details_copy3_widget.dart'
     show DonateDetailsCopy3Widget;
@@ -43,7 +36,11 @@ export 'request_details_copy/request_details_copy_widget.dart'
 export 'myrequests_org/myrequests_org_widget.dart' show MyrequestsOrgWidget;
 export 'myrequestdetails_org/myrequestdetails_org_widget.dart'
     show MyrequestdetailsOrgWidget;
-export 'mapt/mapt_widget.dart' show MaptWidget;
 export 'orgprofile/orgprofile_widget.dart' show OrgprofileWidget;
 export 'edit_profile_org/edit_profile_org_widget.dart'
     show EditProfileOrgWidget;
+export 'donor_home_copy/donor_home_copy_widget.dart' show DonorHomeCopyWidget;
+export 'maptest_copy/maptest_copy_widget.dart' show MaptestCopyWidget;
+export 'map_user/map_user_widget.dart' show MapUserWidget;
+export 'mylistdetails_copy/mylistdetails_copy_widget.dart'
+    show MylistdetailsCopyWidget;

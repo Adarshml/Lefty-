@@ -2,8 +2,8 @@ import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class OrgprofileforusersWidget extends StatefulWidget {
@@ -12,7 +12,7 @@ class OrgprofileforusersWidget extends StatefulWidget {
     this.orgprofileforusers,
   }) : super(key: key);
 
-  final DocumentReference orgprofileforusers;
+  final OrganizationRecord orgprofileforusers;
 
   @override
   _OrgprofileforusersWidgetState createState() =>
@@ -35,8 +35,9 @@ class _OrgprofileforusersWidgetState extends State<OrgprofileforusersWidget> {
             child: SizedBox(
               width: 50,
               height: 50,
-              child: CircularProgressIndicator(
+              child: SpinKitChasingDots(
                 color: FlutterFlowTheme.of(context).primaryColor,
+                size: 50,
               ),
             ),
           );
@@ -77,8 +78,9 @@ class _OrgprofileforusersWidgetState extends State<OrgprofileforusersWidget> {
                     child: SizedBox(
                       width: 50,
                       height: 50,
-                      child: CircularProgressIndicator(
+                      child: SpinKitChasingDots(
                         color: FlutterFlowTheme.of(context).primaryColor,
+                        size: 50,
                       ),
                     ),
                   );
@@ -127,9 +129,10 @@ class _OrgprofileforusersWidgetState extends State<OrgprofileforusersWidget> {
                                 child: SizedBox(
                                   width: 50,
                                   height: 50,
-                                  child: CircularProgressIndicator(
+                                  child: SpinKitChasingDots(
                                     color: FlutterFlowTheme.of(context)
                                         .primaryColor,
+                                    size: 50,
                                   ),
                                 ),
                               );
@@ -176,18 +179,18 @@ class _OrgprofileforusersWidgetState extends State<OrgprofileforusersWidget> {
                                           child: SizedBox(
                                             width: 50,
                                             height: 50,
-                                            child: CircularProgressIndicator(
+                                            child: SpinKitChasingDots(
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryColor,
+                                              size: 50,
                                             ),
                                           ),
                                         );
                                       }
                                       final textDonateRecord = snapshot.data;
                                       return Text(
-                                        orgprofileforusersOrganizationRecord
-                                            .orgName,
+                                        widget.orgprofileforusers.orgName,
                                         style: FlutterFlowTheme.of(context)
                                             .title3
                                             .override(
@@ -251,10 +254,11 @@ class _OrgprofileforusersWidgetState extends State<OrgprofileforusersWidget> {
                                           child: SizedBox(
                                             width: 50,
                                             height: 50,
-                                            child: CircularProgressIndicator(
+                                            child: SpinKitChasingDots(
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryColor,
+                                              size: 50,
                                             ),
                                           ),
                                         );
@@ -271,7 +275,7 @@ class _OrgprofileforusersWidgetState extends State<OrgprofileforusersWidget> {
                                               ? textOrganizationRecordList.first
                                               : null;
                                       return Text(
-                                        textOrganizationRecord.orgEmail,
+                                        widget.orgprofileforusers.orgEmail,
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
@@ -334,9 +338,10 @@ class _OrgprofileforusersWidgetState extends State<OrgprofileforusersWidget> {
                                         child: SizedBox(
                                           width: 50,
                                           height: 50,
-                                          child: CircularProgressIndicator(
+                                          child: SpinKitChasingDots(
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryColor,
+                                            size: 50,
                                           ),
                                         ),
                                       );
@@ -417,9 +422,10 @@ class _OrgprofileforusersWidgetState extends State<OrgprofileforusersWidget> {
                                         child: SizedBox(
                                           width: 50,
                                           height: 50,
-                                          child: CircularProgressIndicator(
+                                          child: SpinKitChasingDots(
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryColor,
+                                            size: 50,
                                           ),
                                         ),
                                       );
@@ -437,7 +443,7 @@ class _OrgprofileforusersWidgetState extends State<OrgprofileforusersWidget> {
                                             : null;
                                     return Text(
                                       valueOrDefault<String>(
-                                        textOrganizationRecord.orgPhoneNumber
+                                        widget.orgprofileforusers.orgPhoneNumber
                                             .toString(),
                                         '+91',
                                       ).maybeHandleOverflow(maxChars: 10),
@@ -501,9 +507,10 @@ class _OrgprofileforusersWidgetState extends State<OrgprofileforusersWidget> {
                                         child: SizedBox(
                                           width: 50,
                                           height: 50,
-                                          child: CircularProgressIndicator(
+                                          child: SpinKitChasingDots(
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryColor,
+                                            size: 50,
                                           ),
                                         ),
                                       );
@@ -520,7 +527,7 @@ class _OrgprofileforusersWidgetState extends State<OrgprofileforusersWidget> {
                                             ? textOrganizationRecordList.first
                                             : null;
                                     return AutoSizeText(
-                                      textOrganizationRecord.orgAddress,
+                                      widget.orgprofileforusers.orgAddress,
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText1
                                           .override(

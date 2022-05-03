@@ -2,15 +2,18 @@ import '../add_org/add_org_widget.dart';
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../donate_details/donate_details_widget.dart';
+import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../main.dart';
+import '../map_org/map_org_widget.dart';
 import '../myrequests_org/myrequests_org_widget.dart';
+import '../orgprofile/orgprofile_widget.dart';
 import '../request_food/request_food_widget.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class OrgHomeWidget extends StatefulWidget {
@@ -56,6 +59,20 @@ class _OrgHomeWidgetState extends State<OrgHomeWidget> {
       appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).primaryColor,
         automaticallyImplyLeading: false,
+        leading: FlutterFlowIconButton(
+          borderColor: Colors.transparent,
+          borderRadius: 30,
+          borderWidth: 1,
+          buttonSize: 60,
+          icon: Icon(
+            Icons.filter_list,
+            color: Colors.white,
+            size: 30,
+          ),
+          onPressed: () async {
+            scaffoldKey.currentState.openDrawer();
+          },
+        ),
         title: Text(
           'LEFTY',
           style: FlutterFlowTheme.of(context).title2.override(
@@ -101,8 +118,9 @@ class _OrgHomeWidgetState extends State<OrgHomeWidget> {
                       child: SizedBox(
                         width: 50,
                         height: 50,
-                        child: CircularProgressIndicator(
+                        child: SpinKitChasingDots(
                           color: FlutterFlowTheme.of(context).primaryColor,
+                          size: 50,
                         ),
                       ),
                     );
@@ -125,7 +143,7 @@ class _OrgHomeWidgetState extends State<OrgHomeWidget> {
                 await Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => NavBarPage(initialPage: 'orgprofile'),
+                    builder: (context) => OrgprofileWidget(),
                   ),
                 );
               },
@@ -133,15 +151,17 @@ class _OrgHomeWidgetState extends State<OrgHomeWidget> {
                 title: Text(
                   'Profile',
                   style: FlutterFlowTheme.of(context).title3.override(
-                        fontFamily: 'Lexend Deca',
+                        fontFamily: 'Product Sans',
                         color: Colors.black,
+                        useGoogleFonts: false,
                       ),
                 ),
                 subtitle: Text(
                   'View and edit profile',
                   style: FlutterFlowTheme.of(context).subtitle2.override(
-                        fontFamily: 'Lexend Deca',
+                        fontFamily: 'Product Sans',
                         fontWeight: FontWeight.w500,
+                        useGoogleFonts: false,
                       ),
                 ),
                 trailing: Icon(
@@ -167,15 +187,17 @@ class _OrgHomeWidgetState extends State<OrgHomeWidget> {
                 title: Text(
                   'Requests',
                   style: FlutterFlowTheme.of(context).title3.override(
-                        fontFamily: 'Lexend Deca',
+                        fontFamily: 'Product Sans',
                         color: Colors.black,
+                        useGoogleFonts: false,
                       ),
                 ),
                 subtitle: Text(
                   'Food requests',
                   style: FlutterFlowTheme.of(context).subtitle2.override(
-                        fontFamily: 'Lexend Deca',
+                        fontFamily: 'Product Sans',
                         fontWeight: FontWeight.w500,
+                        useGoogleFonts: false,
                       ),
                 ),
                 trailing: Icon(
@@ -187,74 +209,40 @@ class _OrgHomeWidgetState extends State<OrgHomeWidget> {
                 dense: false,
               ),
             ),
-            ListTile(
-              title: Text(
-                'Activity',
-                style: FlutterFlowTheme.of(context).title3.override(
-                      fontFamily: 'Lexend Deca',
-                      color: Colors.black,
-                    ),
+            InkWell(
+              onTap: () async {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MapOrgWidget(),
+                  ),
+                );
+              },
+              child: ListTile(
+                title: Text(
+                  'Map',
+                  style: FlutterFlowTheme.of(context).title3.override(
+                        fontFamily: 'Product Sans',
+                        color: Colors.black,
+                        useGoogleFonts: false,
+                      ),
+                ),
+                subtitle: Text(
+                  'Help and support',
+                  style: FlutterFlowTheme.of(context).subtitle2.override(
+                        fontFamily: 'Product Sans',
+                        fontWeight: FontWeight.w500,
+                        useGoogleFonts: false,
+                      ),
+                ),
+                trailing: Icon(
+                  Icons.arrow_forward_ios,
+                  color: Color(0xFF303030),
+                  size: 20,
+                ),
+                tileColor: Color(0xFFF5F5F5),
+                dense: false,
               ),
-              subtitle: Text(
-                'Orders ',
-                style: FlutterFlowTheme.of(context).subtitle2.override(
-                      fontFamily: 'Lexend Deca',
-                      fontWeight: FontWeight.w500,
-                    ),
-              ),
-              trailing: Icon(
-                Icons.arrow_forward_ios,
-                color: Color(0xFF303030),
-                size: 20,
-              ),
-              tileColor: Color(0xFFF5F5F5),
-              dense: false,
-            ),
-            ListTile(
-              title: Text(
-                'Settings',
-                style: FlutterFlowTheme.of(context).title3.override(
-                      fontFamily: 'Lexend Deca',
-                      color: Colors.black,
-                    ),
-              ),
-              subtitle: Text(
-                'Privacy and settings',
-                style: FlutterFlowTheme.of(context).subtitle2.override(
-                      fontFamily: 'Lexend Deca',
-                      fontWeight: FontWeight.w500,
-                    ),
-              ),
-              trailing: Icon(
-                Icons.arrow_forward_ios,
-                color: Color(0xFF303030),
-                size: 20,
-              ),
-              tileColor: Color(0xFFF5F5F5),
-              dense: false,
-            ),
-            ListTile(
-              title: Text(
-                'Help',
-                style: FlutterFlowTheme.of(context).title3.override(
-                      fontFamily: 'Lexend Deca',
-                      color: Colors.black,
-                    ),
-              ),
-              subtitle: Text(
-                'Help and support',
-                style: FlutterFlowTheme.of(context).subtitle2.override(
-                      fontFamily: 'Lexend Deca',
-                      fontWeight: FontWeight.w500,
-                    ),
-              ),
-              trailing: Icon(
-                Icons.arrow_forward_ios,
-                color: Color(0xFF303030),
-                size: 20,
-              ),
-              tileColor: Color(0xFFF5F5F5),
-              dense: false,
             ),
           ],
         ),
@@ -278,8 +266,9 @@ class _OrgHomeWidgetState extends State<OrgHomeWidget> {
                         child: SizedBox(
                           width: 50,
                           height: 50,
-                          child: CircularProgressIndicator(
+                          child: SpinKitChasingDots(
                             color: FlutterFlowTheme.of(context).primaryColor,
+                            size: 50,
                           ),
                         ),
                       );
@@ -336,10 +325,11 @@ class _OrgHomeWidgetState extends State<OrgHomeWidget> {
                                             child: SizedBox(
                                               width: 50,
                                               height: 50,
-                                              child: CircularProgressIndicator(
+                                              child: SpinKitChasingDots(
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .primaryColor,
+                                                size: 50,
                                               ),
                                             ),
                                           );
@@ -388,12 +378,12 @@ class _OrgHomeWidgetState extends State<OrgHomeWidget> {
                                                     child: SizedBox(
                                                       width: 50,
                                                       height: 50,
-                                                      child:
-                                                          CircularProgressIndicator(
+                                                      child: SpinKitChasingDots(
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
                                                                 .primaryColor,
+                                                        size: 50,
                                                       ),
                                                     ),
                                                   );
@@ -415,15 +405,12 @@ class _OrgHomeWidgetState extends State<OrgHomeWidget> {
                                                   columnDonateRecord.foodName,
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .subtitle1
+                                                      .title3
                                                       .override(
                                                         fontFamily:
-                                                            'Lexend Deca',
-                                                        color:
-                                                            Color(0xFF090F13),
-                                                        fontSize: 20,
-                                                        fontWeight:
-                                                            FontWeight.w500,
+                                                            'Product Sans',
+                                                        color: Colors.black,
+                                                        useGoogleFonts: false,
                                                       ),
                                                 );
                                               },
@@ -444,10 +431,11 @@ class _OrgHomeWidgetState extends State<OrgHomeWidget> {
                                                         width: 50,
                                                         height: 50,
                                                         child:
-                                                            CircularProgressIndicator(
+                                                            SpinKitChasingDots(
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .primaryColor,
+                                                          size: 50,
                                                         ),
                                                       ),
                                                     );
@@ -475,15 +463,15 @@ class _OrgHomeWidgetState extends State<OrgHomeWidget> {
                                                     ),
                                                     style: FlutterFlowTheme.of(
                                                             context)
-                                                        .bodyText1
+                                                        .subtitle1
                                                         .override(
                                                           fontFamily:
-                                                              'Lexend Deca',
-                                                          color:
-                                                              Color(0xFF57636C),
-                                                          fontSize: 12,
+                                                              'Product Sans',
+                                                          color: Colors.black,
+                                                          fontSize: 16,
                                                           fontWeight:
-                                                              FontWeight.normal,
+                                                              FontWeight.w500,
+                                                          useGoogleFonts: false,
                                                         ),
                                                   );
                                                 },
@@ -505,12 +493,12 @@ class _OrgHomeWidgetState extends State<OrgHomeWidget> {
                                                     child: SizedBox(
                                                       width: 50,
                                                       height: 50,
-                                                      child:
-                                                          CircularProgressIndicator(
+                                                      child: SpinKitChasingDots(
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
                                                                 .primaryColor,
+                                                        size: 50,
                                                       ),
                                                     ),
                                                   );
@@ -533,14 +521,15 @@ class _OrgHomeWidgetState extends State<OrgHomeWidget> {
                                                       .toString(),
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .title3
+                                                      .subtitle1
                                                       .override(
                                                         fontFamily:
-                                                            'Lexend Deca',
+                                                            'Product Sans',
                                                         color: Colors.black,
-                                                        fontSize: 12,
+                                                        fontSize: 16,
                                                         fontWeight:
                                                             FontWeight.w500,
+                                                        useGoogleFonts: false,
                                                       ),
                                                 );
                                               },
@@ -556,12 +545,12 @@ class _OrgHomeWidgetState extends State<OrgHomeWidget> {
                                                     child: SizedBox(
                                                       width: 50,
                                                       height: 50,
-                                                      child:
-                                                          CircularProgressIndicator(
+                                                      child: SpinKitChasingDots(
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
                                                                 .primaryColor,
+                                                        size: 50,
                                                       ),
                                                     ),
                                                   );
@@ -583,11 +572,16 @@ class _OrgHomeWidgetState extends State<OrgHomeWidget> {
                                                   columnDonateRecord.status,
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .bodyText1
+                                                      .subtitle1
                                                       .override(
-                                                        fontFamily: 'Poppins',
+                                                        fontFamily:
+                                                            'Product Sans',
                                                         color:
-                                                            Color(0xEB359339),
+                                                            Color(0xFF3ACF24),
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        useGoogleFonts: false,
                                                       ),
                                                 );
                                               },

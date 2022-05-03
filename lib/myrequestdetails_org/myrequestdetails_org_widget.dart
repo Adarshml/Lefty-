@@ -6,6 +6,7 @@ import '../flutter_flow/lat_lng.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyrequestdetailsOrgWidget extends StatefulWidget {
@@ -39,8 +40,9 @@ class _MyrequestdetailsOrgWidgetState extends State<MyrequestdetailsOrgWidget> {
             child: SizedBox(
               width: 50,
               height: 50,
-              child: CircularProgressIndicator(
+              child: SpinKitChasingDots(
                 color: FlutterFlowTheme.of(context).primaryColor,
+                size: 50,
               ),
             ),
           );
@@ -73,8 +75,9 @@ class _MyrequestdetailsOrgWidgetState extends State<MyrequestdetailsOrgWidget> {
                     child: SizedBox(
                       width: 50,
                       height: 50,
-                      child: CircularProgressIndicator(
+                      child: SpinKitChasingDots(
                         color: FlutterFlowTheme.of(context).primaryColor,
+                        size: 50,
                       ),
                     ),
                   );
@@ -126,9 +129,10 @@ class _MyrequestdetailsOrgWidgetState extends State<MyrequestdetailsOrgWidget> {
                                   child: SizedBox(
                                     width: 50,
                                     height: 50,
-                                    child: CircularProgressIndicator(
+                                    child: SpinKitChasingDots(
                                       color: FlutterFlowTheme.of(context)
                                           .primaryColor,
+                                      size: 50,
                                     ),
                                   ),
                                 );
@@ -172,9 +176,10 @@ class _MyrequestdetailsOrgWidgetState extends State<MyrequestdetailsOrgWidget> {
                                         child: SizedBox(
                                           width: 50,
                                           height: 50,
-                                          child: CircularProgressIndicator(
+                                          child: SpinKitChasingDots(
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryColor,
+                                            size: 50,
                                           ),
                                         ),
                                       );
@@ -196,7 +201,10 @@ class _MyrequestdetailsOrgWidgetState extends State<MyrequestdetailsOrgWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .subtitle1
                                           .override(
-                                            fontFamily: 'Lexend Deca',
+                                            fontFamily: 'Product Sans',
+                                            color: Color(0xFF3ACF24),
+                                            fontSize: 20,
+                                            useGoogleFonts: false,
                                           ),
                                     );
                                   },
@@ -224,10 +232,11 @@ class _MyrequestdetailsOrgWidgetState extends State<MyrequestdetailsOrgWidget> {
                                           child: SizedBox(
                                             width: 50,
                                             height: 50,
-                                            child: CircularProgressIndicator(
+                                            child: SpinKitChasingDots(
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryColor,
+                                              size: 50,
                                             ),
                                           ),
                                         );
@@ -249,10 +258,11 @@ class _MyrequestdetailsOrgWidgetState extends State<MyrequestdetailsOrgWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .subtitle1
                                             .override(
-                                              fontFamily: 'Lexend Deca',
+                                              fontFamily: 'Product Sans',
                                               color: Colors.black,
-                                              fontSize: 16,
+                                              fontSize: 18,
                                               fontWeight: FontWeight.w500,
+                                              useGoogleFonts: false,
                                             ),
                                       );
                                     },
@@ -262,10 +272,11 @@ class _MyrequestdetailsOrgWidgetState extends State<MyrequestdetailsOrgWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .subtitle1
                                         .override(
-                                          fontFamily: 'Lexend Deca',
+                                          fontFamily: 'Product Sans',
                                           color: Colors.black,
-                                          fontSize: 16,
+                                          fontSize: 18,
                                           fontWeight: FontWeight.w500,
+                                          useGoogleFonts: false,
                                         ),
                                   ),
                                 ],
@@ -282,9 +293,10 @@ class _MyrequestdetailsOrgWidgetState extends State<MyrequestdetailsOrgWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText1
                                       .override(
-                                        fontFamily: 'Lexend Deca',
+                                        fontFamily: 'Product Sans',
                                         color: Colors.black,
                                         fontSize: 20,
+                                        useGoogleFonts: false,
                                       ),
                                 ),
                               ],
@@ -310,10 +322,11 @@ class _MyrequestdetailsOrgWidgetState extends State<MyrequestdetailsOrgWidget> {
                                           child: SizedBox(
                                             width: 50,
                                             height: 50,
-                                            child: CircularProgressIndicator(
+                                            child: SpinKitChasingDots(
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryColor,
+                                              size: 50,
                                             ),
                                           ),
                                         );
@@ -335,9 +348,10 @@ class _MyrequestdetailsOrgWidgetState extends State<MyrequestdetailsOrgWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .subtitle1
                                             .override(
-                                              fontFamily: 'Lexend Deca',
+                                              fontFamily: 'Product Sans',
                                               color: Colors.black,
                                               fontWeight: FontWeight.w500,
+                                              useGoogleFonts: false,
                                             ),
                                       );
                                     },
@@ -357,10 +371,11 @@ class _MyrequestdetailsOrgWidgetState extends State<MyrequestdetailsOrgWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText1
                                       .override(
-                                        fontFamily: 'Lexend Deca',
+                                        fontFamily: 'Product Sans',
                                         color: Colors.black,
                                         fontSize: 18,
                                         fontWeight: FontWeight.w500,
+                                        useGoogleFonts: false,
                                       ),
                                 ),
                                 Padding(
@@ -377,10 +392,11 @@ class _MyrequestdetailsOrgWidgetState extends State<MyrequestdetailsOrgWidget> {
                                           child: SizedBox(
                                             width: 50,
                                             height: 50,
-                                            child: CircularProgressIndicator(
+                                            child: SpinKitChasingDots(
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryColor,
+                                              size: 50,
                                             ),
                                           ),
                                         );
@@ -404,10 +420,11 @@ class _MyrequestdetailsOrgWidgetState extends State<MyrequestdetailsOrgWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .subtitle1
                                             .override(
-                                              fontFamily: 'Lexend Deca',
+                                              fontFamily: 'Product Sans',
                                               color: Colors.black,
                                               fontSize: 18,
                                               fontWeight: FontWeight.w500,
+                                              useGoogleFonts: false,
                                             ),
                                       );
                                     },
@@ -427,10 +444,11 @@ class _MyrequestdetailsOrgWidgetState extends State<MyrequestdetailsOrgWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText1
                                       .override(
-                                        fontFamily: 'Lexend Deca',
+                                        fontFamily: 'Product Sans',
                                         color: Colors.black,
                                         fontSize: 18,
                                         fontWeight: FontWeight.w500,
+                                        useGoogleFonts: false,
                                       ),
                                 ),
                                 Padding(
@@ -447,10 +465,11 @@ class _MyrequestdetailsOrgWidgetState extends State<MyrequestdetailsOrgWidget> {
                                           child: SizedBox(
                                             width: 50,
                                             height: 50,
-                                            child: CircularProgressIndicator(
+                                            child: SpinKitChasingDots(
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryColor,
+                                              size: 50,
                                             ),
                                           ),
                                         );
@@ -473,9 +492,10 @@ class _MyrequestdetailsOrgWidgetState extends State<MyrequestdetailsOrgWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .subtitle1
                                             .override(
-                                              fontFamily: 'Lexend Deca',
+                                              fontFamily: 'Product Sans',
                                               color: Colors.black,
                                               fontWeight: FontWeight.w500,
+                                              useGoogleFonts: false,
                                             ),
                                       );
                                     },
@@ -497,10 +517,11 @@ class _MyrequestdetailsOrgWidgetState extends State<MyrequestdetailsOrgWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                          fontFamily: 'Lexend Deca',
+                                          fontFamily: 'Product Sans',
                                           color: Colors.black,
                                           fontSize: 18,
                                           fontWeight: FontWeight.w500,
+                                          useGoogleFonts: false,
                                         ),
                                   ),
                                   Padding(
@@ -518,10 +539,11 @@ class _MyrequestdetailsOrgWidgetState extends State<MyrequestdetailsOrgWidget> {
                                             child: SizedBox(
                                               width: 50,
                                               height: 50,
-                                              child: CircularProgressIndicator(
+                                              child: SpinKitChasingDots(
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .primaryColor,
+                                                size: 50,
                                               ),
                                             ),
                                           );
@@ -544,9 +566,10 @@ class _MyrequestdetailsOrgWidgetState extends State<MyrequestdetailsOrgWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .subtitle1
                                               .override(
-                                                fontFamily: 'Lexend Deca',
+                                                fontFamily: 'Product Sans',
                                                 color: Colors.black,
                                                 fontWeight: FontWeight.w500,
+                                                useGoogleFonts: false,
                                               ),
                                         );
                                       },
@@ -570,11 +593,12 @@ class _MyrequestdetailsOrgWidgetState extends State<MyrequestdetailsOrgWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                          fontFamily: 'Lexend Deca',
+                                          fontFamily: 'Product Sans',
                                           color: Colors.black,
                                           fontSize: 18,
                                           fontWeight: FontWeight.w500,
                                           decoration: TextDecoration.underline,
+                                          useGoogleFonts: false,
                                         ),
                                   ),
                                 ),
@@ -598,9 +622,10 @@ class _MyrequestdetailsOrgWidgetState extends State<MyrequestdetailsOrgWidget> {
                                       child: SizedBox(
                                         width: 50,
                                         height: 50,
-                                        child: CircularProgressIndicator(
+                                        child: SpinKitChasingDots(
                                           color: FlutterFlowTheme.of(context)
                                               .primaryColor,
+                                          size: 50,
                                         ),
                                       ),
                                     );
@@ -618,8 +643,8 @@ class _MyrequestdetailsOrgWidgetState extends State<MyrequestdetailsOrgWidget> {
                                           : null;
                                   return FlutterFlowGoogleMap(
                                     controller: googleMapsController,
-                                    onCameraIdle: (latLng) => setState(
-                                        () => googleMapsCenter = latLng),
+                                    onCameraIdle: (latLng) =>
+                                        googleMapsCenter = latLng,
                                     initialLocation: googleMapsCenter ??=
                                         myrequestdetailsOrgRequestFoodRecord
                                             .requestLocation,
@@ -639,7 +664,7 @@ class _MyrequestdetailsOrgWidgetState extends State<MyrequestdetailsOrgWidget> {
                                     initialZoom: 14,
                                     allowInteraction: true,
                                     allowZoom: true,
-                                    showZoomControls: true,
+                                    showZoomControls: false,
                                     showLocation: true,
                                     showCompass: true,
                                     showMapToolbar: true,
@@ -664,11 +689,12 @@ class _MyrequestdetailsOrgWidgetState extends State<MyrequestdetailsOrgWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                          fontFamily: 'Lexend Deca',
+                                          fontFamily: 'Product Sans',
                                           color: FlutterFlowTheme.of(context)
                                               .primaryText,
                                           fontSize: 18,
                                           fontWeight: FontWeight.w600,
+                                          useGoogleFonts: false,
                                         ),
                                   ),
                               ],
@@ -711,11 +737,11 @@ class _MyrequestdetailsOrgWidgetState extends State<MyrequestdetailsOrgWidget> {
                                                 child: SizedBox(
                                                   width: 50,
                                                   height: 50,
-                                                  child:
-                                                      CircularProgressIndicator(
+                                                  child: SpinKitChasingDots(
                                                     color: FlutterFlowTheme.of(
                                                             context)
                                                         .primaryColor,
+                                                    size: 50,
                                                   ),
                                                 ),
                                               );
@@ -740,10 +766,11 @@ class _MyrequestdetailsOrgWidgetState extends State<MyrequestdetailsOrgWidget> {
                                                       context)
                                                   .bodyText1
                                                   .override(
-                                                    fontFamily: 'Lexend Deca',
+                                                    fontFamily: 'Product Sans',
                                                     color: Colors.black,
                                                     fontSize: 18,
                                                     fontWeight: FontWeight.w500,
+                                                    useGoogleFonts: false,
                                                   ),
                                             );
                                           },
@@ -764,12 +791,12 @@ class _MyrequestdetailsOrgWidgetState extends State<MyrequestdetailsOrgWidget> {
                                                   child: SizedBox(
                                                     width: 50,
                                                     height: 50,
-                                                    child:
-                                                        CircularProgressIndicator(
+                                                    child: SpinKitChasingDots(
                                                       color:
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .primaryColor,
+                                                      size: 50,
                                                     ),
                                                   ),
                                                 );
@@ -798,10 +825,11 @@ class _MyrequestdetailsOrgWidgetState extends State<MyrequestdetailsOrgWidget> {
                                                         .bodyText1
                                                         .override(
                                                           fontFamily:
-                                                              'Lexend Deca',
+                                                              'Product Sans',
                                                           color: Colors.black,
                                                           fontWeight:
                                                               FontWeight.w500,
+                                                          useGoogleFonts: false,
                                                         ),
                                               );
                                             },
@@ -818,11 +846,11 @@ class _MyrequestdetailsOrgWidgetState extends State<MyrequestdetailsOrgWidget> {
                                                 child: SizedBox(
                                                   width: 50,
                                                   height: 50,
-                                                  child:
-                                                      CircularProgressIndicator(
+                                                  child: SpinKitChasingDots(
                                                     color: FlutterFlowTheme.of(
                                                             context)
                                                         .primaryColor,
+                                                    size: 50,
                                                   ),
                                                 ),
                                               );
@@ -847,9 +875,10 @@ class _MyrequestdetailsOrgWidgetState extends State<MyrequestdetailsOrgWidget> {
                                                       context)
                                                   .bodyText1
                                                   .override(
-                                                    fontFamily: 'Lexend Deca',
+                                                    fontFamily: 'Product Sans',
                                                     color: Colors.black,
                                                     fontWeight: FontWeight.w500,
+                                                    useGoogleFonts: false,
                                                   ),
                                             );
                                           },
@@ -869,9 +898,11 @@ class _MyrequestdetailsOrgWidgetState extends State<MyrequestdetailsOrgWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .bodyText1
                                   .override(
-                                    fontFamily: 'Poppins',
+                                    fontFamily: 'Product Sans',
                                     color: Color(0xFFFF000D),
+                                    fontSize: 16,
                                     fontWeight: FontWeight.normal,
+                                    useGoogleFonts: false,
                                   ),
                             ),
                         ],
