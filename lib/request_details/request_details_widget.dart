@@ -9,6 +9,7 @@ import '../main.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class RequestDetailsWidget extends StatefulWidget {
@@ -41,8 +42,9 @@ class _RequestDetailsWidgetState extends State<RequestDetailsWidget> {
             child: SizedBox(
               width: 50,
               height: 50,
-              child: CircularProgressIndicator(
+              child: SpinKitChasingDots(
                 color: FlutterFlowTheme.of(context).primaryColor,
+                size: 50,
               ),
             ),
           );
@@ -91,9 +93,10 @@ class _RequestDetailsWidgetState extends State<RequestDetailsWidget> {
                                   child: SizedBox(
                                     width: 50,
                                     height: 50,
-                                    child: CircularProgressIndicator(
+                                    child: SpinKitChasingDots(
                                       color: FlutterFlowTheme.of(context)
                                           .primaryColor,
+                                      size: 50,
                                     ),
                                   ),
                                 );
@@ -127,7 +130,7 @@ class _RequestDetailsWidgetState extends State<RequestDetailsWidget> {
                               children: [
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 5, 200, 5),
+                                      0, 0, 0, 5),
                                   child: StreamBuilder<List<RequestFoodRecord>>(
                                     stream: queryRequestFoodRecord(
                                       singleRecord: true,
@@ -139,10 +142,11 @@ class _RequestDetailsWidgetState extends State<RequestDetailsWidget> {
                                           child: SizedBox(
                                             width: 50,
                                             height: 50,
-                                            child: CircularProgressIndicator(
+                                            child: SpinKitChasingDots(
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryColor,
+                                              size: 50,
                                             ),
                                           ),
                                         );
@@ -163,9 +167,10 @@ class _RequestDetailsWidgetState extends State<RequestDetailsWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .subtitle1
                                             .override(
-                                              fontFamily: 'Lexend Deca',
+                                              fontFamily: 'Product Sans',
                                               color: Colors.black,
-                                              fontSize: 22,
+                                              fontSize: 24,
+                                              useGoogleFonts: false,
                                             ),
                                       );
                                     },
@@ -176,16 +181,27 @@ class _RequestDetailsWidgetState extends State<RequestDetailsWidget> {
                           ),
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 230, 0),
-                            child: Text(
-                              'Description',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: 'Lexend Deca',
-                                    color: Colors.black,
-                                    fontSize: 20,
+                                EdgeInsetsDirectional.fromSTEB(20, 0, 20, 2),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 0, 230, 0),
+                                  child: Text(
+                                    'Description',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'Product Sans',
+                                          color: Colors.black,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w600,
+                                          useGoogleFonts: false,
+                                        ),
                                   ),
+                                ),
+                              ],
                             ),
                           ),
                           Padding(
@@ -208,10 +224,11 @@ class _RequestDetailsWidgetState extends State<RequestDetailsWidget> {
                                           child: SizedBox(
                                             width: 50,
                                             height: 50,
-                                            child: CircularProgressIndicator(
+                                            child: SpinKitChasingDots(
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryColor,
+                                              size: 50,
                                             ),
                                           ),
                                         );
@@ -233,8 +250,10 @@ class _RequestDetailsWidgetState extends State<RequestDetailsWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .subtitle1
                                             .override(
-                                              fontFamily: 'Poppins',
+                                              fontFamily: 'Product Sans',
                                               color: Colors.black,
+                                              fontSize: 20,
+                                              useGoogleFonts: false,
                                             ),
                                       );
                                     },
@@ -254,59 +273,58 @@ class _RequestDetailsWidgetState extends State<RequestDetailsWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText1
                                       .override(
-                                        fontFamily: 'Lexend Deca',
+                                        fontFamily: 'Product Sans',
                                         color: Colors.black,
-                                        fontSize: 18,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w600,
+                                        useGoogleFonts: false,
                                       ),
                                 ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      15, 5, 0, 5),
-                                  child: StreamBuilder<List<RequestFoodRecord>>(
-                                    stream: queryRequestFoodRecord(
-                                      singleRecord: true,
-                                    ),
-                                    builder: (context, snapshot) {
-                                      // Customize what your widget looks like when it's loading.
-                                      if (!snapshot.hasData) {
-                                        return Center(
-                                          child: SizedBox(
-                                            width: 50,
-                                            height: 50,
-                                            child: CircularProgressIndicator(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryColor,
-                                            ),
-                                          ),
-                                        );
-                                      }
-                                      List<RequestFoodRecord>
-                                          textRequestFoodRecordList =
-                                          snapshot.data;
-                                      // Return an empty Container when the document does not exist.
-                                      if (snapshot.data.isEmpty) {
-                                        return Container();
-                                      }
-                                      final textRequestFoodRecord =
-                                          textRequestFoodRecordList.isNotEmpty
-                                              ? textRequestFoodRecordList.first
-                                              : null;
-                                      return Text(
-                                        dateTimeFormat(
-                                            'd/M/y',
-                                            requestDetailsRequestFoodRecord
-                                                .rDate),
-                                        style: FlutterFlowTheme.of(context)
-                                            .subtitle1
-                                            .override(
-                                              fontFamily: 'Lexend Deca',
-                                              color: Colors.black,
-                                              fontSize: 18,
-                                            ),
-                                      );
-                                    },
+                                StreamBuilder<List<RequestFoodRecord>>(
+                                  stream: queryRequestFoodRecord(
+                                    singleRecord: true,
                                   ),
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50,
+                                          height: 50,
+                                          child: SpinKitChasingDots(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryColor,
+                                            size: 50,
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                    List<RequestFoodRecord>
+                                        textRequestFoodRecordList =
+                                        snapshot.data;
+                                    // Return an empty Container when the document does not exist.
+                                    if (snapshot.data.isEmpty) {
+                                      return Container();
+                                    }
+                                    final textRequestFoodRecord =
+                                        textRequestFoodRecordList.isNotEmpty
+                                            ? textRequestFoodRecordList.first
+                                            : null;
+                                    return Text(
+                                      dateTimeFormat(
+                                          'd/M/y',
+                                          requestDetailsRequestFoodRecord
+                                              .rDate),
+                                      style: FlutterFlowTheme.of(context)
+                                          .subtitle1
+                                          .override(
+                                            fontFamily: 'Product Sans',
+                                            color: Colors.black,
+                                            fontSize: 20,
+                                            useGoogleFonts: false,
+                                          ),
+                                    );
+                                  },
                                 ),
                               ],
                             ),
@@ -322,15 +340,79 @@ class _RequestDetailsWidgetState extends State<RequestDetailsWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText1
                                       .override(
-                                        fontFamily: 'Lexend Deca',
+                                        fontFamily: 'Product Sans',
                                         color: Colors.black,
-                                        fontSize: 18,
+                                        fontSize: 20,
+                                        useGoogleFonts: false,
                                       ),
                                 ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      15, 5, 0, 5),
-                                  child: StreamBuilder<List<RequestFoodRecord>>(
+                                StreamBuilder<List<RequestFoodRecord>>(
+                                  stream: queryRequestFoodRecord(
+                                    singleRecord: true,
+                                  ),
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50,
+                                          height: 50,
+                                          child: SpinKitChasingDots(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryColor,
+                                            size: 50,
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                    List<RequestFoodRecord>
+                                        textRequestFoodRecordList =
+                                        snapshot.data;
+                                    // Return an empty Container when the document does not exist.
+                                    if (snapshot.data.isEmpty) {
+                                      return Container();
+                                    }
+                                    final textRequestFoodRecord =
+                                        textRequestFoodRecordList.isNotEmpty
+                                            ? textRequestFoodRecordList.first
+                                            : null;
+                                    return Text(
+                                      requestDetailsRequestFoodRecord.rQuantity
+                                          .toString(),
+                                      style: FlutterFlowTheme.of(context)
+                                          .subtitle1
+                                          .override(
+                                            fontFamily: 'Product Sans',
+                                            color: Colors.black,
+                                            fontSize: 20,
+                                            useGoogleFonts: false,
+                                          ),
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                          Align(
+                            alignment: AlignmentDirectional(3.06, 0.8),
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(20, 0, 20, 15),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Text(
+                                    'Contact Number :',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'Product Sans',
+                                          color: Colors.black,
+                                          fontSize: 20,
+                                          useGoogleFonts: false,
+                                        ),
+                                  ),
+                                  StreamBuilder<List<RequestFoodRecord>>(
                                     stream: queryRequestFoodRecord(
                                       singleRecord: true,
                                     ),
@@ -341,10 +423,11 @@ class _RequestDetailsWidgetState extends State<RequestDetailsWidget> {
                                           child: SizedBox(
                                             width: 50,
                                             height: 50,
-                                            child: CircularProgressIndicator(
+                                            child: SpinKitChasingDots(
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryColor,
+                                              size: 50,
                                             ),
                                           ),
                                         );
@@ -362,98 +445,45 @@ class _RequestDetailsWidgetState extends State<RequestDetailsWidget> {
                                               : null;
                                       return Text(
                                         requestDetailsRequestFoodRecord
-                                            .rQuantity
-                                            .toString(),
+                                            .rqstdOrgCN,
                                         style: FlutterFlowTheme.of(context)
-                                            .subtitle1
+                                            .bodyText1
                                             .override(
-                                              fontFamily: 'Poppins',
+                                              fontFamily: 'Product Sans',
                                               color: Colors.black,
+                                              fontSize: 20,
+                                              useGoogleFonts: false,
                                             ),
                                       );
                                     },
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Align(
-                            alignment: AlignmentDirectional(3.06, 0.8),
-                            child: Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(10, 0, 20, 20),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        8, 0, 0, 0),
-                                    child: Text(
-                                      'Contact Number :',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily: 'Lexend Deca',
-                                            color: Colors.black,
-                                            fontSize: 18,
-                                          ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        22, 0, 0, 0),
-                                    child:
-                                        StreamBuilder<List<RequestFoodRecord>>(
-                                      stream: queryRequestFoodRecord(
-                                        singleRecord: true,
-                                      ),
-                                      builder: (context, snapshot) {
-                                        // Customize what your widget looks like when it's loading.
-                                        if (!snapshot.hasData) {
-                                          return Center(
-                                            child: SizedBox(
-                                              width: 50,
-                                              height: 50,
-                                              child: CircularProgressIndicator(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryColor,
-                                              ),
-                                            ),
-                                          );
-                                        }
-                                        List<RequestFoodRecord>
-                                            textRequestFoodRecordList =
-                                            snapshot.data;
-                                        // Return an empty Container when the document does not exist.
-                                        if (snapshot.data.isEmpty) {
-                                          return Container();
-                                        }
-                                        final textRequestFoodRecord =
-                                            textRequestFoodRecordList.isNotEmpty
-                                                ? textRequestFoodRecordList
-                                                    .first
-                                                : null;
-                                        return Text(
-                                          requestDetailsRequestFoodRecord
-                                              .rqstdOrgCN,
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily: 'Lexend Deca',
-                                                color: Colors.black,
-                                                fontSize: 16,
-                                              ),
-                                        );
-                                      },
-                                    ),
                                   ),
                                 ],
                               ),
                             ),
                           ),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Text(
+                                  'Request posted at',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyText1
+                                      .override(
+                                        fontFamily: 'Product Sans',
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                        useGoogleFonts: false,
+                                      ),
+                                ),
+                              ],
+                            ),
+                          ),
                           Container(
-                            height: 200,
+                            height: 300,
+                            decoration: BoxDecoration(),
                             child: Padding(
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
@@ -468,9 +498,10 @@ class _RequestDetailsWidgetState extends State<RequestDetailsWidget> {
                                       child: SizedBox(
                                         width: 50,
                                         height: 50,
-                                        child: CircularProgressIndicator(
+                                        child: SpinKitChasingDots(
                                           color: FlutterFlowTheme.of(context)
                                               .primaryColor,
+                                          size: 50,
                                         ),
                                       ),
                                     );
@@ -488,8 +519,8 @@ class _RequestDetailsWidgetState extends State<RequestDetailsWidget> {
                                           : null;
                                   return FlutterFlowGoogleMap(
                                     controller: googleMapsController,
-                                    onCameraIdle: (latLng) => setState(
-                                        () => googleMapsCenter = latLng),
+                                    onCameraIdle: (latLng) =>
+                                        googleMapsCenter = latLng,
                                     initialLocation: googleMapsCenter ??=
                                         requestDetailsRequestFoodRecord
                                             .requestLocation,
@@ -509,7 +540,7 @@ class _RequestDetailsWidgetState extends State<RequestDetailsWidget> {
                                     initialZoom: 14,
                                     allowInteraction: true,
                                     allowZoom: true,
-                                    showZoomControls: true,
+                                    showZoomControls: false,
                                     showLocation: true,
                                     showCompass: true,
                                     showMapToolbar: true,
@@ -528,7 +559,7 @@ class _RequestDetailsWidgetState extends State<RequestDetailsWidget> {
                       child: FFButtonWidget(
                         onPressed: () async {
                           if ((requestDetailsRequestFoodRecord.requeststatus) ==
-                              'Active') {
+                              'Pending') {
                             final requestFoodUpdateData =
                                 createRequestFoodRecordData(
                               requeststatus: 'Accepted',
@@ -590,8 +621,10 @@ class _RequestDetailsWidgetState extends State<RequestDetailsWidget> {
                           color: FlutterFlowTheme.of(context).primaryColor,
                           textStyle:
                               FlutterFlowTheme.of(context).subtitle2.override(
-                                    fontFamily: 'Lexend Deca',
+                                    fontFamily: 'Product Sans',
                                     color: Colors.white,
+                                    fontSize: 18,
+                                    useGoogleFonts: false,
                                   ),
                           borderSide: BorderSide(
                             color: Colors.transparent,

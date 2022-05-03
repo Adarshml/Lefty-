@@ -10,6 +10,7 @@ import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class RequestFoodWidget extends StatefulWidget {
@@ -45,8 +46,9 @@ class _RequestFoodWidgetState extends State<RequestFoodWidget> {
         child: SizedBox(
           width: 50,
           height: 50,
-          child: CircularProgressIndicator(
+          child: SpinKitChasingDots(
             color: FlutterFlowTheme.of(context).primaryColor,
+            size: 50,
           ),
         ),
       );
@@ -104,9 +106,10 @@ class _RequestFoodWidgetState extends State<RequestFoodWidget> {
                             'Request Food',
                             style:
                                 FlutterFlowTheme.of(context).bodyText1.override(
-                                      fontFamily: 'Lexend Deca',
+                                      fontFamily: 'Product Sans',
                                       color: Colors.black,
-                                      fontSize: 25,
+                                      fontSize: 24,
+                                      useGoogleFonts: false,
                                     ),
                           ),
                         ),
@@ -131,10 +134,11 @@ class _RequestFoodWidgetState extends State<RequestFoodWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText1
                                           .override(
-                                            fontFamily: 'Lexend Deca',
+                                            fontFamily: 'Product Sans',
                                             color: Colors.black,
                                             fontSize: 18,
                                             fontWeight: FontWeight.w500,
+                                            useGoogleFonts: false,
                                           ),
                                     ),
                                   ),
@@ -178,10 +182,11 @@ class _RequestFoodWidgetState extends State<RequestFoodWidget> {
                                 style: FlutterFlowTheme.of(context)
                                     .bodyText1
                                     .override(
-                                      fontFamily: 'Lexend Deca',
+                                      fontFamily: 'Product Sans',
                                       color: Colors.black,
-                                      fontSize: 16,
+                                      fontSize: 18,
                                       fontWeight: FontWeight.w500,
+                                      useGoogleFonts: false,
                                     ),
                               ),
                             ),
@@ -220,10 +225,11 @@ class _RequestFoodWidgetState extends State<RequestFoodWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText1
                                       .override(
-                                        fontFamily: 'Lexend Deca',
+                                        fontFamily: 'Product Sans',
                                         color: Colors.black,
                                         fontSize: 18,
                                         fontWeight: FontWeight.w500,
+                                        useGoogleFonts: false,
                                       ),
                                   validator: (val) {
                                     if (val.isEmpty) {
@@ -269,10 +275,11 @@ class _RequestFoodWidgetState extends State<RequestFoodWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText1
                                       .override(
-                                        fontFamily: 'Lexend Deca',
+                                        fontFamily: 'Product Sans',
                                         color: Colors.black,
                                         fontSize: 18,
                                         fontWeight: FontWeight.w500,
+                                        useGoogleFonts: false,
                                       ),
                                   validator: (val) {
                                     if (val.isEmpty) {
@@ -294,15 +301,16 @@ class _RequestFoodWidgetState extends State<RequestFoodWidget> {
                           textAlign: TextAlign.center,
                           style:
                               FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Lexend Deca',
+                                    fontFamily: 'Product Sans',
                                     color: Colors.black,
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,
+                                    useGoogleFonts: false,
                                   ),
                         ),
                       ),
                       Container(
-                        height: 200,
+                        height: 300,
                         decoration: BoxDecoration(),
                         child: Padding(
                           padding:
@@ -318,9 +326,10 @@ class _RequestFoodWidgetState extends State<RequestFoodWidget> {
                                   child: SizedBox(
                                     width: 50,
                                     height: 50,
-                                    child: CircularProgressIndicator(
+                                    child: SpinKitChasingDots(
                                       color: FlutterFlowTheme.of(context)
                                           .primaryColor,
+                                      size: 50,
                                     ),
                                   ),
                                 );
@@ -378,7 +387,7 @@ class _RequestFoodWidgetState extends State<RequestFoodWidget> {
                               requestLocation: googleMapsCenter,
                               reqBy: currentUserDocument?.orgname,
                               rDate: datePicked,
-                              requeststatus: 'Active',
+                              requeststatus: 'Pending',
                               rqstdOrgCN: currentUserDocument?.orgCNfromusers,
                               rqstdOrgcover: valueOrDefault<String>(
                                 currentUserDocument?.orgpicFromrUsers,
@@ -390,12 +399,23 @@ class _RequestFoodWidgetState extends State<RequestFoodWidget> {
                             await RequestFoodRecord.collection
                                 .doc()
                                 .set(requestFoodCreateData);
-                            await Navigator.push(
+
+                            final requestsMarkersCreateData =
+                                createRequestsMarkersRecordData(
+                              orgName: currentUserDocument?.orgname,
+                              location: googleMapsCenter,
+                              date: datePicked,
+                            );
+                            await RequestsMarkersRecord.collection
+                                .doc()
+                                .set(requestsMarkersCreateData);
+                            await Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
                                     NavBarPage(initialPage: 'org_home'),
                               ),
+                              (r) => false,
                             );
                           },
                           text: 'Request',
@@ -405,9 +425,10 @@ class _RequestFoodWidgetState extends State<RequestFoodWidget> {
                             color: FlutterFlowTheme.of(context).primaryColor,
                             textStyle:
                                 FlutterFlowTheme.of(context).subtitle2.override(
-                                      fontFamily: 'Lexend Deca',
+                                      fontFamily: 'Product Sans',
                                       color: Colors.white,
                                       fontSize: 18,
+                                      useGoogleFonts: false,
                                     ),
                             borderSide: BorderSide(
                               color: Colors.transparent,

@@ -12,6 +12,7 @@ import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DonateWidget extends StatefulWidget {
@@ -28,9 +29,9 @@ class _DonateWidgetState extends State<DonateWidget> {
   TextEditingController textController3;
   TextEditingController textController4;
   DateTime datePicked2;
+  String uploadedFileUrl = '';
   LatLng googleMapsCenter;
   final googleMapsController = Completer<GoogleMapController>();
-  String uploadedFileUrl = '';
   LatLng currentUserLocationValue;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -53,8 +54,9 @@ class _DonateWidgetState extends State<DonateWidget> {
         child: SizedBox(
           width: 50,
           height: 50,
-          child: CircularProgressIndicator(
+          child: SpinKitChasingDots(
             color: FlutterFlowTheme.of(context).primaryColor,
+            size: 50,
           ),
         ),
       );
@@ -93,13 +95,11 @@ class _DonateWidgetState extends State<DonateWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                         child: Text(
                           'ShareTheMeal  ',
-                          style:
-                              FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Lexend Deca',
-                                    color: Color(0xFF101010),
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                          style: FlutterFlowTheme.of(context).title1.override(
+                                fontFamily: 'Product Sans',
+                                color: Colors.black,
+                                useGoogleFonts: false,
+                              ),
                         ),
                       ),
                       Padding(
@@ -174,8 +174,9 @@ class _DonateWidgetState extends State<DonateWidget> {
                                 style: FlutterFlowTheme.of(context)
                                     .subtitle1
                                     .override(
-                                      fontFamily: 'Lexend Deca',
+                                      fontFamily: 'Product Sans',
                                       color: Colors.black,
+                                      useGoogleFonts: false,
                                     ),
                               ),
                             ),
@@ -231,10 +232,11 @@ class _DonateWidgetState extends State<DonateWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
-                                                fontFamily: 'Lexend Deca',
+                                                fontFamily: 'Product Sans',
                                                 color: Colors.black,
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.w500,
+                                                useGoogleFonts: false,
                                               ),
                                           validator: (val) {
                                             if (val.isEmpty) {
@@ -283,10 +285,11 @@ class _DonateWidgetState extends State<DonateWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
-                                                fontFamily: 'Lexend Deca',
+                                                fontFamily: 'Product Sans',
                                                 color: Colors.black,
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.w500,
+                                                useGoogleFonts: false,
                                               ),
                                           validator: (val) {
                                             if (val.isEmpty) {
@@ -335,10 +338,11 @@ class _DonateWidgetState extends State<DonateWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
-                                                fontFamily: 'Lexend Deca',
+                                                fontFamily: 'Product Sans',
                                                 color: Colors.black,
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.w500,
+                                                useGoogleFonts: false,
                                               ),
                                           keyboardType: TextInputType.number,
                                           validator: (val) {
@@ -388,10 +392,11 @@ class _DonateWidgetState extends State<DonateWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
-                                                fontFamily: 'Lexend Deca',
+                                                fontFamily: 'Product Sans',
                                                 color: Colors.black,
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.w500,
+                                                useGoogleFonts: false,
                                               ),
                                           keyboardType: TextInputType.phone,
                                           validator: (val) {
@@ -406,87 +411,56 @@ class _DonateWidgetState extends State<DonateWidget> {
                                         ),
                                       ),
                                     ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          20, 20, 20, 0),
-                                      child: Row(
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    20, 20, 20, 0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    SingleChildScrollView(
+                                      child: Column(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
-                                          SingleChildScrollView(
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(0, 0, 10, 0),
-                                                  child: Text(
-                                                    'Preferred Time',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .subtitle2
-                                                        .override(
-                                                          fontFamily:
-                                                              'Lexend Deca',
-                                                          color: Colors.black,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0, 0, 10, 0),
+                                            child: Text(
+                                              'Preferred Time',
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .subtitle2
+                                                  .override(
+                                                    fontFamily: 'Product Sans',
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.w500,
+                                                    useGoogleFonts: false,
                                                   ),
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(0, 0, 30, 0),
-                                                  child: Text(
-                                                    valueOrDefault<String>(
-                                                      dateTimeFormat(
-                                                          'd/M h:mm a',
-                                                          datePicked1),
-                                                      'dd-mm-hh:mm',
-                                                    ),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              'Lexend Deca',
-                                                          color: Colors.black,
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
-                                                  ),
-                                                ),
-                                              ],
                                             ),
                                           ),
                                           Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
-                                                    100, 0, 0, 0),
-                                            child: FlutterFlowIconButton(
-                                              borderColor: Colors.transparent,
-                                              borderRadius: 10,
-                                              borderWidth: 1,
-                                              buttonSize: 50,
-                                              icon: Icon(
-                                                Icons.more_time,
-                                                color: Colors.black,
-                                                size: 25,
+                                                    0, 0, 30, 0),
+                                            child: Text(
+                                              valueOrDefault<String>(
+                                                dateTimeFormat(
+                                                    'd/M h:mm a', datePicked1),
+                                                'dd-mm-hh:mm',
                                               ),
-                                              onPressed: () async {
-                                                await DatePicker
-                                                    .showDateTimePicker(
-                                                  context,
-                                                  showTitleActions: true,
-                                                  onConfirm: (date) {
-                                                    setState(() =>
-                                                        datePicked1 = date);
-                                                  },
-                                                  currentTime:
-                                                      getCurrentTimestamp,
-                                                  minTime: getCurrentTimestamp,
-                                                );
-                                              },
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyText1
+                                                  .override(
+                                                    fontFamily: 'Product Sans',
+                                                    color: Colors.black,
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.w500,
+                                                    useGoogleFonts: false,
+                                                  ),
                                             ),
                                           ),
                                         ],
@@ -494,81 +468,75 @@ class _DonateWidgetState extends State<DonateWidget> {
                                     ),
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          20, 10, 20, 0),
-                                      child: Row(
+                                          100, 0, 0, 0),
+                                      child: FlutterFlowIconButton(
+                                        borderColor: Colors.transparent,
+                                        borderRadius: 10,
+                                        borderWidth: 1,
+                                        buttonSize: 50,
+                                        icon: Icon(
+                                          Icons.more_time,
+                                          color: Colors.black,
+                                          size: 25,
+                                        ),
+                                        onPressed: () async {
+                                          await DatePicker.showDateTimePicker(
+                                            context,
+                                            showTitleActions: true,
+                                            onConfirm: (date) {
+                                              setState(
+                                                  () => datePicked1 = date);
+                                            },
+                                            currentTime: getCurrentTimestamp,
+                                            minTime: getCurrentTimestamp,
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    20, 10, 20, 0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    SingleChildScrollView(
+                                      child: Column(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
-                                          SingleChildScrollView(
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                Text(
-                                                  'Expiration Time',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .subtitle2
-                                                      .override(
-                                                        fontFamily:
-                                                            'Lexend Deca',
-                                                        color: Colors.black,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                      ),
+                                          Text(
+                                            'Expiration Time',
+                                            style: FlutterFlowTheme.of(context)
+                                                .subtitle2
+                                                .override(
+                                                  fontFamily: 'Product Sans',
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.w500,
+                                                  useGoogleFonts: false,
                                                 ),
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(0, 0, 30, 0),
-                                                  child: Text(
-                                                    valueOrDefault<String>(
-                                                      dateTimeFormat(
-                                                          'd/M h:mm a',
-                                                          datePicked2),
-                                                      'dd-mm-hh:mm',
-                                                    ),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              'Lexend Deca',
-                                                          color: Colors.black,
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
                                           ),
                                           Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
-                                                    100, 0, 0, 0),
-                                            child: FlutterFlowIconButton(
-                                              borderColor: Colors.transparent,
-                                              borderRadius: 10,
-                                              borderWidth: 1,
-                                              buttonSize: 50,
-                                              icon: Icon(
-                                                Icons.more_time,
-                                                color: Colors.black,
-                                                size: 25,
+                                                    0, 0, 30, 0),
+                                            child: Text(
+                                              valueOrDefault<String>(
+                                                dateTimeFormat(
+                                                    'd/M h:mm a', datePicked2),
+                                                'dd-mm-hh:mm',
                                               ),
-                                              onPressed: () async {
-                                                await DatePicker
-                                                    .showDateTimePicker(
-                                                  context,
-                                                  showTitleActions: true,
-                                                  onConfirm: (date) {
-                                                    setState(() =>
-                                                        datePicked2 = date);
-                                                  },
-                                                  currentTime:
-                                                      getCurrentTimestamp,
-                                                  minTime: getCurrentTimestamp,
-                                                );
-                                              },
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyText1
+                                                  .override(
+                                                    fontFamily: 'Product Sans',
+                                                    color: Colors.black,
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.w500,
+                                                    useGoogleFonts: false,
+                                                  ),
                                             ),
                                           ),
                                         ],
@@ -576,163 +544,176 @@ class _DonateWidgetState extends State<DonateWidget> {
                                     ),
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 20, 140, 0),
-                                      child: Text(
-                                        'Your location(approx)',
-                                        textAlign: TextAlign.center,
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText1
-                                            .override(
-                                              fontFamily: 'Lexend Deca',
-                                              color: Colors.black,
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                      ),
-                                    ),
-                                    Container(
-                                      height: 200,
-                                      decoration: BoxDecoration(),
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            20, 0, 20, 5),
-                                        child:
-                                            StreamBuilder<List<DonateRecord>>(
-                                          stream: queryDonateRecord(
-                                            singleRecord: true,
-                                          ),
-                                          builder: (context, snapshot) {
-                                            // Customize what your widget looks like when it's loading.
-                                            if (!snapshot.hasData) {
-                                              return Center(
-                                                child: SizedBox(
-                                                  width: 50,
-                                                  height: 50,
-                                                  child:
-                                                      CircularProgressIndicator(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryColor,
-                                                  ),
-                                                ),
-                                              );
-                                            }
-                                            List<DonateRecord>
-                                                googleMapDonateRecordList =
-                                                snapshot.data;
-                                            // Return an empty Container when the document does not exist.
-                                            if (snapshot.data.isEmpty) {
-                                              return Container();
-                                            }
-                                            final googleMapDonateRecord =
-                                                googleMapDonateRecordList
-                                                        .isNotEmpty
-                                                    ? googleMapDonateRecordList
-                                                        .first
-                                                    : null;
-                                            return FlutterFlowGoogleMap(
-                                              controller: googleMapsController,
-                                              onCameraIdle: (latLng) =>
-                                                  googleMapsCenter = latLng,
-                                              initialLocation: googleMapsCenter ??=
-                                                  functions.getUsersLocation(
-                                                      currentUserLocationValue),
-                                              markerColor:
-                                                  GoogleMarkerColor.red,
-                                              mapType: MapType.normal,
-                                              style: GoogleMapStyle.standard,
-                                              initialZoom: 14,
-                                              allowInteraction: true,
-                                              allowZoom: true,
-                                              showZoomControls: true,
-                                              showLocation: true,
-                                              showCompass: true,
-                                              showMapToolbar: true,
-                                              showTraffic: false,
-                                              centerMapOnMarkerTap: false,
-                                            );
-                                          },
+                                          100, 0, 0, 0),
+                                      child: FlutterFlowIconButton(
+                                        borderColor: Colors.transparent,
+                                        borderRadius: 10,
+                                        borderWidth: 1,
+                                        buttonSize: 50,
+                                        icon: Icon(
+                                          Icons.more_time,
+                                          color: Colors.black,
+                                          size: 25,
                                         ),
-                                      ),
-                                    ),
-                                    Align(
-                                      alignment:
-                                          AlignmentDirectional(-0.15, 0.42),
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            19, 20, 0, 20),
-                                        child: FFButtonWidget(
-                                          onPressed: () async {
-                                            if (!formKey.currentState
-                                                .validate()) {
-                                              return;
-                                            }
-
-                                            if (datePicked1 == null) {
-                                              return;
-                                            }
-                                            if (datePicked2 == null) {
-                                              return;
-                                            }
-
-                                            final donateCreateData =
-                                                createDonateRecordData(
-                                              foodName: textController1.text,
-                                              phoneNumber: textController4.text,
-                                              donorLocation: googleMapsCenter,
-                                              donBy: currentUserDocument?.name,
-                                              prTime: datePicked1,
-                                              exTime: datePicked2,
-                                              description: textController2.text,
-                                              status: 'Active',
-                                              donEmail: currentUserDocument
-                                                  ?.emailAddress,
-                                              quantity: int.parse(
-                                                  textController3.text),
-                                              foodimageUrl: uploadedFileUrl,
-                                              initialquantity: int.parse(
-                                                  textController3.text),
-                                            );
-                                            await DonateRecord.collection
-                                                .doc()
-                                                .set(donateCreateData);
-                                            await Navigator.pushAndRemoveUntil(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    NavBarPage(
-                                                        initialPage:
-                                                            'donor_home'),
-                                              ),
-                                              (r) => false,
-                                            );
-                                          },
-                                          text: 'Donate',
-                                          options: FFButtonOptions(
-                                            width: 130,
-                                            height: 40,
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryColor,
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .subtitle2
-                                                    .override(
-                                                      fontFamily: 'Poppins',
-                                                      color: Colors.white,
-                                                    ),
-                                            borderSide: BorderSide(
-                                              color: Colors.transparent,
-                                              width: 1,
-                                            ),
-                                            borderRadius: 12,
-                                          ),
-                                        ),
+                                        onPressed: () async {
+                                          await DatePicker.showDateTimePicker(
+                                            context,
+                                            showTitleActions: true,
+                                            onConfirm: (date) {
+                                              setState(
+                                                  () => datePicked2 = date);
+                                            },
+                                            currentTime: getCurrentTimestamp,
+                                            minTime: getCurrentTimestamp,
+                                          );
+                                        },
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
                             ],
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 20, 140, 0),
+                        child: Text(
+                          'Your location(approx)',
+                          textAlign: TextAlign.center,
+                          style:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'Product Sans',
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                    useGoogleFonts: false,
+                                  ),
+                        ),
+                      ),
+                      Container(
+                        height: 200,
+                        decoration: BoxDecoration(),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 5),
+                          child: StreamBuilder<List<DonateRecord>>(
+                            stream: queryDonateRecord(
+                              singleRecord: true,
+                            ),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                  child: SizedBox(
+                                    width: 50,
+                                    height: 50,
+                                    child: SpinKitChasingDots(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryColor,
+                                      size: 50,
+                                    ),
+                                  ),
+                                );
+                              }
+                              List<DonateRecord> googleMapDonateRecordList =
+                                  snapshot.data;
+                              // Return an empty Container when the document does not exist.
+                              if (snapshot.data.isEmpty) {
+                                return Container();
+                              }
+                              final googleMapDonateRecord =
+                                  googleMapDonateRecordList.isNotEmpty
+                                      ? googleMapDonateRecordList.first
+                                      : null;
+                              return FlutterFlowGoogleMap(
+                                controller: googleMapsController,
+                                onCameraIdle: (latLng) =>
+                                    googleMapsCenter = latLng,
+                                initialLocation: googleMapsCenter ??= functions
+                                    .getUsersLocation(currentUserLocationValue),
+                                markerColor: GoogleMarkerColor.red,
+                                mapType: MapType.normal,
+                                style: GoogleMapStyle.standard,
+                                initialZoom: 14,
+                                allowInteraction: true,
+                                allowZoom: true,
+                                showZoomControls: false,
+                                showLocation: true,
+                                showCompass: true,
+                                showMapToolbar: true,
+                                showTraffic: false,
+                                centerMapOnMarkerTap: false,
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: AlignmentDirectional(-0.15, 0.42),
+                        child: Padding(
+                          padding:
+                              EdgeInsetsDirectional.fromSTEB(19, 20, 0, 20),
+                          child: FFButtonWidget(
+                            onPressed: () async {
+                              if (!formKey.currentState.validate()) {
+                                return;
+                              }
+
+                              final donateCreateData = createDonateRecordData(
+                                foodName: textController1.text,
+                                donorLocation: googleMapsCenter,
+                                donBy: currentUserDocument?.name,
+                                prTime: datePicked1,
+                                exTime: datePicked2,
+                                description: textController2.text,
+                                status: 'Active',
+                                donEmail: currentUserDocument?.emailAddress,
+                                quantity: int.parse(textController3.text),
+                                foodimageUrl: uploadedFileUrl,
+                                initialquantity:
+                                    int.parse(textController3.text),
+                                phoneNumber: textController4.text,
+                              );
+                              await DonateRecord.collection
+                                  .doc()
+                                  .set(donateCreateData);
+
+                              final donorMarkersCreateData =
+                                  createDonorMarkersRecordData(
+                                name: currentUserDocument?.name,
+                                location: googleMapsCenter,
+                                exDate: datePicked2,
+                              );
+                              await DonorMarkersRecord.collection
+                                  .doc()
+                                  .set(donorMarkersCreateData);
+                              await Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      NavBarPage(initialPage: 'donor_home'),
+                                ),
+                                (r) => false,
+                              );
+                            },
+                            text: 'Donate',
+                            options: FFButtonOptions(
+                              width: 130,
+                              height: 40,
+                              color: FlutterFlowTheme.of(context).primaryColor,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .subtitle2
+                                  .override(
+                                    fontFamily: 'Product Sans',
+                                    color: Colors.white,
+                                    useGoogleFonts: false,
+                                  ),
+                              borderSide: BorderSide(
+                                color: Colors.transparent,
+                                width: 1,
+                              ),
+                              borderRadius: 12,
+                            ),
                           ),
                         ),
                       ),

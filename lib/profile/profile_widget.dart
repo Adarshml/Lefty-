@@ -1,12 +1,15 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../edit_profile/edit_profile_widget.dart';
+import '../flutter_flow/flutter_flow_expanded_image_view.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../login/login_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 
 class ProfileWidget extends StatefulWidget {
   const ProfileWidget({Key key}) : super(key: key);
@@ -61,25 +64,58 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                 child: SizedBox(
                                   width: 50,
                                   height: 50,
-                                  child: CircularProgressIndicator(
+                                  child: SpinKitChasingDots(
                                     color: FlutterFlowTheme.of(context)
                                         .primaryColor,
+                                    size: 50,
                                   ),
                                 ),
                               );
                             }
                             final circleImageUsersRecord = snapshot.data;
-                            return Container(
-                              width: 120,
-                              height: 120,
-                              clipBehavior: Clip.antiAlias,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                              ),
-                              child: Image.network(
-                                valueOrDefault<String>(
+                            return InkWell(
+                              onTap: () async {
+                                await Navigator.push(
+                                  context,
+                                  PageTransition(
+                                    type: PageTransitionType.fade,
+                                    child: FlutterFlowExpandedImageView(
+                                      image: Image.network(
+                                        valueOrDefault<String>(
+                                          circleImageUsersRecord.photoUrl,
+                                          'https://picsum.photos/seed/990/600',
+                                        ),
+                                        fit: BoxFit.contain,
+                                      ),
+                                      allowRotation: false,
+                                      tag: valueOrDefault<String>(
+                                        circleImageUsersRecord.photoUrl,
+                                        'https://picsum.photos/seed/990/600',
+                                      ),
+                                      useHeroAnimation: true,
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: Hero(
+                                tag: valueOrDefault<String>(
                                   circleImageUsersRecord.photoUrl,
                                   'https://picsum.photos/seed/990/600',
+                                ),
+                                transitionOnUserGestures: true,
+                                child: Container(
+                                  width: 120,
+                                  height: 120,
+                                  clipBehavior: Clip.antiAlias,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Image.network(
+                                    valueOrDefault<String>(
+                                      circleImageUsersRecord.photoUrl,
+                                      'https://picsum.photos/seed/990/600',
+                                    ),
+                                  ),
                                 ),
                               ),
                             );
@@ -104,9 +140,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                     child: SizedBox(
                                       width: 50,
                                       height: 50,
-                                      child: CircularProgressIndicator(
+                                      child: SpinKitChasingDots(
                                         color: FlutterFlowTheme.of(context)
                                             .primaryColor,
+                                        size: 50,
                                       ),
                                     ),
                                   );
@@ -120,8 +157,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .title1
                                       .override(
-                                        fontFamily: 'Lexend Deca',
+                                        fontFamily: 'Product Sans',
                                         color: Colors.black,
+                                        useGoogleFonts: false,
                                       ),
                                 );
                               },
@@ -147,9 +185,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                     child: SizedBox(
                                       width: 50,
                                       height: 50,
-                                      child: CircularProgressIndicator(
+                                      child: SpinKitChasingDots(
                                         color: FlutterFlowTheme.of(context)
                                             .primaryColor,
+                                        size: 50,
                                       ),
                                     ),
                                   );
@@ -163,9 +202,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .title3
                                       .override(
-                                        fontFamily: 'Lexend Deca',
+                                        fontFamily: 'Product Sans',
                                         color: Colors.black,
                                         fontSize: 20,
+                                        useGoogleFonts: false,
                                       ),
                                 );
                               },
@@ -194,8 +234,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .subtitle1
                                   .override(
-                                    fontFamily: 'Lexend Deca',
+                                    fontFamily: 'Product Sans',
                                     color: Colors.black,
+                                    useGoogleFonts: false,
                                   ),
                             ),
                           ),
@@ -223,9 +264,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                         child: SizedBox(
                                           width: 50,
                                           height: 50,
-                                          child: CircularProgressIndicator(
+                                          child: SpinKitChasingDots(
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryColor,
+                                            size: 50,
                                           ),
                                         ),
                                       );
@@ -239,8 +281,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .subtitle1
                                           .override(
-                                            fontFamily: 'Lexend Deca',
+                                            fontFamily: 'Product Sans',
                                             color: Colors.black,
+                                            useGoogleFonts: false,
                                           ),
                                     );
                                   },
@@ -271,8 +314,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .subtitle1
                                   .override(
-                                    fontFamily: 'Lexend Deca',
+                                    fontFamily: 'Product Sans',
                                     color: Colors.black,
+                                    useGoogleFonts: false,
                                   ),
                             ),
                           ),
@@ -300,9 +344,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                         child: SizedBox(
                                           width: 50,
                                           height: 50,
-                                          child: CircularProgressIndicator(
+                                          child: SpinKitChasingDots(
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryColor,
+                                            size: 50,
                                           ),
                                         ),
                                       );
@@ -316,8 +361,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .subtitle1
                                           .override(
-                                            fontFamily: 'Lexend Deca',
+                                            fontFamily: 'Product Sans',
                                             color: Colors.black,
+                                            useGoogleFonts: false,
                                           ),
                                     );
                                   },
@@ -348,10 +394,11 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             color: Colors.white,
                             textStyle:
                                 FlutterFlowTheme.of(context).subtitle2.override(
-                                      fontFamily: 'Lexend Deca',
+                                      fontFamily: 'Product Sans',
                                       color: Colors.black,
                                       fontSize: 14,
-                                      fontWeight: FontWeight.w600,
+                                      fontWeight: FontWeight.w500,
+                                      useGoogleFonts: false,
                                     ),
                             elevation: 2,
                             borderSide: BorderSide(
@@ -369,11 +416,13 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(40, 40, 0, 0),
                         child: FFButtonWidget(
                           onPressed: () async {
-                            await Navigator.push(
+                            await signOut();
+                            await Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => LoginWidget(),
                               ),
+                              (r) => false,
                             );
                           },
                           text: 'logout',
@@ -383,8 +432,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             color: FlutterFlowTheme.of(context).primaryColor,
                             textStyle:
                                 FlutterFlowTheme.of(context).subtitle2.override(
-                                      fontFamily: 'Poppins',
+                                      fontFamily: 'Product Sans',
                                       color: Colors.white,
+                                      fontSize: 18,
+                                      useGoogleFonts: false,
                                     ),
                             borderSide: BorderSide(
                               color: Colors.transparent,

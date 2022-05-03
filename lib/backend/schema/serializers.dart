@@ -4,6 +4,8 @@ import 'users_record.dart';
 import 'organization_record.dart';
 import 'donate_record.dart';
 import 'request_food_record.dart';
+import 'donor_markers_record.dart';
+import 'requests_markers_record.dart';
 
 import 'index.dart';
 
@@ -18,6 +20,8 @@ const kDocumentReferenceField = 'Document__Reference__Field';
   OrganizationRecord,
   DonateRecord,
   RequestFoodRecord,
+  DonorMarkersRecord,
+  RequestsMarkersRecord,
 ])
 final Serializers serializers = (_$serializers.toBuilder()
       ..add(DocumentReferenceSerializer())

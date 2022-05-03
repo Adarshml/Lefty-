@@ -10,6 +10,7 @@ import '../main.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class EditProfileWidget extends StatefulWidget {
@@ -34,7 +35,6 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
     emailAddressController =
         TextEditingController(text: currentUserDocument?.emailAddress);
     fullNameController = TextEditingController(text: currentUserDocument?.name);
-    myBioController = TextEditingController();
   }
 
   @override
@@ -138,8 +138,9 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                         child: SizedBox(
                           width: 50,
                           height: 50,
-                          child: CircularProgressIndicator(
+                          child: SpinKitChasingDots(
                             color: FlutterFlowTheme.of(context).primaryColor,
+                            size: 50,
                           ),
                         ),
                       );
@@ -165,9 +166,10 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                       child: SizedBox(
                                         width: 50,
                                         height: 50,
-                                        child: CircularProgressIndicator(
+                                        child: SpinKitChasingDots(
                                           color: FlutterFlowTheme.of(context)
                                               .primaryColor,
+                                          size: 50,
                                         ),
                                       ),
                                     );
@@ -216,9 +218,10 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                          fontFamily: 'Lexend Deca',
+                                          fontFamily: 'Product Sans',
                                           color: Color(0xFF14181B),
                                           fontWeight: FontWeight.normal,
+                                          useGoogleFonts: false,
                                         ),
                                     validator: (val) {
                                       if (val.isEmpty) {
@@ -279,9 +282,10 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                 style: FlutterFlowTheme.of(context)
                                     .bodyText1
                                     .override(
-                                      fontFamily: 'Lexend Deca',
+                                      fontFamily: 'Product Sans',
                                       color: Color(0xFF14181B),
                                       fontWeight: FontWeight.normal,
+                                      useGoogleFonts: false,
                                     ),
                                 validator: (val) {
                                   if (val.isEmpty) {
@@ -341,9 +345,10 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .bodyText1
                                   .override(
-                                    fontFamily: 'Lexend Deca',
+                                    fontFamily: 'Product Sans',
                                     color: Color(0xFF14181B),
                                     fontWeight: FontWeight.normal,
+                                    useGoogleFonts: false,
                                   ),
                               keyboardType: TextInputType.phone,
                               validator: (val) {
@@ -359,10 +364,13 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
                             child: TextFormField(
-                              controller: myBioController,
+                              controller: myBioController ??=
+                                  TextEditingController(
+                                text: formUsersRecord.bio,
+                              ),
                               obscureText: false,
                               decoration: InputDecoration(
-                                labelText: formUsersRecord.bio,
+                                labelText: 'About',
                                 labelStyle: FlutterFlowTheme.of(context)
                                     .bodyText1
                                     .override(
@@ -370,7 +378,6 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                       color: Color(0xFF95A1AC),
                                       fontWeight: FontWeight.normal,
                                     ),
-                                hintText: '[bio]',
                                 hintStyle: FlutterFlowTheme.of(context)
                                     .bodyText1
                                     .override(
@@ -400,9 +407,10 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .bodyText1
                                   .override(
-                                    fontFamily: 'Lexend Deca',
+                                    fontFamily: 'Product Sans',
                                     color: Color(0xFF14181B),
                                     fontWeight: FontWeight.normal,
+                                    useGoogleFonts: false,
                                   ),
                               textAlign: TextAlign.start,
                               maxLines: 3,
@@ -433,9 +441,10 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                             child: SizedBox(
                               width: 50,
                               height: 50,
-                              child: CircularProgressIndicator(
+                              child: SpinKitChasingDots(
                                 color:
                                     FlutterFlowTheme.of(context).primaryColor,
+                                size: 50,
                               ),
                             ),
                           );
@@ -450,7 +459,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                             final usersUpdateData = createUsersRecordData(
                               name: fullNameController.text,
                               emailAddress: emailAddressController.text,
-                              bio: myBioController.text,
+                              bio: myBioController?.text ?? '',
                               phoneNumber: phoneController?.text ?? '',
                               photoUrl: uploadedFileUrl,
                             );
@@ -471,10 +480,11 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                             color: FlutterFlowTheme.of(context).primaryColor,
                             textStyle:
                                 FlutterFlowTheme.of(context).subtitle2.override(
-                                      fontFamily: 'Lexend Deca',
+                                      fontFamily: 'Product Sans',
                                       color: Colors.white,
-                                      fontSize: 16,
+                                      fontSize: 18,
                                       fontWeight: FontWeight.w600,
+                                      useGoogleFonts: false,
                                     ),
                             elevation: 3,
                             borderSide: BorderSide(

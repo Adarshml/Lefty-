@@ -6,6 +6,7 @@ import '../flutter_flow/lat_lng.dart';
 import '../main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DonateDetailsCopy2Widget extends StatefulWidget {
@@ -39,8 +40,9 @@ class _DonateDetailsCopy2WidgetState extends State<DonateDetailsCopy2Widget> {
             child: SizedBox(
               width: 50,
               height: 50,
-              child: CircularProgressIndicator(
+              child: SpinKitChasingDots(
                 color: FlutterFlowTheme.of(context).primaryColor,
+                size: 50,
               ),
             ),
           );
@@ -78,8 +80,9 @@ class _DonateDetailsCopy2WidgetState extends State<DonateDetailsCopy2Widget> {
                     child: SizedBox(
                       width: 50,
                       height: 50,
-                      child: CircularProgressIndicator(
+                      child: SpinKitChasingDots(
                         color: FlutterFlowTheme.of(context).primaryColor,
+                        size: 50,
                       ),
                     ),
                   );
@@ -138,9 +141,10 @@ class _DonateDetailsCopy2WidgetState extends State<DonateDetailsCopy2Widget> {
                                     child: SizedBox(
                                       width: 50,
                                       height: 50,
-                                      child: CircularProgressIndicator(
+                                      child: SpinKitChasingDots(
                                         color: FlutterFlowTheme.of(context)
                                             .primaryColor,
+                                        size: 50,
                                       ),
                                     ),
                                   );
@@ -189,9 +193,10 @@ class _DonateDetailsCopy2WidgetState extends State<DonateDetailsCopy2Widget> {
                                     child: SizedBox(
                                       width: 50,
                                       height: 50,
-                                      child: CircularProgressIndicator(
+                                      child: SpinKitChasingDots(
                                         color: FlutterFlowTheme.of(context)
                                             .primaryColor,
+                                        size: 50,
                                       ),
                                     ),
                                   );
@@ -233,9 +238,10 @@ class _DonateDetailsCopy2WidgetState extends State<DonateDetailsCopy2Widget> {
                                 child: SizedBox(
                                   width: 50,
                                   height: 50,
-                                  child: CircularProgressIndicator(
+                                  child: SpinKitChasingDots(
                                     color: FlutterFlowTheme.of(context)
                                         .primaryColor,
+                                    size: 50,
                                   ),
                                 ),
                               );
@@ -295,9 +301,10 @@ class _DonateDetailsCopy2WidgetState extends State<DonateDetailsCopy2Widget> {
                                       child: SizedBox(
                                         width: 50,
                                         height: 50,
-                                        child: CircularProgressIndicator(
+                                        child: SpinKitChasingDots(
                                           color: FlutterFlowTheme.of(context)
                                               .primaryColor,
+                                          size: 50,
                                         ),
                                       ),
                                     );
@@ -358,9 +365,10 @@ class _DonateDetailsCopy2WidgetState extends State<DonateDetailsCopy2Widget> {
                                       child: SizedBox(
                                         width: 50,
                                         height: 50,
-                                        child: CircularProgressIndicator(
+                                        child: SpinKitChasingDots(
                                           color: FlutterFlowTheme.of(context)
                                               .primaryColor,
+                                          size: 50,
                                         ),
                                       ),
                                     );
@@ -421,9 +429,10 @@ class _DonateDetailsCopy2WidgetState extends State<DonateDetailsCopy2Widget> {
                                       child: SizedBox(
                                         width: 50,
                                         height: 50,
-                                        child: CircularProgressIndicator(
+                                        child: SpinKitChasingDots(
                                           color: FlutterFlowTheme.of(context)
                                               .primaryColor,
+                                          size: 50,
                                         ),
                                       ),
                                     );
@@ -478,9 +487,10 @@ class _DonateDetailsCopy2WidgetState extends State<DonateDetailsCopy2Widget> {
                                     child: SizedBox(
                                       width: 50,
                                       height: 50,
-                                      child: CircularProgressIndicator(
+                                      child: SpinKitChasingDots(
                                         color: FlutterFlowTheme.of(context)
                                             .primaryColor,
+                                        size: 50,
                                       ),
                                     ),
                                   );

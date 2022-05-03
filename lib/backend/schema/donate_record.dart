@@ -80,6 +80,9 @@ abstract class DonateRecord
   DocumentReference get clymdBy;
 
   @nullable
+  BuiltList<LatLng> get donateMarkers;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -95,7 +98,8 @@ abstract class DonateRecord
     ..quantity = 0
     ..foodimageUrl = ''
     ..claimedby = ''
-    ..initialquantity = 0;
+    ..initialquantity = 0
+    ..donateMarkers = ListBuilder();
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('donate');
@@ -160,4 +164,5 @@ Map<String, dynamic> createDonateRecordData({
           ..foodimageUrl = foodimageUrl
           ..claimedby = claimedby
           ..initialquantity = initialquantity
-          ..clymdBy = clymdBy));
+          ..clymdBy = clymdBy
+          ..donateMarkers = null));

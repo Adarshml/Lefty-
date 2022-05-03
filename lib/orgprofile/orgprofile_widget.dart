@@ -1,11 +1,15 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../edit_profile_org/edit_profile_org_widget.dart';
+import '../flutter_flow/flutter_flow_expanded_image_view.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 
 class OrgprofileWidget extends StatefulWidget {
   const OrgprofileWidget({Key key}) : super(key: key);
@@ -26,7 +30,12 @@ class _OrgprofileWidgetState extends State<OrgprofileWidget> {
         automaticallyImplyLeading: false,
         leading: InkWell(
           onTap: () async {
-            Navigator.pop(context);
+            await Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => NavBarPage(initialPage: 'org_home'),
+              ),
+            );
           },
           child: Icon(
             Icons.arrow_back_rounded,
@@ -70,134 +79,205 @@ class _OrgprofileWidgetState extends State<OrgprofileWidget> {
                                 child: SizedBox(
                                   width: 50,
                                   height: 50,
-                                  child: CircularProgressIndicator(
+                                  child: SpinKitChasingDots(
                                     color: FlutterFlowTheme.of(context)
                                         .primaryColor,
+                                    size: 50,
                                   ),
                                 ),
                               );
                             }
                             final circleImageUsersRecord = snapshot.data;
-                            return Container(
-                              width: 120,
-                              height: 120,
-                              clipBehavior: Clip.antiAlias,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                              ),
-                              child: Image.network(
-                                valueOrDefault<String>(
+                            return InkWell(
+                              onTap: () async {
+                                await Navigator.push(
+                                  context,
+                                  PageTransition(
+                                    type: PageTransitionType.fade,
+                                    child: FlutterFlowExpandedImageView(
+                                      image: Image.network(
+                                        valueOrDefault<String>(
+                                          circleImageUsersRecord
+                                              .orgpicFromrUsers,
+                                          'gs://lefty-bdb52.appspot.com/assets/42de7cbe3ff10d84b2a281d4172da65c.png',
+                                        ),
+                                        fit: BoxFit.contain,
+                                      ),
+                                      allowRotation: false,
+                                      tag: valueOrDefault<String>(
+                                        circleImageUsersRecord.orgpicFromrUsers,
+                                        'gs://lefty-bdb52.appspot.com/assets/42de7cbe3ff10d84b2a281d4172da65c.png',
+                                      ),
+                                      useHeroAnimation: true,
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: Hero(
+                                tag: valueOrDefault<String>(
                                   circleImageUsersRecord.orgpicFromrUsers,
                                   'gs://lefty-bdb52.appspot.com/assets/42de7cbe3ff10d84b2a281d4172da65c.png',
                                 ),
+                                transitionOnUserGestures: true,
+                                child: Container(
+                                  width: 120,
+                                  height: 120,
+                                  clipBehavior: Clip.antiAlias,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Image.network(
+                                    valueOrDefault<String>(
+                                      circleImageUsersRecord.orgpicFromrUsers,
+                                      'gs://lefty-bdb52.appspot.com/assets/42de7cbe3ff10d84b2a281d4172da65c.png',
+                                    ),
+                                  ),
+                                ),
                               ),
                             );
                           },
                         ),
                       ),
                     ),
-                    Align(
-                      alignment: AlignmentDirectional(-0.71, -0.6),
-                      child: StreamBuilder<UsersRecord>(
-                        stream: UsersRecord.getDocument(currentUserReference),
-                        builder: (context, snapshot) {
-                          // Customize what your widget looks like when it's loading.
-                          if (!snapshot.hasData) {
-                            return Center(
-                              child: SizedBox(
-                                width: 50,
-                                height: 50,
-                                child: CircularProgressIndicator(
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryColor,
-                                ),
-                              ),
-                            );
-                          }
-                          final textUsersRecord = snapshot.data;
-                          return Text(
-                            valueOrDefault<String>(
-                              textUsersRecord.orgname,
-                              'name',
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Align(
+                            alignment: AlignmentDirectional(-0.71, -0.6),
+                            child: StreamBuilder<UsersRecord>(
+                              stream:
+                                  UsersRecord.getDocument(currentUserReference),
+                              builder: (context, snapshot) {
+                                // Customize what your widget looks like when it's loading.
+                                if (!snapshot.hasData) {
+                                  return Center(
+                                    child: SizedBox(
+                                      width: 50,
+                                      height: 50,
+                                      child: SpinKitChasingDots(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                        size: 50,
+                                      ),
+                                    ),
+                                  );
+                                }
+                                final textUsersRecord = snapshot.data;
+                                return Text(
+                                  valueOrDefault<String>(
+                                    textUsersRecord.orgname,
+                                    'name',
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .title1
+                                      .override(
+                                        fontFamily: 'Product Sans',
+                                        color: Colors.black,
+                                        useGoogleFonts: false,
+                                      ),
+                                );
+                              },
                             ),
-                            style: FlutterFlowTheme.of(context).title1.override(
-                                  fontFamily: 'Lexend Deca',
-                                  color: Colors.black,
-                                ),
-                          );
-                        },
+                          ),
+                        ],
                       ),
                     ),
-                    Align(
-                      alignment: AlignmentDirectional(-0.63, -0.53),
-                      child: AuthUserStreamWidget(
-                        child: StreamBuilder<UsersRecord>(
-                          stream: UsersRecord.getDocument(currentUserReference),
-                          builder: (context, snapshot) {
-                            // Customize what your widget looks like when it's loading.
-                            if (!snapshot.hasData) {
-                              return Center(
-                                child: SizedBox(
-                                  width: 50,
-                                  height: 50,
-                                  child: CircularProgressIndicator(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryColor,
-                                  ),
-                                ),
-                              );
-                            }
-                            final textUsersRecord = snapshot.data;
-                            return Text(
-                              valueOrDefault<String>(
-                                currentUserDocument?.orgemail,
-                                'email',
-                              ),
-                              style:
-                                  FlutterFlowTheme.of(context).title3.override(
-                                        fontFamily: 'Lexend Deca',
-                                        color: Colors.black,
-                                        fontSize: 20,
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(20, 3, 20, 0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Align(
+                            alignment: AlignmentDirectional(-0.63, -0.53),
+                            child: AuthUserStreamWidget(
+                              child: StreamBuilder<UsersRecord>(
+                                stream: UsersRecord.getDocument(
+                                    currentUserReference),
+                                builder: (context, snapshot) {
+                                  // Customize what your widget looks like when it's loading.
+                                  if (!snapshot.hasData) {
+                                    return Center(
+                                      child: SizedBox(
+                                        width: 50,
+                                        height: 50,
+                                        child: SpinKitChasingDots(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          size: 50,
+                                        ),
                                       ),
-                            );
-                          },
-                        ),
+                                    );
+                                  }
+                                  final textUsersRecord = snapshot.data;
+                                  return Text(
+                                    valueOrDefault<String>(
+                                      currentUserDocument?.orgemail,
+                                      'email',
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .title3
+                                        .override(
+                                          fontFamily: 'Product Sans',
+                                          color: Colors.black,
+                                          fontSize: 20,
+                                          useGoogleFonts: false,
+                                        ),
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    Align(
-                      alignment: AlignmentDirectional(-0.63, -0.53),
-                      child: AuthUserStreamWidget(
-                        child: StreamBuilder<UsersRecord>(
-                          stream: UsersRecord.getDocument(currentUserReference),
-                          builder: (context, snapshot) {
-                            // Customize what your widget looks like when it's loading.
-                            if (!snapshot.hasData) {
-                              return Center(
-                                child: SizedBox(
-                                  width: 50,
-                                  height: 50,
-                                  child: CircularProgressIndicator(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryColor,
-                                  ),
-                                ),
-                              );
-                            }
-                            final textUsersRecord = snapshot.data;
-                            return Text(
-                              valueOrDefault<String>(
-                                currentUserDocument?.orgregid,
-                                'id',
-                              ),
-                              style:
-                                  FlutterFlowTheme.of(context).title3.override(
-                                        fontFamily: 'Lexend Deca',
-                                        color: Colors.black,
-                                        fontSize: 20,
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(20, 3, 20, 0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Align(
+                            alignment: AlignmentDirectional(-0.63, -0.53),
+                            child: AuthUserStreamWidget(
+                              child: StreamBuilder<UsersRecord>(
+                                stream: UsersRecord.getDocument(
+                                    currentUserReference),
+                                builder: (context, snapshot) {
+                                  // Customize what your widget looks like when it's loading.
+                                  if (!snapshot.hasData) {
+                                    return Center(
+                                      child: SizedBox(
+                                        width: 50,
+                                        height: 50,
+                                        child: SpinKitChasingDots(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          size: 50,
+                                        ),
                                       ),
-                            );
-                          },
-                        ),
+                                    );
+                                  }
+                                  final textUsersRecord = snapshot.data;
+                                  return Text(
+                                    valueOrDefault<String>(
+                                      currentUserDocument?.orgregid,
+                                      'id',
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .title3
+                                        .override(
+                                          fontFamily: 'Product Sans',
+                                          color: Colors.black,
+                                          fontSize: 20,
+                                          useGoogleFonts: false,
+                                        ),
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     Padding(
@@ -220,8 +300,9 @@ class _OrgprofileWidgetState extends State<OrgprofileWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .subtitle1
                                   .override(
-                                    fontFamily: 'Lexend Deca',
+                                    fontFamily: 'Product Sans',
                                     color: Colors.black,
+                                    useGoogleFonts: false,
                                   ),
                             ),
                           ),
@@ -249,9 +330,10 @@ class _OrgprofileWidgetState extends State<OrgprofileWidget> {
                                         child: SizedBox(
                                           width: 50,
                                           height: 50,
-                                          child: CircularProgressIndicator(
+                                          child: SpinKitChasingDots(
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryColor,
+                                            size: 50,
                                           ),
                                         ),
                                       );
@@ -265,8 +347,9 @@ class _OrgprofileWidgetState extends State<OrgprofileWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .subtitle1
                                           .override(
-                                            fontFamily: 'Lexend Deca',
+                                            fontFamily: 'Product Sans',
                                             color: Colors.black,
+                                            useGoogleFonts: false,
                                           ),
                                     );
                                   },
@@ -297,8 +380,9 @@ class _OrgprofileWidgetState extends State<OrgprofileWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .subtitle1
                                   .override(
-                                    fontFamily: 'Lexend Deca',
+                                    fontFamily: 'Product Sans',
                                     color: Colors.black,
+                                    useGoogleFonts: false,
                                   ),
                             ),
                           ),
@@ -326,9 +410,10 @@ class _OrgprofileWidgetState extends State<OrgprofileWidget> {
                                         child: SizedBox(
                                           width: 50,
                                           height: 50,
-                                          child: CircularProgressIndicator(
+                                          child: SpinKitChasingDots(
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryColor,
+                                            size: 50,
                                           ),
                                         ),
                                       );
@@ -342,8 +427,9 @@ class _OrgprofileWidgetState extends State<OrgprofileWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .subtitle1
                                           .override(
-                                            fontFamily: 'Lexend Deca',
+                                            fontFamily: 'Product Sans',
                                             color: Colors.black,
+                                            useGoogleFonts: false,
                                           ),
                                     );
                                   },
@@ -374,10 +460,11 @@ class _OrgprofileWidgetState extends State<OrgprofileWidget> {
                             color: Colors.white,
                             textStyle:
                                 FlutterFlowTheme.of(context).subtitle2.override(
-                                      fontFamily: 'Lexend Deca',
+                                      fontFamily: 'Product Sans',
                                       color: Colors.black,
-                                      fontSize: 14,
+                                      fontSize: 16,
                                       fontWeight: FontWeight.w600,
+                                      useGoogleFonts: false,
                                     ),
                             elevation: 2,
                             borderSide: BorderSide(

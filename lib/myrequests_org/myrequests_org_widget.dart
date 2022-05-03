@@ -5,6 +5,7 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../main.dart';
 import '../myrequestdetails_org/myrequestdetails_org_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyrequestsOrgWidget extends StatefulWidget {
@@ -74,8 +75,9 @@ class _MyrequestsOrgWidgetState extends State<MyrequestsOrgWidget> {
                           child: SizedBox(
                             width: 50,
                             height: 50,
-                            child: CircularProgressIndicator(
+                            child: SpinKitChasingDots(
                               color: FlutterFlowTheme.of(context).primaryColor,
+                              size: 50,
                             ),
                           ),
                         );
@@ -137,11 +139,11 @@ class _MyrequestsOrgWidgetState extends State<MyrequestsOrgWidget> {
                                               child: SizedBox(
                                                 width: 50,
                                                 height: 50,
-                                                child:
-                                                    CircularProgressIndicator(
+                                                child: SpinKitChasingDots(
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .primaryColor,
+                                                  size: 50,
                                                 ),
                                               ),
                                             );
@@ -196,10 +198,11 @@ class _MyrequestsOrgWidgetState extends State<MyrequestsOrgWidget> {
                                                         width: 50,
                                                         height: 50,
                                                         child:
-                                                            CircularProgressIndicator(
+                                                            SpinKitChasingDots(
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .primaryColor,
+                                                          size: 50,
                                                         ),
                                                       ),
                                                     );
@@ -221,19 +224,19 @@ class _MyrequestsOrgWidgetState extends State<MyrequestsOrgWidget> {
                                                     valueOrDefault<String>(
                                                       columnRequestFoodRecord
                                                           .acceptedby,
-                                                      'Waiting list',
+                                                      'Waiting for donor',
                                                     ),
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .subtitle1
                                                         .override(
                                                           fontFamily:
-                                                              'Lexend Deca',
-                                                          color:
-                                                              Color(0xFF090F13),
+                                                              'Product Sans',
+                                                          color: Colors.black,
                                                           fontSize: 20,
                                                           fontWeight:
                                                               FontWeight.w500,
+                                                          useGoogleFonts: false,
                                                         ),
                                                   );
                                                 },
@@ -255,10 +258,11 @@ class _MyrequestsOrgWidgetState extends State<MyrequestsOrgWidget> {
                                                           width: 50,
                                                           height: 50,
                                                           child:
-                                                              CircularProgressIndicator(
+                                                              SpinKitChasingDots(
                                                             color: FlutterFlowTheme
                                                                     .of(context)
                                                                 .primaryColor,
+                                                            size: 50,
                                                           ),
                                                         ),
                                                       );
@@ -286,12 +290,14 @@ class _MyrequestsOrgWidgetState extends State<MyrequestsOrgWidget> {
                                                           .bodyText1
                                                           .override(
                                                             fontFamily:
-                                                                'Lexend Deca',
+                                                                'Product Sans',
                                                             color: Color(
                                                                 0xFF57636C),
-                                                            fontSize: 16,
+                                                            fontSize: 18,
                                                             fontWeight:
                                                                 FontWeight.w500,
+                                                            useGoogleFonts:
+                                                                false,
                                                           ),
                                                     );
                                                   },
@@ -314,10 +320,11 @@ class _MyrequestsOrgWidgetState extends State<MyrequestsOrgWidget> {
                                                           width: 50,
                                                           height: 50,
                                                           child:
-                                                              CircularProgressIndicator(
+                                                              SpinKitChasingDots(
                                                             color: FlutterFlowTheme
                                                                     .of(context)
                                                                 .primaryColor,
+                                                            size: 50,
                                                           ),
                                                         ),
                                                       );
@@ -336,17 +343,24 @@ class _MyrequestsOrgWidgetState extends State<MyrequestsOrgWidget> {
                                                                 .first
                                                             : null;
                                                     return Text(
-                                                      columnRequestFoodRecord
-                                                          .requeststatus,
+                                                      valueOrDefault<String>(
+                                                        columnRequestFoodRecord
+                                                            .requeststatus,
+                                                        'Pending',
+                                                      ),
                                                       style: FlutterFlowTheme
                                                               .of(context)
                                                           .subtitle1
                                                           .override(
                                                             fontFamily:
-                                                                'Poppins',
-                                                            fontSize: 16,
+                                                                'Product Sans',
+                                                            color: Color(
+                                                                0xFF3ACF24),
+                                                            fontSize: 18,
                                                             fontWeight:
                                                                 FontWeight.w500,
+                                                            useGoogleFonts:
+                                                                false,
                                                           ),
                                                     );
                                                   },

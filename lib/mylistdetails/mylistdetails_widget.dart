@@ -4,9 +4,9 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/lat_lng.dart';
 import '../main.dart';
-import '../orgprofileforusers/orgprofileforusers_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MylistdetailsWidget extends StatefulWidget {
@@ -39,8 +39,9 @@ class _MylistdetailsWidgetState extends State<MylistdetailsWidget> {
             child: SizedBox(
               width: 50,
               height: 50,
-              child: CircularProgressIndicator(
+              child: SpinKitChasingDots(
                 color: FlutterFlowTheme.of(context).primaryColor,
+                size: 50,
               ),
             ),
           );
@@ -78,8 +79,9 @@ class _MylistdetailsWidgetState extends State<MylistdetailsWidget> {
                     child: SizedBox(
                       width: 50,
                       height: 50,
-                      child: CircularProgressIndicator(
+                      child: SpinKitChasingDots(
                         color: FlutterFlowTheme.of(context).primaryColor,
+                        size: 50,
                       ),
                     ),
                   );
@@ -95,9 +97,10 @@ class _MylistdetailsWidgetState extends State<MylistdetailsWidget> {
                 return Text(
                   mylistdetailsDonateRecord.foodName,
                   style: FlutterFlowTheme.of(context).title2.override(
-                        fontFamily: 'Lexend Deca',
+                        fontFamily: 'Product Sans',
                         color: Colors.white,
                         fontSize: 20,
+                        useGoogleFonts: false,
                       ),
                 );
               },
@@ -129,9 +132,10 @@ class _MylistdetailsWidgetState extends State<MylistdetailsWidget> {
                                   child: SizedBox(
                                     width: 50,
                                     height: 50,
-                                    child: CircularProgressIndicator(
+                                    child: SpinKitChasingDots(
                                       color: FlutterFlowTheme.of(context)
                                           .primaryColor,
+                                      size: 50,
                                     ),
                                   ),
                                 );
@@ -174,9 +178,10 @@ class _MylistdetailsWidgetState extends State<MylistdetailsWidget> {
                                         child: SizedBox(
                                           width: 50,
                                           height: 50,
-                                          child: CircularProgressIndicator(
+                                          child: SpinKitChasingDots(
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryColor,
+                                            size: 50,
                                           ),
                                         ),
                                       );
@@ -199,9 +204,10 @@ class _MylistdetailsWidgetState extends State<MylistdetailsWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .title3
                                           .override(
-                                            fontFamily: 'Poppins',
+                                            fontFamily: 'Product Sans',
                                             color: Color(0xFF105C09),
-                                            fontSize: 18,
+                                            fontSize: 20,
+                                            useGoogleFonts: false,
                                           ),
                                     );
                                   },
@@ -226,9 +232,10 @@ class _MylistdetailsWidgetState extends State<MylistdetailsWidget> {
                                         child: SizedBox(
                                           width: 50,
                                           height: 50,
-                                          child: CircularProgressIndicator(
+                                          child: SpinKitChasingDots(
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryColor,
+                                            size: 50,
                                           ),
                                         ),
                                       );
@@ -251,9 +258,10 @@ class _MylistdetailsWidgetState extends State<MylistdetailsWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .subtitle1
                                           .override(
-                                            fontFamily: 'Poppins',
+                                            fontFamily: 'Product Sans',
                                             color: Colors.black,
                                             fontSize: 22,
+                                            useGoogleFonts: false,
                                           ),
                                     );
                                   },
@@ -278,9 +286,10 @@ class _MylistdetailsWidgetState extends State<MylistdetailsWidget> {
                                         child: SizedBox(
                                           width: 50,
                                           height: 50,
-                                          child: CircularProgressIndicator(
+                                          child: SpinKitChasingDots(
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryColor,
+                                            size: 50,
                                           ),
                                         ),
                                       );
@@ -300,8 +309,9 @@ class _MylistdetailsWidgetState extends State<MylistdetailsWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .subtitle1
                                           .override(
-                                            fontFamily: 'Poppins',
+                                            fontFamily: 'Product Sans',
                                             color: Colors.black,
+                                            useGoogleFonts: false,
                                           ),
                                     );
                                   },
@@ -323,9 +333,10 @@ class _MylistdetailsWidgetState extends State<MylistdetailsWidget> {
                                     child: SizedBox(
                                       width: 50,
                                       height: 50,
-                                      child: CircularProgressIndicator(
+                                      child: SpinKitChasingDots(
                                         color: FlutterFlowTheme.of(context)
                                             .primaryColor,
+                                        size: 50,
                                       ),
                                     ),
                                   );
@@ -345,8 +356,9 @@ class _MylistdetailsWidgetState extends State<MylistdetailsWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .subtitle1
                                       .override(
-                                        fontFamily: 'Poppins',
+                                        fontFamily: 'Product Sans',
                                         color: Colors.black,
+                                        useGoogleFonts: false,
                                       ),
                                 );
                               },
@@ -363,9 +375,11 @@ class _MylistdetailsWidgetState extends State<MylistdetailsWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText1
                                       .override(
-                                        fontFamily: 'Lexend Deca',
+                                        fontFamily: 'Product Sans',
                                         color: Colors.black,
+                                        fontSize: 18,
                                         fontWeight: FontWeight.w500,
+                                        useGoogleFonts: false,
                                       ),
                                 ),
                                 Padding(
@@ -382,10 +396,11 @@ class _MylistdetailsWidgetState extends State<MylistdetailsWidget> {
                                           child: SizedBox(
                                             width: 50,
                                             height: 50,
-                                            child: CircularProgressIndicator(
+                                            child: SpinKitChasingDots(
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryColor,
+                                              size: 50,
                                             ),
                                           ),
                                         );
@@ -406,9 +421,11 @@ class _MylistdetailsWidgetState extends State<MylistdetailsWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
-                                              fontFamily: 'Lexend Deca',
+                                              fontFamily: 'Product Sans',
                                               color: Colors.black,
+                                              fontSize: 18,
                                               fontWeight: FontWeight.w500,
+                                              useGoogleFonts: false,
                                             ),
                                       );
                                     },
@@ -428,9 +445,11 @@ class _MylistdetailsWidgetState extends State<MylistdetailsWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText1
                                       .override(
-                                        fontFamily: 'Lexend Deca',
+                                        fontFamily: 'Product Sans',
                                         color: Colors.black,
+                                        fontSize: 18,
                                         fontWeight: FontWeight.w500,
+                                        useGoogleFonts: false,
                                       ),
                                 ),
                                 Padding(
@@ -447,10 +466,11 @@ class _MylistdetailsWidgetState extends State<MylistdetailsWidget> {
                                           child: SizedBox(
                                             width: 50,
                                             height: 50,
-                                            child: CircularProgressIndicator(
+                                            child: SpinKitChasingDots(
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryColor,
+                                              size: 50,
                                             ),
                                           ),
                                         );
@@ -471,9 +491,11 @@ class _MylistdetailsWidgetState extends State<MylistdetailsWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
-                                              fontFamily: 'Lexend Deca',
+                                              fontFamily: 'Product Sans',
                                               color: Colors.black,
+                                              fontSize: 18,
                                               fontWeight: FontWeight.w500,
+                                              useGoogleFonts: false,
                                             ),
                                       );
                                     },
@@ -493,9 +515,11 @@ class _MylistdetailsWidgetState extends State<MylistdetailsWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText1
                                       .override(
-                                        fontFamily: 'Lexend Deca',
+                                        fontFamily: 'Product Sans',
                                         color: Colors.black,
+                                        fontSize: 18,
                                         fontWeight: FontWeight.w500,
+                                        useGoogleFonts: false,
                                       ),
                                 ),
                                 Padding(
@@ -512,10 +536,11 @@ class _MylistdetailsWidgetState extends State<MylistdetailsWidget> {
                                           child: SizedBox(
                                             width: 50,
                                             height: 50,
-                                            child: CircularProgressIndicator(
+                                            child: SpinKitChasingDots(
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryColor,
+                                              size: 50,
                                             ),
                                           ),
                                         );
@@ -538,9 +563,11 @@ class _MylistdetailsWidgetState extends State<MylistdetailsWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
-                                              fontFamily: 'Lexend Deca',
+                                              fontFamily: 'Product Sans',
                                               color: Colors.black,
+                                              fontSize: 18,
                                               fontWeight: FontWeight.w500,
+                                              useGoogleFonts: false,
                                             ),
                                       );
                                     },
@@ -560,10 +587,11 @@ class _MylistdetailsWidgetState extends State<MylistdetailsWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText1
                                       .override(
-                                        fontFamily: 'Lexend Deca',
+                                        fontFamily: 'Product Sans',
                                         color: Colors.black,
                                         fontSize: 18,
                                         fontWeight: FontWeight.w500,
+                                        useGoogleFonts: false,
                                       ),
                                 ),
                               ],
@@ -586,9 +614,10 @@ class _MylistdetailsWidgetState extends State<MylistdetailsWidget> {
                                       child: SizedBox(
                                         width: 50,
                                         height: 50,
-                                        child: CircularProgressIndicator(
+                                        child: SpinKitChasingDots(
                                           color: FlutterFlowTheme.of(context)
                                               .primaryColor,
+                                          size: 50,
                                         ),
                                       ),
                                     );
@@ -605,8 +634,8 @@ class _MylistdetailsWidgetState extends State<MylistdetailsWidget> {
                                           : null;
                                   return FlutterFlowGoogleMap(
                                     controller: googleMapsController,
-                                    onCameraIdle: (latLng) => setState(
-                                        () => googleMapsCenter = latLng),
+                                    onCameraIdle: (latLng) =>
+                                        googleMapsCenter = latLng,
                                     initialLocation: googleMapsCenter ??=
                                         mylistdetailsDonateRecord.donorLocation,
                                     markers: [
@@ -646,10 +675,11 @@ class _MylistdetailsWidgetState extends State<MylistdetailsWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText1
                                       .override(
-                                        fontFamily: 'Lexend Deca',
+                                        fontFamily: 'Product Sans',
                                         color: Colors.black,
-                                        fontSize: 16,
+                                        fontSize: 18,
                                         fontWeight: FontWeight.w500,
+                                        useGoogleFonts: false,
                                       ),
                                 ),
                                 StreamBuilder<List<DonateRecord>>(
@@ -663,9 +693,10 @@ class _MylistdetailsWidgetState extends State<MylistdetailsWidget> {
                                         child: SizedBox(
                                           width: 50,
                                           height: 50,
-                                          child: CircularProgressIndicator(
+                                          child: SpinKitChasingDots(
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryColor,
+                                            size: 50,
                                           ),
                                         ),
                                       );
@@ -680,33 +711,18 @@ class _MylistdetailsWidgetState extends State<MylistdetailsWidget> {
                                         textDonateRecordList.isNotEmpty
                                             ? textDonateRecordList.first
                                             : null;
-                                    return InkWell(
-                                      onTap: () async {
-                                        await Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                OrgprofileforusersWidget(
-                                              orgprofileforusers:
-                                                  mylistdetailsDonateRecord
-                                                      .reference,
-                                            ),
+                                    return Text(
+                                      mylistdetailsDonateRecord.claimedby,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1
+                                          .override(
+                                            fontFamily: 'Product Sans',
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryColor,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w500,
+                                            useGoogleFonts: false,
                                           ),
-                                        );
-                                      },
-                                      child: Text(
-                                        mylistdetailsDonateRecord.claimedby,
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText1
-                                            .override(
-                                              fontFamily: 'Poppins',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryColor,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                      ),
                                     );
                                   },
                                 ),

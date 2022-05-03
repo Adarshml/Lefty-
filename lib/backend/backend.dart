@@ -8,6 +8,8 @@ import 'schema/users_record.dart';
 import 'schema/organization_record.dart';
 import 'schema/donate_record.dart';
 import 'schema/request_food_record.dart';
+import 'schema/donor_markers_record.dart';
+import 'schema/requests_markers_record.dart';
 import 'schema/serializers.dart';
 
 export 'dart:async' show StreamSubscription;
@@ -19,6 +21,8 @@ export 'schema/users_record.dart';
 export 'schema/organization_record.dart';
 export 'schema/donate_record.dart';
 export 'schema/request_food_record.dart';
+export 'schema/donor_markers_record.dart';
+export 'schema/requests_markers_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Stream<List<UsersRecord>> queryUsersRecord(
@@ -137,6 +141,70 @@ Future<FFFirestorePage<RequestFoodRecord>> queryRequestFoodRecordPage({
     queryCollectionPage(
       RequestFoodRecord.collection,
       RequestFoodRecord.serializer,
+      queryBuilder: queryBuilder,
+      nextPageMarker: nextPageMarker,
+      pageSize: pageSize,
+      isStream: isStream,
+    );
+
+/// Functions to query DonorMarkersRecords (as a Stream and as a Future).
+Stream<List<DonorMarkersRecord>> queryDonorMarkersRecord(
+        {Query Function(Query) queryBuilder,
+        int limit = -1,
+        bool singleRecord = false}) =>
+    queryCollection(
+        DonorMarkersRecord.collection, DonorMarkersRecord.serializer,
+        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
+
+Future<List<DonorMarkersRecord>> queryDonorMarkersRecordOnce(
+        {Query Function(Query) queryBuilder,
+        int limit = -1,
+        bool singleRecord = false}) =>
+    queryCollectionOnce(
+        DonorMarkersRecord.collection, DonorMarkersRecord.serializer,
+        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
+
+Future<FFFirestorePage<DonorMarkersRecord>> queryDonorMarkersRecordPage({
+  Query Function(Query) queryBuilder,
+  DocumentSnapshot nextPageMarker,
+  int pageSize,
+  bool isStream,
+}) =>
+    queryCollectionPage(
+      DonorMarkersRecord.collection,
+      DonorMarkersRecord.serializer,
+      queryBuilder: queryBuilder,
+      nextPageMarker: nextPageMarker,
+      pageSize: pageSize,
+      isStream: isStream,
+    );
+
+/// Functions to query RequestsMarkersRecords (as a Stream and as a Future).
+Stream<List<RequestsMarkersRecord>> queryRequestsMarkersRecord(
+        {Query Function(Query) queryBuilder,
+        int limit = -1,
+        bool singleRecord = false}) =>
+    queryCollection(
+        RequestsMarkersRecord.collection, RequestsMarkersRecord.serializer,
+        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
+
+Future<List<RequestsMarkersRecord>> queryRequestsMarkersRecordOnce(
+        {Query Function(Query) queryBuilder,
+        int limit = -1,
+        bool singleRecord = false}) =>
+    queryCollectionOnce(
+        RequestsMarkersRecord.collection, RequestsMarkersRecord.serializer,
+        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
+
+Future<FFFirestorePage<RequestsMarkersRecord>> queryRequestsMarkersRecordPage({
+  Query Function(Query) queryBuilder,
+  DocumentSnapshot nextPageMarker,
+  int pageSize,
+  bool isStream,
+}) =>
+    queryCollectionPage(
+      RequestsMarkersRecord.collection,
+      RequestsMarkersRecord.serializer,
       queryBuilder: queryBuilder,
       nextPageMarker: nextPageMarker,
       pageSize: pageSize,

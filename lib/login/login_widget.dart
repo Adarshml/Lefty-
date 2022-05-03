@@ -5,6 +5,7 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginWidget extends StatefulWidget {
@@ -44,14 +45,34 @@ class _LoginWidgetState extends State<LoginWidget> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 120, 0, 0),
-                      child: Text(
-                        'WELCOME TO LEFTY',
-                        style: FlutterFlowTheme.of(context).title1.override(
-                              fontFamily: 'Lexend Deca',
-                              color: Colors.white,
-                              fontSize: 26,
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
+                      child: Image.network(
+                        '',
+                        width: 100,
+                        height: 100,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 20),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(30, 0, 0, 0),
+                            child: Text(
+                              'WELCOME TO LEFTY',
+                              style:
+                                  FlutterFlowTheme.of(context).title1.override(
+                                        fontFamily: 'Product Sans',
+                                        color: Colors.white,
+                                        fontSize: 28,
+                                        useGoogleFonts: false,
+                                      ),
                             ),
+                          ),
+                        ],
                       ),
                     ),
                     Padding(
@@ -60,10 +81,12 @@ class _LoginWidgetState extends State<LoginWidget> {
                         'Login',
                         textAlign: TextAlign.center,
                         style: FlutterFlowTheme.of(context).title1.override(
-                              fontFamily: 'Lexend Deca',
+                              fontFamily: 'Product Sans',
                               color: FlutterFlowTheme.of(context)
                                   .primaryBackground,
+                              fontSize: 26,
                               fontWeight: FontWeight.bold,
+                              useGoogleFonts: false,
                             ),
                       ),
                     ),
@@ -73,9 +96,11 @@ class _LoginWidgetState extends State<LoginWidget> {
                         'Enter your details to continue',
                         textAlign: TextAlign.center,
                         style: FlutterFlowTheme.of(context).bodyText2.override(
-                              fontFamily: 'Lexend Deca',
+                              fontFamily: 'Product Sans',
                               color: Color(0x84FFFFFF),
+                              fontSize: 16,
                               fontWeight: FontWeight.normal,
+                              useGoogleFonts: false,
                             ),
                       ),
                     ),
@@ -123,10 +148,11 @@ class _LoginWidgetState extends State<LoginWidget> {
                           ),
                           style:
                               FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Lexend Deca',
+                                    fontFamily: 'Product Sans',
                                     color: Color(0xFF2B343A),
                                     fontSize: 14,
                                     fontWeight: FontWeight.normal,
+                                    useGoogleFonts: false,
                                   ),
                           textAlign: TextAlign.start,
                         ),
@@ -188,10 +214,11 @@ class _LoginWidgetState extends State<LoginWidget> {
                           ),
                           style:
                               FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Lexend Deca',
+                                    fontFamily: 'Product Sans',
                                     color: Color(0xFF2B343A),
                                     fontSize: 14,
                                     fontWeight: FontWeight.normal,
+                                    useGoogleFonts: false,
                                   ),
                           textAlign: TextAlign.start,
                         ),
@@ -226,9 +253,11 @@ class _LoginWidgetState extends State<LoginWidget> {
                           color: Color(0xFF090F13),
                           textStyle:
                               FlutterFlowTheme.of(context).subtitle2.override(
-                                    fontFamily: 'Lexend Deca',
+                                    fontFamily: 'Product Sans',
                                     color: Colors.white,
+                                    fontSize: 18,
                                     fontWeight: FontWeight.w500,
+                                    useGoogleFonts: false,
                                   ),
                           elevation: 3,
                           borderSide: BorderSide(
@@ -248,50 +277,50 @@ class _LoginWidgetState extends State<LoginWidget> {
                           children: [
                             Padding(
                               padding:
-                                  EdgeInsetsDirectional.fromSTEB(50, 0, 0, 0),
+                                  EdgeInsetsDirectional.fromSTEB(45, 0, 0, 0),
                               child: Text(
                                 'Dont have an account?',
                                 style: FlutterFlowTheme.of(context)
                                     .subtitle2
                                     .override(
-                                      fontFamily: 'Lexend Deca',
+                                      fontFamily: 'Product Sans',
                                       color: FlutterFlowTheme.of(context)
                                           .primaryBackground,
+                                      fontSize: 18,
                                       fontWeight: FontWeight.w500,
+                                      useGoogleFonts: false,
                                     ),
                               ),
                             ),
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(2, 0, 0, 0),
-                              child: FFButtonWidget(
-                                onPressed: () async {
-                                  await Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          CreateAccountUserWidget(),
-                                    ),
-                                  );
-                                },
-                                text: 'Sign Up',
-                                options: FFButtonOptions(
-                                  width: 90,
-                                  height: 30,
-                                  color: Color(0x00FFFFFF),
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .subtitle2
-                                      .override(
-                                        fontFamily: 'Lexend Deca',
-                                        color: Color(0xFFFFDE06),
-                                      ),
-                                  elevation: 0,
-                                  borderSide: BorderSide(
-                                    color: Colors.transparent,
-                                    width: 1,
+                            FFButtonWidget(
+                              onPressed: () async {
+                                await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        CreateAccountUserWidget(),
                                   ),
-                                  borderRadius: 0,
+                                );
+                              },
+                              text: 'Sign Up',
+                              options: FFButtonOptions(
+                                width: 90,
+                                height: 30,
+                                color: Color(0x00FFFFFF),
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .subtitle2
+                                    .override(
+                                      fontFamily: 'Product Sans',
+                                      color: Color(0xFFFFDE06),
+                                      fontSize: 18,
+                                      useGoogleFonts: false,
+                                    ),
+                                elevation: 0,
+                                borderSide: BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1,
                                 ),
+                                borderRadius: 0,
                               ),
                             ),
                           ],
