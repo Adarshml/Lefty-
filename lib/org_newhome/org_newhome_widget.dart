@@ -17,13 +17,13 @@ class OrgNewhomeWidget extends StatefulWidget {
 }
 
 class _OrgNewhomeWidgetState extends State<OrgNewhomeWidget> {
+  final scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController addressController;
   TextEditingController descriptionController;
   TextEditingController emailAddressController;
   TextEditingController orgNameController;
   TextEditingController regNoController;
   TextEditingController phoneController;
-  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {

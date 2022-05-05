@@ -1,10 +1,9 @@
 import '../auth/auth_util.dart';
-import '../create_account_organization/create_account_organization_widget.dart';
-import '../create_account_user/create_account_user_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
+import '../register/register_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,6 +16,7 @@ class LoginOldWidget extends StatefulWidget {
 }
 
 class _LoginOldWidgetState extends State<LoginOldWidget> {
+  final scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController emailAddressController;
   TextEditingController passwordController;
   bool passwordVisibility;
@@ -24,7 +24,6 @@ class _LoginOldWidgetState extends State<LoginOldWidget> {
   TextEditingController orgpasswordController;
   bool orgpasswordVisibility;
   TextEditingController orgemailAddressController2;
-  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -137,7 +136,7 @@ class _LoginOldWidgetState extends State<LoginOldWidget> {
                                             context,
                                             MaterialPageRoute(
                                               builder: (context) =>
-                                                  CreateAccountUserWidget(),
+                                                  RegisterWidget(),
                                             ),
                                           );
                                         },
@@ -560,14 +559,8 @@ class _LoginOldWidgetState extends State<LoginOldWidget> {
                                               ),
                                             ),
                                             FFButtonWidget(
-                                              onPressed: () async {
-                                                await Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        CreateAccountOrganizationWidget(),
-                                                  ),
-                                                );
+                                              onPressed: () {
+                                                print('Button pressed ...');
                                               },
                                               text: 'Sign Up',
                                               options: FFButtonOptions(

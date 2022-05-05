@@ -4,20 +4,18 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../login/login_widget.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CreateAccountUserWidget extends StatefulWidget {
-  const CreateAccountUserWidget({Key key}) : super(key: key);
+class RegisterWidget extends StatefulWidget {
+  const RegisterWidget({Key key}) : super(key: key);
 
   @override
-  _CreateAccountUserWidgetState createState() =>
-      _CreateAccountUserWidgetState();
+  _RegisterWidgetState createState() => _RegisterWidgetState();
 }
 
-class _CreateAccountUserWidgetState extends State<CreateAccountUserWidget> {
+class _RegisterWidgetState extends State<RegisterWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController confirmpasswordController;
   bool confirmpasswordVisibility;
@@ -52,71 +50,6 @@ class _CreateAccountUserWidgetState extends State<CreateAccountUserWidget> {
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 50, 0, 0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
-                            child: Text(
-                              'LEFTY',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: 'Lexend Deca',
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
-                                    fontSize: 35,
-                                  ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(20, 30, 20, 0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Text(
-                            'Create Account',
-                            style: FlutterFlowTheme.of(context).title1.override(
-                                  fontFamily: 'Product Sans',
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                  fontWeight: FontWeight.bold,
-                                  useGoogleFonts: false,
-                                ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Align(
-                            alignment: AlignmentDirectional(-0.77, -0.72),
-                            child: Text(
-                              'Enter your details to continue',
-                              textAlign: TextAlign.center,
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyText2
-                                  .override(
-                                    fontFamily: 'Product Sans',
-                                    color: Color(0x84FFFFFF),
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.normal,
-                                    useGoogleFonts: false,
-                                  ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
                     Align(
                       alignment: AlignmentDirectional(-3.13, -0.62),
                       child: Padding(
@@ -362,61 +295,51 @@ class _CreateAccountUserWidgetState extends State<CreateAccountUserWidget> {
                       alignment: AlignmentDirectional(-0.17, 0.73),
                       child: Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
-                        child: FFButtonWidget(
-                          onPressed: () async {
-                            if (passwordController.text !=
-                                confirmpasswordController.text) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    'Passwords don\'t match!',
+                        child: StreamBuilder<UsersRecord>(
+                          stream: UsersRecord.getDocument(currentUserReference),
+                          builder: (context, snapshot) {
+                            // Customize what your widget looks like when it's loading.
+                            if (!snapshot.hasData) {
+                              return Center(
+                                child: SizedBox(
+                                  width: 50,
+                                  height: 50,
+                                  child: SpinKitChasingDots(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryColor,
+                                    size: 50,
                                   ),
                                 ),
                               );
-                              return;
                             }
-
-                            final user = await createAccountWithEmail(
-                              context,
-                              emailAddressController.text,
-                              passwordController.text,
-                            );
-                            if (user == null) {
-                              return;
-                            }
-
-                            final usersUpdateData = createUsersRecordData(
-                              name: nameController.text,
-                              emailAddress: emailAddressController.text,
-                            );
-                            await currentUserReference.update(usersUpdateData);
-                            await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => LoginWidget(),
-                              ),
-                            );
-                          },
-                          text: 'Create Account',
-                          options: FFButtonOptions(
-                            width: 230,
-                            height: 50,
-                            color: Color(0xFF090F13),
-                            textStyle:
-                                FlutterFlowTheme.of(context).subtitle2.override(
+                            final buttonUsersRecord = snapshot.data;
+                            return FFButtonWidget(
+                              onPressed: () {
+                                print('Button pressed ...');
+                              },
+                              text: 'Create Account',
+                              options: FFButtonOptions(
+                                width: 230,
+                                height: 50,
+                                color: Color(0xFF090F13),
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .subtitle2
+                                    .override(
                                       fontFamily: 'Product Sans',
                                       color: Colors.white,
                                       fontSize: 18,
                                       fontWeight: FontWeight.w500,
                                       useGoogleFonts: false,
                                     ),
-                            elevation: 3,
-                            borderSide: BorderSide(
-                              color: Colors.black,
-                              width: 1,
-                            ),
-                            borderRadius: 8,
-                          ),
+                                elevation: 3,
+                                borderSide: BorderSide(
+                                  color: Colors.black,
+                                  width: 1,
+                                ),
+                                borderRadius: 8,
+                              ),
+                            );
+                          },
                         ),
                       ),
                     ),

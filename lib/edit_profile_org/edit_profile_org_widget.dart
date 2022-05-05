@@ -96,11 +96,14 @@ class _EditProfileOrgWidgetState extends State<EditProfileOrgWidget> {
                         'Uploading file...',
                         showLoading: true,
                       );
-                      final downloadUrls = await Future.wait(selectedMedia.map(
-                          (m) async =>
-                              await uploadData(m.storagePath, m.bytes)));
+                      final downloadUrls = (await Future.wait(selectedMedia.map(
+                              (m) async =>
+                                  await uploadData(m.storagePath, m.bytes))))
+                          .where((u) => u != null)
+                          .toList();
                       ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                      if (downloadUrls != null) {
+                      if (downloadUrls != null &&
+                          downloadUrls.length == selectedMedia.length) {
                         setState(() => uploadedFileUrl = downloadUrls.first);
                         showUploadMessage(
                           context,
@@ -425,7 +428,8 @@ class _EditProfileOrgWidgetState extends State<EditProfileOrgWidget> {
                         final saveUsersRecord = snapshot.data;
                         return FFButtonWidget(
                           onPressed: () async {
-                            if (!formKey.currentState.validate()) {
+                            if (formKey.currentState == null ||
+                                !formKey.currentState.validate()) {
                               return;
                             }
 
