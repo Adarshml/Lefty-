@@ -95,11 +95,14 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                         'Uploading file...',
                         showLoading: true,
                       );
-                      final downloadUrls = await Future.wait(selectedMedia.map(
-                          (m) async =>
-                              await uploadData(m.storagePath, m.bytes)));
+                      final downloadUrls = (await Future.wait(selectedMedia.map(
+                              (m) async =>
+                                  await uploadData(m.storagePath, m.bytes))))
+                          .where((u) => u != null)
+                          .toList();
                       ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                      if (downloadUrls != null) {
+                      if (downloadUrls != null &&
+                          downloadUrls.length == selectedMedia.length) {
                         setState(() => uploadedFileUrl = downloadUrls.first);
                         showUploadMessage(
                           context,
@@ -224,7 +227,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                           useGoogleFonts: false,
                                         ),
                                     validator: (val) {
-                                      if (val.isEmpty) {
+                                      if (val == null || val.isEmpty) {
                                         return 'Field is required';
                                       }
 
@@ -288,7 +291,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                       useGoogleFonts: false,
                                     ),
                                 validator: (val) {
-                                  if (val.isEmpty) {
+                                  if (val == null || val.isEmpty) {
                                     return 'Field is required';
                                   }
 
@@ -352,7 +355,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                   ),
                               keyboardType: TextInputType.phone,
                               validator: (val) {
-                                if (val.isEmpty) {
+                                if (val == null || val.isEmpty) {
                                   return 'Field is required';
                                 }
 
@@ -415,7 +418,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                               textAlign: TextAlign.start,
                               maxLines: 3,
                               validator: (val) {
-                                if (val.isEmpty) {
+                                if (val == null || val.isEmpty) {
                                   return 'Field is required';
                                 }
 
@@ -452,7 +455,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                         final saveUsersRecord = snapshot.data;
                         return FFButtonWidget(
                           onPressed: () async {
-                            if (!formKey.currentState.validate()) {
+                            if (formKey.currentState == null ||
+                                !formKey.currentState.validate()) {
                               return;
                             }
 

@@ -232,7 +232,7 @@ class _RequestFoodWidgetState extends State<RequestFoodWidget> {
                                         useGoogleFonts: false,
                                       ),
                                   validator: (val) {
-                                    if (val.isEmpty) {
+                                    if (val == null || val.isEmpty) {
                                       return 'Field is required';
                                     }
 
@@ -282,7 +282,7 @@ class _RequestFoodWidgetState extends State<RequestFoodWidget> {
                                         useGoogleFonts: false,
                                       ),
                                   validator: (val) {
-                                    if (val.isEmpty) {
+                                    if (val == null || val.isEmpty) {
                                       return 'Field is required';
                                     }
 
@@ -372,7 +372,8 @@ class _RequestFoodWidgetState extends State<RequestFoodWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(0, 30, 10, 0),
                         child: FFButtonWidget(
                           onPressed: () async {
-                            if (!formKey.currentState.validate()) {
+                            if (formKey.currentState == null ||
+                                !formKey.currentState.validate()) {
                               return;
                             }
 

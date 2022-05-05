@@ -17,14 +17,14 @@ class AddOrgWidget extends StatefulWidget {
 }
 
 class _AddOrgWidgetState extends State<AddOrgWidget> {
+  final formKey = GlobalKey<FormState>();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController addressController;
   TextEditingController descriptionController;
   TextEditingController emailAddressController;
   TextEditingController orgNameController;
   TextEditingController regNoController;
   TextEditingController phoneController;
-  final formKey = GlobalKey<FormState>();
-  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -204,7 +204,8 @@ class _AddOrgWidgetState extends State<AddOrgWidget> {
                                                                     .normal,
                                                           ),
                                                       validator: (val) {
-                                                        if (val.isEmpty) {
+                                                        if (val == null ||
+                                                            val.isEmpty) {
                                                           return 'Field is required';
                                                         }
 
@@ -299,7 +300,8 @@ class _AddOrgWidgetState extends State<AddOrgWidget> {
                                                                     .normal,
                                                           ),
                                                       validator: (val) {
-                                                        if (val.isEmpty) {
+                                                        if (val == null ||
+                                                            val.isEmpty) {
                                                           return 'Field is required';
                                                         }
 
@@ -392,7 +394,8 @@ class _AddOrgWidgetState extends State<AddOrgWidget> {
                                                                     .normal,
                                                           ),
                                                       validator: (val) {
-                                                        if (val.isEmpty) {
+                                                        if (val == null ||
+                                                            val.isEmpty) {
                                                           return 'Field is required';
                                                         }
 
@@ -485,7 +488,8 @@ class _AddOrgWidgetState extends State<AddOrgWidget> {
                                                                     .normal,
                                                           ),
                                                       validator: (val) {
-                                                        if (val.isEmpty) {
+                                                        if (val == null ||
+                                                            val.isEmpty) {
                                                           return 'Field is required';
                                                         }
 
@@ -581,7 +585,8 @@ class _AddOrgWidgetState extends State<AddOrgWidget> {
                                                       keyboardType:
                                                           TextInputType.phone,
                                                       validator: (val) {
-                                                        if (val.isEmpty) {
+                                                        if (val == null ||
+                                                            val.isEmpty) {
                                                           return 'Field is required';
                                                         }
 
@@ -676,7 +681,8 @@ class _AddOrgWidgetState extends State<AddOrgWidget> {
                                                           TextAlign.start,
                                                       maxLines: 3,
                                                       validator: (val) {
-                                                        if (val.isEmpty) {
+                                                        if (val == null ||
+                                                            val.isEmpty) {
                                                           return 'Field is required';
                                                         }
 
@@ -698,8 +704,10 @@ class _AddOrgWidgetState extends State<AddOrgWidget> {
                                                     0, 50, 0, 0),
                                             child: FFButtonWidget(
                                               onPressed: () async {
-                                                if (!formKey.currentState
-                                                    .validate()) {
+                                                if (formKey.currentState ==
+                                                        null ||
+                                                    !formKey.currentState
+                                                        .validate()) {
                                                   return;
                                                 }
 

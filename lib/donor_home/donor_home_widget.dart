@@ -47,7 +47,7 @@ class _DonorHomeWidgetState extends State<DonorHomeWidget> {
             children: [
               Container(
                 width: double.infinity,
-                height: MediaQuery.of(context).size.height * 0.25,
+                height: MediaQuery.of(context).size.height * 0.29,
                 child: Stack(
                   children: [
                     PageView(
@@ -68,7 +68,7 @@ class _DonorHomeWidgetState extends State<DonorHomeWidget> {
                           child: Image.asset(
                             'assets/images/a29hc_2.jpg',
                             width: MediaQuery.of(context).size.width,
-                            height: MediaQuery.of(context).size.height * 0.25,
+                            height: MediaQuery.of(context).size.height * 0.29,
                             fit: BoxFit.cover,
                           ),
                         ),

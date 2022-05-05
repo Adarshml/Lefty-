@@ -3,8 +3,6 @@ export 'login_old/login_old_widget.dart' show LoginOldWidget;
 export 'onboarding/onboarding_widget.dart' show OnboardingWidget;
 export 'create_account_user/create_account_user_widget.dart'
     show CreateAccountUserWidget;
-export 'create_account_organization/create_account_organization_widget.dart'
-    show CreateAccountOrganizationWidget;
 export 'olddonate/olddonate_widget.dart' show OlddonateWidget;
 export 'edit_profile/edit_profile_widget.dart' show EditProfileWidget;
 export 'profile/profile_widget.dart' show ProfileWidget;
@@ -25,8 +23,6 @@ export 'mylist/mylist_widget.dart' show MylistWidget;
 export 'donate_details_copy3/donate_details_copy3_widget.dart'
     show DonateDetailsCopy3Widget;
 export 'donate/donate_widget.dart' show DonateWidget;
-export 'create_account_user_copy/create_account_user_copy_widget.dart'
-    show CreateAccountUserCopyWidget;
 export 'edit_profileorg/edit_profileorg_widget.dart' show EditProfileorgWidget;
 export 'mylistdetails/mylistdetails_widget.dart' show MylistdetailsWidget;
 export 'orgprofileforusers/orgprofileforusers_widget.dart'
@@ -44,3 +40,4 @@ export 'maptest_copy/maptest_copy_widget.dart' show MaptestCopyWidget;
 export 'map_user/map_user_widget.dart' show MapUserWidget;
 export 'mylistdetails_copy/mylistdetails_copy_widget.dart'
     show MylistdetailsCopyWidget;
+export 'register/register_widget.dart' show RegisterWidget;
